@@ -7,12 +7,18 @@ public class Health : MonoBehaviour
     public float maxHealth;
     private float currentHealth;
 
+    public void Awake()
+    {
+        currentHealth = maxHealth;
+    }
+
     /// <summary>
     /// update the max health of player Pod
     /// </summary>
     /// <param name="amount">the amount of changes to player Pod's max health</param>
     public void PlayerMaxHealthUpdate(int amount) {
         maxHealth += amount;
+        currentHealth += amount;
     }
 
     /// <summary>
