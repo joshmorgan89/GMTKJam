@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BaseRoom : MonoBehaviour
 {
-    public int PowerRequired = 10;
     protected ShipGrid _shipGrid;
     private Scripts.Shared.Health _health;
 

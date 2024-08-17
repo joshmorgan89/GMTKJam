@@ -17,8 +17,6 @@ public class AsteroidCollisionHandler : MonoBehaviour
         else if(collision.gameObject.tag == "Bullet") {
             GetComponent<Health>().CurrentHealthUpdate(-50);
         }
-
-        
     }
 
 }

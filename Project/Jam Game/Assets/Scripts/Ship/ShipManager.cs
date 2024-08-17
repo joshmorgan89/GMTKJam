@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class ShipManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private List<BaseRoom> _addedRooms = new List<BaseRoom>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

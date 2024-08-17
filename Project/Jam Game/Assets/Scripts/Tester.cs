@@ -15,7 +15,7 @@ public class Tester : MonoBehaviourSingleton<Tester>
         timer += Time.deltaTime;
 
         if (timer >= 2) { 
-            Instantiate(asteroid,Vector3.zero, Quaternion.Euler(new Vector3(0,0, Random.Range(0f, 360f))));
+            Instantiate(asteroid, gameObject.transform.position, Quaternion.Euler(new Vector3(0,0, Random.Range(0f, 360f))));
             timer -= 2;
         }
 

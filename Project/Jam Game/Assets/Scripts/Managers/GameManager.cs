@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Cinemachine;
 public class GameManager : MonoBehaviourSingleton<GameManager> {
     [Header("Game Settings")]
     public int InitialRoomCount = 3;
-    public BaseRoom RoomPrefab;
+    public List<BaseRoom> RoomPrefabs;
     public Transform RoomsParent;
 
     [Header("Managers")]
     public GameObject Ship;
     private ShipGrid _shipGrid;
 
-    private List<BaseRoom> _activeRooms = new List<BaseRoom>();
+    private List<BaseRoom> _addedRooms = new List<BaseRoom>();
     private int _currentElectionCycle = 1;
 
     [Header("Camera")]
@@ -33,16 +34,20 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
         int section = -1;
 
         for (int i = 0; i < InitialRoomCount; i++) {
-            AddRoomAtPosition(new Vector3Int(section++, 0));
+            BaseRoom newRoom;
+            if (i == 0) {
+                newRoom = Instantiate(RoomPrefabs.FirstOrDefault(x => x.GetComponent<GeneratorRoom>() != null), RoomsParent);
+            } else {
+                newRoom = Instantiate(RoomPrefabs.ElementAt(Random.Range(0, RoomPrefabs.Count - 1)), RoomsParent); 
+            }
+            AddRoomAtPosition(newRoom, new Vector3Int(section++, 0));
         }
     }
 
-    public void AddRoomAtPosition(Vector3Int cellPosition) {
+    public void AddRoomAtPosition(BaseRoom newRoom, Vector3Int cellPosition) {
         if (_shipGrid.IsPositionValid(cellPosition)) {
-            BaseRoom newRoom = Instantiate(RoomPrefab, RoomsParent);
-
             if (_shipGrid.AddRoom(newRoom, cellPosition)) {
-                _activeRooms.Add(newRoom);
+                _addedRooms.Add(newRoom);
 
                 // Update UI with room count.
             } else {
@@ -52,7 +57,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
     }
 
     public void HandleRoomDestroyed(BaseRoom room) {
-        _activeRooms.Remove(room);
+        _addedRooms.Remove(room);
         
         // Update UI with room count.
 
@@ -61,7 +66,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
     }
 
     public void CheckGameOverCondition() {
-        if (_activeRooms.Count == 0) {
+        if (_addedRooms.Count == 0) {
             // Show Game Over screen.
         }
     }

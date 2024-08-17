@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 6810669435960761930}
   - component: {fileID: 4868463793571088457}
   - component: {fileID: 6125454879443601254}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
