@@ -7,36 +7,36 @@ public class InputManager : MonoBehaviour
 {
     public PodMovement playerMovement;
 
-    private PlayerInputAction playerInputAction;
+    private PlayerInputAction _playerInputAction;
     
-    private InputAction moveAction;
+    private InputAction _moveAction;
     
     private void Awake()
     {
-        playerInputAction = new PlayerInputAction();
+        _playerInputAction = new PlayerInputAction();
 
-        moveAction = playerInputAction.Player.Move;
+        _moveAction = _playerInputAction.Player.Move;
     }
 
     private void OnEnable()
     {
-        moveAction.Enable();
-        playerInputAction.Player.Break.performed += OnBreakPerformed;
-        playerInputAction.Player.Break.canceled += OnBreakCanceled;
-        playerInputAction.Player.Break.Enable();
+        _moveAction.Enable();
+        _playerInputAction.Player.Break.performed += OnBreakPerformed;
+        _playerInputAction.Player.Break.canceled += OnBreakCanceled;
+        _playerInputAction.Player.Break.Enable();
     }
 
     private void OnDisable()
     {
-        moveAction.Disable();
-        playerInputAction.Player.Break.performed -= OnBreakPerformed;
-        playerInputAction.Player.Break.canceled -= OnBreakCanceled;
-        playerInputAction.Player.Break.Disable();
+        _moveAction.Disable();
+        _playerInputAction.Player.Break.performed -= OnBreakPerformed;
+        _playerInputAction.Player.Break.canceled -= OnBreakCanceled;
+        _playerInputAction.Player.Break.Disable();
     }
 
     private void FixedUpdate()
     {
-        Vector2 moveDir = moveAction.ReadValue<Vector2>();
+        Vector2 moveDir = _moveAction.ReadValue<Vector2>();
         playerMovement.Movement(moveDir);
     }
 
