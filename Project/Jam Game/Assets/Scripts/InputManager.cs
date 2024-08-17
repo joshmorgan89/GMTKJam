@@ -21,16 +21,31 @@ public class InputManager : MonoBehaviour
     private void OnEnable()
     {
         moveAction.Enable();
+        playerInputAction.Player.Break.performed += OnBreakPerformed;
+        playerInputAction.Player.Break.canceled += OnBreakCanceled;
+        playerInputAction.Player.Break.Enable();
     }
 
     private void OnDisable()
     {
         moveAction.Disable();
+        playerInputAction.Player.Break.performed -= OnBreakPerformed;
+        playerInputAction.Player.Break.canceled -= OnBreakCanceled;
+        playerInputAction.Player.Break.Disable();
     }
 
     private void FixedUpdate()
     {
         Vector2 moveDir = moveAction.ReadValue<Vector2>();
         playerMovement.Movement(moveDir);
+    }
+
+    private void OnBreakPerformed(InputAction.CallbackContext context)
+    {
+        playerMovement.BreakStart();
+    }
+    private void OnBreakCanceled(InputAction.CallbackContext context)
+    {
+        playerMovement.BreakEnd();
     }
 }
