@@ -8,14 +8,14 @@ public class AsteroidMovement : MonoBehaviour
     public float movementSpeed;
     public float rotationSpeed;
 
-    private SpriteRenderer asteroidSprite;
-    private Rigidbody2D rigidbody;
-    private Health health;
+    private SpriteRenderer _asteroidSprite;
+    private Rigidbody2D _rigidbody;
+    private Health _health;
     private void Awake()
     {
-        asteroidSprite = GetComponentInChildren<SpriteRenderer>();
-        rigidbody = GetComponent<Rigidbody2D>();
-        health = GetComponent<Health>();
+        _asteroidSprite = GetComponentInChildren<SpriteRenderer>();
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _health = GetComponent<Health>();
     }
 
     private void Update()
@@ -23,16 +23,16 @@ public class AsteroidMovement : MonoBehaviour
         Movement();
         Rotation();
 
-        if (health.IsDestroyed) {
+        if (_health.IsDestroyed) {
             Destroy(gameObject);
         }
     }
 
     public void Movement() {
-        rigidbody.velocity = transform.right * movementSpeed;
+        _rigidbody.velocity = transform.right * movementSpeed;
     }
 
     public void Rotation() {
-        asteroidSprite.gameObject.transform.Rotate(0,0,rotationSpeed);
+        _asteroidSprite.gameObject.transform.Rotate(0,0,rotationSpeed);
     }
 }

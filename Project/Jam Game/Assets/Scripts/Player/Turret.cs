@@ -6,32 +6,32 @@ public class Turret : MonoBehaviour
     public float attackingRange;
     public float attackingCooldown;
 
-    private float timer;
+    private float _timer;
 
     public GameObject bulletPrefab;
     public GameObject turret;
 
     public Transform ShootingPoint;
 
-    private GameObject closestEnemy;
+    private GameObject _closestEnemy;
 
     private void FixedUpdate()
     {
         // Update the cooldown timer
-        if (timer < attackingCooldown)
-            timer += Time.fixedDeltaTime;
+        if (_timer < attackingCooldown)
+            _timer += Time.fixedDeltaTime;
 
         // Find the closest enemy
         FindClosestEnemy();
 
         // If an enemy is within range, rotate and shoot
-        if (closestEnemy != null)
+        if (_closestEnemy != null)
         {
             RotateTurretTowardsEnemy();
-            if (timer >= attackingCooldown)
+            if (_timer >= attackingCooldown)
             {
                 ShootBullet();
-                timer = 0f;
+                _timer = 0f;
             }
         }
     }
@@ -51,7 +51,7 @@ public class Turret : MonoBehaviour
             if (currentEnemyDistance < attackingRange && currentEnemyDistance < closestEnemyDistance)
             {
                 closestEnemyDistance = currentEnemyDistance;
-                closestEnemy = enemy;
+                _closestEnemy = enemy;
             }
         }
     }
@@ -61,7 +61,7 @@ public class Turret : MonoBehaviour
     /// </summary>
     private void RotateTurretTowardsEnemy()
     {
-        Vector2 direction = (closestEnemy.transform.position - ShootingPoint.position).normalized;
+        Vector2 direction = (_closestEnemy.transform.position - ShootingPoint.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         turret.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
