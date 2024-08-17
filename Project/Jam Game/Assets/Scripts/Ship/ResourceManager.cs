@@ -9,7 +9,7 @@ public class ResourceManager : MonoBehaviourSingleton<ResourceManager>
 
     public void UpdateFuel(float amount) {
         fuel += amount;
-        TestUIManager.Instance.UpdateResourceUI(electricity, fuel);
+        Tester.Instance.UpdateResourceUI(electricity, fuel);
     }
 
     public void UpdateElectricity(float amount) {  
