@@ -15,6 +15,10 @@ public class ResourceManager : MonoBehaviourSingleton<ResourceManager>
     public void UpdateFuel(float amount) {
         _fuel += amount;
 
+        if (_fuel > _maxFuel) { 
+            _fuel = _maxFuel;
+        }
+
         HUD.Instance.UpdateFuel(_maxFuel, _fuel);
     }
 
