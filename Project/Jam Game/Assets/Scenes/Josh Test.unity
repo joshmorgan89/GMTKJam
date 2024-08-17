@@ -693,9 +693,10 @@ MonoBehaviour:
   InitialRoomCount: 3
   RoomPrefabs:
   - {fileID: -8462453080596069446, guid: 738498fea7031824d9b25cc6493ae514, type: 3}
-  - {fileID: 1780956736131179413, guid: fc9f4c8b599191c458417078fe3fd0cf, type: 3}
+  - {fileID: 1035496011471388962, guid: fc9f4c8b599191c458417078fe3fd0cf, type: 3}
   RoomsParent: {fileID: 1361644232}
   Ship: {fileID: 1361644229}
+  virtualCamera: {fileID: 0}
 --- !u!4 &915799949
 Transform:
   m_ObjectHideFlags: 0
@@ -1503,7 +1504,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
