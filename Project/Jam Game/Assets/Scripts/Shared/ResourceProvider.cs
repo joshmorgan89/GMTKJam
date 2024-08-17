@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ResourceDrop { 
+    fuel
+}
+
 public class ResourceProvider : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public ResourceDrop resourceDrop;
+    public float resourceMultiplier;
+    private void OnDestroy()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //provide material
+        if (resourceDrop == ResourceDrop.fuel) {
+            ResourceManager.Instance.UpdateFuel(5 * resourceMultiplier);
+        }
     }
 }

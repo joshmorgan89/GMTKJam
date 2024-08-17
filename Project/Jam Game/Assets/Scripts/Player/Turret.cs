@@ -1,7 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Serialization;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Turret : MonoBehaviour
@@ -12,63 +9,70 @@ public class Turret : MonoBehaviour
     private float timer;
 
     public GameObject bulletPrefab;
-    public GameObject[] Enemies;
     public GameObject turret;
 
     public Transform ShootingPoint;
-    public void Update()
-    {
-        timer += Time.deltaTime;
-    }
 
-    public void FixedUpdate()
-    {
-        //find enemy in the scene(could use object pool to save performance later) and init the variables needed
-        Enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        float closestEnemyDistance = float.MaxValue;
-        GameObject closestEnemy = null;
-        float currentEnemyDistance;
+    private GameObject closestEnemy;
 
-        //iterate through all the enemy to find the closest enemy
-        foreach (GameObject enemy in Enemies)
+    private void FixedUpdate()
+    {
+        // Update the cooldown timer
+        if (timer < attackingCooldown)
+            timer += Time.fixedDeltaTime;
+
+        // Find the closest enemy
+        FindClosestEnemy();
+
+        // If an enemy is within range, rotate and shoot
+        if (closestEnemy != null)
         {
-            currentEnemyDistance = Vector2.Distance(enemy.transform.position, transform.position);
-
-            if (currentEnemyDistance < attackingRange)
+            RotateTurretTowardsEnemy();
+            if (timer >= attackingCooldown)
             {
-                if (currentEnemyDistance < closestEnemyDistance)
-                {
-                    closestEnemyDistance = currentEnemyDistance;
-                    closestEnemy = enemy;
-                }
-            }
-        }
-
-        //if there is enemy found in range shoot bullet toward that enemy
-        if (closestEnemy != null )
-        {
-            //calculate the direction angle
-            Vector2 direction = (closestEnemy.transform.position - ShootingPoint.position).normalized;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-            //rotate the turret
-            turret.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle-90));
-
-            //check if attacking cooldown is over
-            if (timer > attackingCooldown) {
-                ShootBullet(angle);
-                timer -= attackingCooldown;
+                ShootBullet();
+                timer = 0f;
             }
         }
     }
-
 
     /// <summary>
-    /// Shoot bullet towards enemy detected
+    /// find the closest gameobject with the Enemy tag
     /// </summary>
-    /// <param name="direction">the direction of the bullet</param>
-    private void ShootBullet(float angle) {
-        
-        GameObject bullet = Instantiate(bulletPrefab, ShootingPoint.position, Quaternion.Euler(new Vector3(0, 0, angle)));
+    private void FindClosestEnemy()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        float closestEnemyDistance = float.MaxValue;
+
+        foreach (GameObject enemy in enemies)
+        {
+            float currentEnemyDistance = Vector2.Distance(enemy.transform.position, transform.position);
+
+            if (currentEnemyDistance < attackingRange && currentEnemyDistance < closestEnemyDistance)
+            {
+                closestEnemyDistance = currentEnemyDistance;
+                closestEnemy = enemy;
+            }
+        }
+    }
+
+    /// <summary>
+    /// rotate the turret towards the closest enemy
+    /// </summary>
+    private void RotateTurretTowardsEnemy()
+    {
+        Vector2 direction = (closestEnemy.transform.position - ShootingPoint.position).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        turret.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+    }
+
+    /// <summary>
+    /// shoot a bullet based on the turret's rotation
+    /// </summary>
+    private void ShootBullet()
+    {
+        float angle = turret.transform.rotation.eulerAngles.z;
+        Instantiate(bulletPrefab, ShootingPoint.position, Quaternion.Euler(new Vector3(0, 0, angle + 90)));
     }
 }

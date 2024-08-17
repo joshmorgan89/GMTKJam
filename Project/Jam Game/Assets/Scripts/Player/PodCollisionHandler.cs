@@ -7,7 +7,7 @@ public class PodCollisionHandler : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Enemy") {
-            gameObject.GetComponent<Health>().PlayerCurrentHealthUpdate(-5);
+            gameObject.GetComponent<PlayerHealth>().PlayerCurrentHealthUpdate(-5);
             //enemy collision event
         }
     }

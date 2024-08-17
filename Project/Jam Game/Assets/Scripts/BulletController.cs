@@ -25,4 +25,12 @@ public class BulletController : MonoBehaviour
             //call enemy's reduce health method
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Destroy(gameObject);
+        }
+    }
 }

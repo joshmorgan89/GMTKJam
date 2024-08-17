@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceManager : MonoBehaviour
+public class ResourceManager : MonoBehaviourSingleton<ResourceManager>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public float fuel;
+    public float electricity;
+
+    public void UpdateFuel(float amount) {
+        fuel += amount;
+        Tester.Instance.UpdateResourceUI(electricity, fuel);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void UpdateElectricity(float amount) {  
+        electricity += amount;
     }
+
 }
