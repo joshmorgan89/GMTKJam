@@ -16,13 +16,14 @@ public class Turret : MonoBehaviour
     public GameObject turret;
 
     public Transform ShootingPoint;
-    public void Update()
-    {
-        timer += Time.deltaTime;
-    }
 
     public void FixedUpdate()
     {
+        //make sure there won't be multiple bullet shoot at once
+        if(timer < attackingCooldown)
+            timer += Time.fixedDeltaTime;
+
+
         //find enemy in the scene(could use object pool to save performance later) and init the variables needed
         Enemies = GameObject.FindGameObjectsWithTag("Enemy");
         float closestEnemyDistance = float.MaxValue;
