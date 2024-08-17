@@ -9,12 +9,8 @@ public class BulletController : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject, 10);
-    }
-
-    private void Update()
-    {
         Movement();
+        Destroy(gameObject, 10);
     }
 
     private void Movement() { 
