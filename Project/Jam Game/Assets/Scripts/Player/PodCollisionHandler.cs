@@ -8,7 +8,6 @@ public class PodCollisionHandler : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy") {
             gameObject.GetComponent<Health>().PlayerCurrentHealthUpdate(-5);
-            Debug.Log(1);
             //enemy collision event
         }
     }
