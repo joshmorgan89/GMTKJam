@@ -16,6 +16,9 @@ public class Tester : MonoBehaviourSingleton<Tester>
             Instantiate(asteroid,Vector3.zero, Quaternion.Euler(new Vector3(0,0, Random.Range(0f, 360f))));
             timer -= 2;
         }
+
+
+        HUD.Instance.UpdateFuel(100, ResourceManager.Instance.fuel);
     }
 
     public void UpdateResourceUI(float electricity, float fuel) {
