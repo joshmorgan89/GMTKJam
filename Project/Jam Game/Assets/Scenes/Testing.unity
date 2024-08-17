@@ -261,7 +261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 696712314}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,11 +278,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.004, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 2037733488}
   - {fileID: 887718383}
-  - {fileID: 1792054271}
   m_Father: {fileID: 1010218346}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &716447609
@@ -559,8 +559,8 @@ GameObject:
   m_Component:
   - component: {fileID: 887718383}
   - component: {fileID: 887718384}
-  m_Layer: 0
-  m_Name: Turret Sprite
+  m_Layer: 6
+  m_Name: Turret Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -575,10 +575,11 @@ Transform:
   m_GameObject: {fileID: 887718382}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01, y: 0.218, z: 0}
+  m_LocalPosition: {x: 0.002, y: 0.065, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 1792054271}
   m_Father: {fileID: 696712314}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &887718384
@@ -622,8 +623,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 0.37241387, g: 1, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 0b72b0aa6a4e95a4cb8f544461f67420, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -781,7 +782,7 @@ GameObject:
   - component: {fileID: 1010218354}
   - component: {fileID: 1010218353}
   - component: {fileID: 1010218355}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -803,7 +804,6 @@ Transform:
   m_Children:
   - {fileID: 1232784026}
   - {fileID: 696712314}
-  - {fileID: 2037733488}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1010218347
@@ -924,7 +924,7 @@ MonoBehaviour:
   attackingCooldown: 1
   bulletPrefab: {fileID: 2984267801637531739, guid: ede413e40c187a241a21207b1c01a3eb, type: 3}
   Enemies: []
-  turret: {fileID: 696712313}
+  turret: {fileID: 887718382}
   ShootingPoint: {fileID: 1792054271}
 --- !u!61 &1010218355
 BoxCollider2D:
@@ -981,7 +981,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1232784026}
   - component: {fileID: 1232784027}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1502,7 +1502,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1792054271}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShootingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1517,12 +1517,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1792054270}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.426, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.010000001, y: 0.4, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 696712314}
+  m_Father: {fileID: 887718383}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2009494253
 GameObject:
@@ -1664,7 +1664,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2037733488}
   - component: {fileID: 2037733489}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Turret Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1680,11 +1680,11 @@ Transform:
   m_GameObject: {fileID: 2037733487}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.0019999999, z: 0}
+  m_LocalPosition: {x: 0, y: -0.006, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1010218346}
+  m_Father: {fileID: 696712314}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2037733489
 SpriteRenderer:
@@ -1726,9 +1726,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: ec8d11dc0f6f5e949a638cd6083e3470, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
