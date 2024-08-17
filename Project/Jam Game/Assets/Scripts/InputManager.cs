@@ -10,6 +10,9 @@ public class InputManager : MonoBehaviour
     private PlayerInputAction playerInputAction;
     
     private InputAction moveAction;
+
+    public ShipGrid ShipGrid;
+    public BaseRoom RoomPrefab;
     
     private void Awake()
     {
@@ -47,5 +50,10 @@ public class InputManager : MonoBehaviour
     private void OnBreakCanceled(InputAction.CallbackContext context)
     {
         playerMovement.BreakEnd();
+    }
+
+    private void OnTEST(InputAction.CallbackContext context) {
+        // Test Functionality
+        ShipGrid.AddRoom(Instantiate(RoomPrefab), new Vector3Int(0, 0));
     }
 }

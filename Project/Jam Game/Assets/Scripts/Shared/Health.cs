@@ -7,7 +7,7 @@ namespace Scripts.Shared {
         public float MaxHealth;
         private float _currentHealth;
 
-        public bool IsDestroyed => _currentHealth <= 0;
+        public bool IsDestroyed => (_currentHealth <= 0);
 
         public void Awake() {
             _currentHealth = MaxHealth;
