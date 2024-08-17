@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Cinemachine;
 public class GameManager : MonoBehaviourSingleton<GameManager> {
     [Header("Game Settings")]
     public int InitialRoomCount = 3;
@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
 
     private List<BaseRoom> _activeRooms = new List<BaseRoom>();
     private int _currentElectionCycle = 1;
+
+    [Header("Camera")]
+    public CinemachineVirtualCamera virtualCamera;
 
     private void Start() {
         InitializeGame();
@@ -69,5 +72,13 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
         // Update UI
 
         // Add more rooms, spawn new challenges, etc.
+    }
+
+    public void SetZoomLevelOne() {
+        virtualCamera.m_Lens.OrthographicSize = 7.5f;
+    }
+
+    public void SetZoomLevelTwo() {
+        virtualCamera.m_Lens.OrthographicSize = 20;
     }
 }

@@ -44,6 +44,24 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Zoom1"",
+                    ""type"": ""Button"",
+                    ""id"": ""892bf796-ca1b-4971-8bd9-aeabac50bc68"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Zoom2"",
+                    ""type"": ""Button"",
+                    ""id"": ""c5f4fbda-327e-4428-a70f-ed6988c96d65"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -110,6 +128,28 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Break"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ae0bcc02-003f-4577-a852-70b2da7e660c"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Zoom1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e877d56d-bbdb-44fe-9c7c-13eb1d87df4c"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Zoom2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -183,6 +223,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Break = m_Player.FindAction("Break", throwIfNotFound: true);
+        m_Player_Zoom1 = m_Player.FindAction("Zoom1", throwIfNotFound: true);
+        m_Player_Zoom2 = m_Player.FindAction("Zoom2", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -246,12 +288,16 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Break;
+    private readonly InputAction m_Player_Zoom1;
+    private readonly InputAction m_Player_Zoom2;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
         public PlayerActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Break => m_Wrapper.m_Player_Break;
+        public InputAction @Zoom1 => m_Wrapper.m_Player_Zoom1;
+        public InputAction @Zoom2 => m_Wrapper.m_Player_Zoom2;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -267,6 +313,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Break.started += instance.OnBreak;
             @Break.performed += instance.OnBreak;
             @Break.canceled += instance.OnBreak;
+            @Zoom1.started += instance.OnZoom1;
+            @Zoom1.performed += instance.OnZoom1;
+            @Zoom1.canceled += instance.OnZoom1;
+            @Zoom2.started += instance.OnZoom2;
+            @Zoom2.performed += instance.OnZoom2;
+            @Zoom2.canceled += instance.OnZoom2;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -277,6 +329,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Break.started -= instance.OnBreak;
             @Break.performed -= instance.OnBreak;
             @Break.canceled -= instance.OnBreak;
+            @Zoom1.started -= instance.OnZoom1;
+            @Zoom1.performed -= instance.OnZoom1;
+            @Zoom1.canceled -= instance.OnZoom1;
+            @Zoom2.started -= instance.OnZoom2;
+            @Zoom2.performed -= instance.OnZoom2;
+            @Zoom2.canceled -= instance.OnZoom2;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -343,5 +401,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnBreak(InputAction.CallbackContext context);
+        void OnZoom1(InputAction.CallbackContext context);
+        void OnZoom2(InputAction.CallbackContext context);
     }
 }
