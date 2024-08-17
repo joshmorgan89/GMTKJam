@@ -7,9 +7,11 @@ public class Tester : MonoBehaviourSingleton<Tester>
     public TMP_Text fuelText;
 
     public float timer;
+    public float goodwillNum;
     public GameObject asteroid;
     private void Update()
     {
+        goodwillNum += Time.deltaTime;
         timer += Time.deltaTime;
 
         if (timer >= 2) { 
@@ -17,11 +19,8 @@ public class Tester : MonoBehaviourSingleton<Tester>
             timer -= 2;
         }
 
-
-        HUD.Instance.UpdateFuel(100, ResourceManager.Instance.fuel);
+        HUD.Instance.UpdateGoodwill(100, goodwillNum);
+        
     }
 
-    public void UpdateResourceUI(float electricity, float fuel) {
-        fuelText.text = "Fuel: " + fuel;
-    }
 }

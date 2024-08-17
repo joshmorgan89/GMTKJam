@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class ResourceManager : MonoBehaviourSingleton<ResourceManager>
 {
-    public float fuel;
-    public float electricity;
+    private float _maxFuel = 100;
+    private float _fuel;
+    private float _electricity;
+
+    public void UpdateMaxFuel(float amount) { 
+        _maxFuel += amount;
+    }
 
     public void UpdateFuel(float amount) {
-        fuel += amount;
-        Tester.Instance.UpdateResourceUI(electricity, fuel);
+        _fuel += amount;
+
+        HUD.Instance.UpdateFuel(_maxFuel, _fuel);
     }
 
     public void UpdateElectricity(float amount) {  
-        electricity += amount;
+        _electricity += amount;
     }
 
 }
