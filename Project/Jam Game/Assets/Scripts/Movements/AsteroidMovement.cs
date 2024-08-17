@@ -3,36 +3,24 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using Scripts.Shared;
-public class AsteroidMovement : MonoBehaviour
+public class AsteroidMovement : BaseMovement
 {
-    public float movementSpeed;
-    public float rotationSpeed;
-
-    private SpriteRenderer _asteroidSprite;
-    private Rigidbody2D _rigidbody;
-    private Health _health;
     private void Awake()
     {
-        _asteroidSprite = GetComponentInChildren<SpriteRenderer>();
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _health = GetComponent<Health>();
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
         Movement();
         Rotation();
-
-        if (_health.IsDestroyed) {
-            Destroy(gameObject);
-        }
     }
 
-    public void Movement() {
-        _rigidbody.velocity = transform.right * movementSpeed;
+    public override void Movement() {
+        _rb.velocity = transform.right * MovementSpeed;
     }
 
-    public void Rotation() {
-        _asteroidSprite.gameObject.transform.Rotate(0,0,rotationSpeed);
+    public override void Rotation() {
+        gameObject.transform.Rotate(0,0,RotationSpeed);
     }
 }

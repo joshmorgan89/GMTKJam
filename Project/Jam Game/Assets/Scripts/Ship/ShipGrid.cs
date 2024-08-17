@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -8,8 +9,6 @@ public class ShipGrid : MonoBehaviour {
     public Grid _grid;
 
     private List<BaseRoom> _addedRooms = new List<BaseRoom>();
-    private int _totalPowerGenerated = 0;
-    private int _totalPowerRequired = 0;
 
     // Add a room to the grid
     public bool AddRoom(BaseRoom room, Vector3Int cellPosition) {
@@ -22,9 +21,11 @@ public class ShipGrid : MonoBehaviour {
 
             // Activate the room
             _addedRooms.Add(room);
-            room.Activate();
 
-            UpdatePowerUsage();
+            if (IsInRangeOfGeneratorRoom(cellPosition)) {
+                room.Activate();
+            }
+
             return true;
         }
         return false;
@@ -36,7 +37,6 @@ public class ShipGrid : MonoBehaviour {
         if (room != null) {
             room.Deactivate();
             _addedRooms.Remove(room);
-            UpdatePowerUsage();
         }
     }
 
@@ -86,6 +86,16 @@ public class ShipGrid : MonoBehaviour {
         return false;
     }
 
+    public bool IsInRangeOfGeneratorRoom(Vector3Int cellPosition) {
+        return _addedRooms
+            .Where(x => {
+                Vector3Int xCellPosition = _grid.WorldToCell(x.gameObject.transform.position);
+                return (xCellPosition.x - cellPosition.x) + (xCellPosition.y - cellPosition.y) <= 3;
+            })
+            .ToList()
+            .Count > 0;
+    }
+
     // Get the room at a specific grid position
     public BaseRoom GetRoomAtPosition(Vector3Int cellPosition) {
         Vector3 worldPosition = _grid.CellToWorld(cellPosition);
@@ -95,39 +105,5 @@ public class ShipGrid : MonoBehaviour {
             }
         }
         return null;
-    }
-
-    // Update power usage across all rooms
-    private void UpdatePowerUsage() {
-        _totalPowerGenerated = 0;
-        _totalPowerRequired = 0;
-
-        foreach (BaseRoom room in _addedRooms) {
-            if (room is GeneratorRoom generatorRoom) {
-                _totalPowerGenerated += generatorRoom.CurrentPowerOutput;
-            }
-            _totalPowerRequired += room.PowerRequired;
-        }
-
-        // Check if the power balance is correct
-        if (_totalPowerGenerated >= _totalPowerRequired) {
-            Debug.Log("Power is sufficient.");
-        } else {
-            Debug.Log("Not enough power. Some rooms may be deactivated.");
-            // Deactivate rooms in order of priority
-            DeactivateRoomsForPowerBalance();
-        }
-    }
-
-    // Deactivate rooms to balance power
-    private void DeactivateRoomsForPowerBalance() {
-        int deficit = _totalPowerRequired - _totalPowerGenerated;
-
-        foreach (BaseRoom room in _addedRooms) {
-            if (deficit <= 0) { break; }
-            if (room is GeneratorRoom) { continue; }
-            room.Deactivate();
-            deficit -= room.PowerRequired;
-        }
     }
 }
