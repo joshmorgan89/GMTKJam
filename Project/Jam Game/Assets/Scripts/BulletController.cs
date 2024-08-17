@@ -1,3 +1,4 @@
+using Scripts.Shared;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ public class BulletController : MonoBehaviour
 {
     public float speed;
     public Rigidbody2D rigidbody;
-
+    public float bulletDamage;
     private void Start()
     {
         Movement();
@@ -17,19 +18,16 @@ public class BulletController : MonoBehaviour
         rigidbody.velocity = transform.right * speed;
     }
 
-
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.gameObject.tag == "Enemy") {
-            Destroy(gameObject);
-            //call enemy's reduce health method
-        }
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
+            collision.gameObject.GetComponent<Health>().CurrentHealthUpdate(-bulletDamage);
+            Destroy(gameObject);
+        }
+
+        if (collision.gameObject.tag == "Player") {
+            collision.gameObject.GetComponent<PlayerHealth>().PlayerCurrentHealthUpdate(-bulletDamage);
             Destroy(gameObject);
         }
     }

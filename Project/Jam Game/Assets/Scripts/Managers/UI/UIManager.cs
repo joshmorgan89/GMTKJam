@@ -32,6 +32,5 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
             _nextElectionHappenValue += _electionHappenValue;
         }
 
-
     }
 }

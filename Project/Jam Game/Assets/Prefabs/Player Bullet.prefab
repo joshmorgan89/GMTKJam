@@ -96,8 +96,8 @@ GameObject:
   - component: {fileID: 6810669435960761930}
   - component: {fileID: 4868463793571088457}
   - component: {fileID: 6125454879443601254}
-  m_Layer: 6
-  m_Name: Bullet
+  m_Layer: 7
+  m_Name: Player Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,6 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   rigidbody: {fileID: 4868463793571088457}
+  bulletDamage: 5
 --- !u!50 &4868463793571088457
 Rigidbody2D:
   serializedVersion: 4
@@ -175,7 +176,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1728
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

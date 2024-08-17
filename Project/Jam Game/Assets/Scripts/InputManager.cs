@@ -52,19 +52,16 @@ public class InputManager : MonoBehaviour
 
     private void OnZoom2Performed(InputAction.CallbackContext context)
     {
-        Debug.Log(2);
         GameManager.Instance.SetZoomLevelTwo(); 
     }
 
     private void OnZoom1Performed(InputAction.CallbackContext context)
     {
 
-        Debug.Log(1);
         GameManager.Instance.SetZoomLevelOne();
     }
     private void OnBreakPerformed(InputAction.CallbackContext context)
     {
-        Debug.Log(3);
         playerMovement.BreakStart();
     }
     private void OnBreakCanceled(InputAction.CallbackContext context)
