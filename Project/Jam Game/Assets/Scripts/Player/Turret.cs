@@ -18,7 +18,7 @@ public class Turret : MonoBehaviour
     private void FixedUpdate()
     {
         // Update the cooldown timer
-        if (_timer < attackingCooldown)
+        if (_timer < attackingCooldown * Settings.Instance.FireCooldownMultiplier)
             _timer += Time.fixedDeltaTime;
 
         // Find the closest enemy
@@ -28,7 +28,7 @@ public class Turret : MonoBehaviour
         if (_closestEnemy != null)
         {
             RotateTurretTowardsEnemy();
-            if (_timer >= attackingCooldown)
+            if (_timer >= attackingCooldown * Settings.Instance.FireCooldownMultiplier)
             {
                 ShootBullet();
                 _timer = 0f;

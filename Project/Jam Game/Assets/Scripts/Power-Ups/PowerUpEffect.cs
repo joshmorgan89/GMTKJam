@@ -10,7 +10,6 @@ public enum PowerUpType
     TradingHub,
     NanobotComposition,
     DroneBuddy,
-    SolarSail,
     Harder,
     Fire,
     EfficientThrusters,
@@ -41,9 +40,6 @@ public class PowerUpEffect : MonoBehaviourSingleton<PowerUpEffect>
             case PowerUpType.DroneBuddy:
                 ApplyDroneBuddy();
                 break;
-            case PowerUpType.SolarSail:
-                ApplySolarSail();
-                break;
             case PowerUpType.Harder:
                 ApplyHarder();
                 break;
@@ -71,18 +67,51 @@ public class PowerUpEffect : MonoBehaviourSingleton<PowerUpEffect>
         }
     }
 
-    public void ApplyBelovedLeader() {  }
-    public void ApplyEnergizer() {  }
-    public void ApplyTradingHub() {  }
-    public void ApplyNanobotComposition() {  }
-    public void ApplyDroneBuddy() {  }
-    public void ApplySolarSail() {  }
-    public void ApplyHarder() {  }
-    public void ApplyFire() { }
-    public void ApplyEfficientThrusters() {  }
-    public void ApplyAsylum() {  }
-    public void ApplyEngineer() { }
-    public void ApplyScavenger() {  }
-    public void ApplyFoundFamily() {  }
+    public void ApplyBelovedLeader() {
+        Settings.Instance.BelovedLeader = true;
+        Settings.Instance.GracePeriod += 5.0f;
+    }
+    public void ApplyEnergizer() {
+        Settings.Instance.Energizer = true;
+        Settings.Instance.EnergizerRange += 1;
+    }
+    public void ApplyTradingHub() {
+        Settings.Instance.TradingHub = true;
+        Settings.Instance.TradingMultiplier *= 0.8f;
+    }
+    public void ApplyNanobotComposition() {
+        Settings.Instance.NanobotComposition = true;
+        Settings.Instance.GoodWillMultiplier *= 0.8f;
+    }
+    public void ApplyDroneBuddy() {
+        Settings.Instance.DroneBuddy = true;
+    }
+    public void ApplyHarder() {
+        Settings.Instance.Harder = true;
+        Settings.Instance.DurabilityMultiplier *= 2f;
+    }
+    public void ApplyFire() {
+        Settings.Instance.Fire = true;
+        Settings.Instance.FireCooldownMultiplier *= 0.8f;
+    }
+    public void ApplyEfficientThrusters() {
+        Settings.Instance.EfficientThrusters = true;
+        Settings.Instance.PlayerSpeedMultiplier *= 1.2f;
+    }
+    public void ApplyAsylum() {
+        Settings.Instance.Asylum = true;
+        Settings.Instance.RefugeeDropModifier += 1;
+    }
+    public void ApplyEngineer() {
+        Settings.Instance.Engineer = true;
+        Settings.Instance.RepairCostModifier -= 1;
+    }
+    public void ApplyScavenger() {
+        Settings.Instance.Scavenger = true;
+        Settings.Instance.RoomDropMultiplier *= 1.2f; 
+    }
+    public void ApplyFoundFamily() {
+        Settings.Instance.FoundFamily = true;
+    }
 }
 

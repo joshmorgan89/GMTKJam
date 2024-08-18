@@ -12,7 +12,7 @@ public class PodMovement : MonoBehaviour
     /// </summary>
     /// <param name="input"></param>
     public void Movement(Vector2 input) {
-        playerRB.AddForce(new Vector2(input.x, input.y) * speed, ForceMode2D.Force);
+        playerRB.AddForce(new Vector2(input.x, input.y) * speed * Settings.Instance.PlayerSpeedMultiplier, ForceMode2D.Force);
     }
 
     public void BreakStart()
