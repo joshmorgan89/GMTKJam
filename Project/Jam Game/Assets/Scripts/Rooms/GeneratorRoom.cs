@@ -19,10 +19,4 @@ public class GeneratorRoom : BaseRoom {
         // Additional generator deactivation logic
         Debug.Log($"{gameObject.name} stopped generating power.");
     }
-
-    // Optional: Place generator on grid (if specific placement logic is needed)
-    public override void PlaceOnGrid(Vector3Int position) {
-        base.PlaceOnGrid(position);
-        // Additional placement logic, if any
-    }
 }

@@ -2,28 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Grid))]
 public class ShipGrid : MonoBehaviour {
-    public Grid _grid;
+    public Grid Grid;
+    public TileBase RoomTile;
+    public TileBase GeneratorRoomTile;
+    public Tilemap RoomTileMap;
+    public Tilemap SpecialRoomTileMap;
 
-    private List<BaseRoom> _addedRooms = new List<BaseRoom>();
+    private Dictionary<Vector3Int, BaseRoom> _addedRooms = new Dictionary<Vector3Int, BaseRoom>();
+
+    public int RoomCount => _addedRooms.Count;
 
     // Add a room to the grid
-    public bool AddRoom(BaseRoom room, Vector3Int cellPosition) {
+    public bool AddRoom(Vector3Int cellPosition, BaseRoom room) {
         if (IsPositionValid(cellPosition)) {
-            // Convert the cell position to world position
-            Vector3 worldPosition = _grid.CellToWorld(cellPosition);
+            // Set the tile on the tilemap
+            RoomTileMap.SetTile(cellPosition, RoomTile);
 
-            // Set the room's position in the world
-            room.transform.position = worldPosition;
+            // Set the tile on the special tilemap if it's one of our special rooms
+            if (room is GeneratorRoom generatorRoom) {
+                SpecialRoomTileMap.SetTile(cellPosition, GeneratorRoomTile);
+            }
 
             // Activate the room
-            _addedRooms.Add(room);
-
             if (IsInRangeOfGeneratorRoom(cellPosition)) {
                 room.Activate();
+            }
+            
+            if (GetRoomAtPosition(cellPosition) == null) {
+                _addedRooms.Add(cellPosition, room);
             }
 
             return true;
@@ -36,14 +47,14 @@ public class ShipGrid : MonoBehaviour {
         BaseRoom room = GetRoomAtPosition(cellPosition);
         if (room != null) {
             room.Deactivate();
-            _addedRooms.Remove(room);
+            _addedRooms.Remove(cellPosition);
         }
     }
 
     // Check if a position is within the grid bounds
     public bool IsPositionValid(Vector3Int cellPosition) {
         // Convert cell position to world position to compare with room positions
-        Vector3 worldPosition = _grid.CellToWorld(cellPosition);
+        Vector3 worldPosition = Grid.CellToWorld(cellPosition);
 
         // Check if the position is already occupied by an active room
         if (GetRoomAtPosition(cellPosition) != null) {
@@ -52,7 +63,7 @@ public class ShipGrid : MonoBehaviour {
         }
 
         // Check if the position is adjacent to an existing active room (if adjacency rules apply)
-        if (!IsAdjacentToExistingRoom(worldPosition) && _addedRooms.Count > 0) {
+        if (RoomCount > 0 && !IsAdjacentToExistingRoom(cellPosition)) {
             Debug.Log("Position is not adjacent to an existing room.");
             return false;
         }
@@ -61,7 +72,18 @@ public class ShipGrid : MonoBehaviour {
         return true;
     }
 
-    private bool IsAdjacentToExistingRoom(Vector3 worldPosition) {
+    public BaseRoom GetRoomAtPosition(Vector3Int cellPosition) {
+        return _addedRooms.FirstOrDefault(x => x.Key == cellPosition).Value;
+    }
+
+    public bool IsInRangeOfGeneratorRoom(Vector3Int cellPosition) {
+        return !_addedRooms
+            .Where(x => (x.Key.x - cellPosition.x) + (x.Key.y - cellPosition.y) <= 3)       // First get cells within charge distance
+            .FirstOrDefault(x => x.Value is GeneratorRoom)                                  // Then see if any of those cells are generators
+            .Equals(default(KeyValuePair<Vector3Int, BaseRoom>));                                                       // Finally we check if the FirstOrDefault is default
+    }
+
+    public bool IsAdjacentToExistingRoom(Vector3 cellPosition) {
         // Offsets to check all four adjacent positions (up, down, left, right)
         Vector3Int[] adjacentOffsets = new Vector3Int[] {
             new Vector3Int(0, 1, 0),  // Up
@@ -72,38 +94,14 @@ public class ShipGrid : MonoBehaviour {
 
         // Check each adjacent position
         foreach (var offset in adjacentOffsets) {
-            Vector3 adjacentPosition = _grid.CellToWorld(_grid.WorldToCell(worldPosition) + offset);
+            Vector3 adjacentPosition = cellPosition + offset;
 
-            // Iterate through active rooms to see if any are at the adjacent position
-            foreach (BaseRoom room in _addedRooms) {
-                if (room.transform.position == adjacentPosition) {
-                    return true; // Found an adjacent room
-                }
+            if (_addedRooms.FirstOrDefault(x => x.Key == adjacentPosition).Value != null) {
+                return true; // Found an adjacent room
             }
         }
 
         // No adjacent room found
         return false;
-    }
-
-    public bool IsInRangeOfGeneratorRoom(Vector3Int cellPosition) {
-        return _addedRooms
-            .Where(x => {
-                Vector3Int xCellPosition = _grid.WorldToCell(x.gameObject.transform.position);
-                return (xCellPosition.x - cellPosition.x) + (xCellPosition.y - cellPosition.y) <= 3;
-            })
-            .ToList()
-            .Count > 0;
-    }
-
-    // Get the room at a specific grid position
-    public BaseRoom GetRoomAtPosition(Vector3Int cellPosition) {
-        Vector3 worldPosition = _grid.CellToWorld(cellPosition);
-        foreach (BaseRoom room in _addedRooms) {
-            if (room.transform.position == worldPosition) {
-                return room;
-            }
-        }
-        return null;
     }
 }

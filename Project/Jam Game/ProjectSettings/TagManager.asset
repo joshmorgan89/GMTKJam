@@ -44,3 +44,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Buffer
+    uniqueID: 2773219963
+    locked: 0
+  - name: Special
+    uniqueID: 2348616101
+    locked: 0

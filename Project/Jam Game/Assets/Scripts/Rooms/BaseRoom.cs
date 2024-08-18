@@ -43,14 +43,4 @@ public class BaseRoom : MonoBehaviour
         Debug.Log($"{gameObject.name} repaired.");
         // Repair logic (e.g., restore functionality, reset damage counters)
     }
-
-    // Place the room on the grid (optional in base class, to be implemented in derived classes)
-    public virtual void PlaceOnGrid(Vector3Int position) {
-        if (_shipGrid.IsPositionValid(position)) {
-            _shipGrid.AddRoom(this, position);
-            Debug.Log($"{gameObject.name} placed on grid at {position}.");
-        } else {
-            Debug.Log("Invalid grid position.");
-        }
-    }
 }

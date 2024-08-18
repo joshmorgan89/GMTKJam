@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
     public GameObject Ship;
     private ShipGrid _shipGrid;
 
-    private List<BaseRoom> _addedRooms = new List<BaseRoom>();
     private int _currentElectionCycle = 1;
 
     [Header("Camera")]
@@ -33,22 +32,16 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
     private void SetupInitialRooms() {
         int section = -1;
 
-        for (int i = 0; i < InitialRoomCount; i++) {
-            BaseRoom newRoom;
-            if (i == 0) {
-                newRoom = Instantiate(RoomPrefabs.FirstOrDefault(x => x.GetComponent<GeneratorRoom>() != null), RoomsParent);
-            } else {
-                newRoom = Instantiate(RoomPrefabs.ElementAt(Random.Range(0, RoomPrefabs.Count - 1)), RoomsParent); 
-            }
-            AddRoomAtPosition(newRoom, new Vector3Int(section++, 0));
+        for (int i = 0; i < RoomPrefabs.Count/*InitialRoomCount*/; i++) {
+            BaseRoom newRoom = Instantiate(RoomPrefabs[i], RoomsParent);
+
+            AddRoomAtPosition(new Vector3Int(section++, 0), newRoom);
         }
     }
 
-    public void AddRoomAtPosition(BaseRoom newRoom, Vector3Int cellPosition) {
+    public void AddRoomAtPosition(Vector3Int cellPosition, BaseRoom newRoom) {
         if (_shipGrid.IsPositionValid(cellPosition)) {
-            if (_shipGrid.AddRoom(newRoom, cellPosition)) {
-                _addedRooms.Add(newRoom);
-
+            if (_shipGrid.AddRoom(cellPosition, newRoom)) {
                 // Update UI with room count.
             } else {
                 Destroy(newRoom);
@@ -56,8 +49,8 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
         }
     }
 
-    public void HandleRoomDestroyed(BaseRoom room) {
-        _addedRooms.Remove(room);
+    public void HandleRoomDestroyed(Vector3Int cellPosition) {
+        _shipGrid.RemoveRoom(cellPosition);
         
         // Update UI with room count.
 
@@ -66,7 +59,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
     }
 
     public void CheckGameOverCondition() {
-        if (_addedRooms.Count == 0) {
+        if (_shipGrid.RoomCount == 0) {
             // Show Game Over screen.
         }
     }
