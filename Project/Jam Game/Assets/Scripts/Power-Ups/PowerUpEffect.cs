@@ -10,7 +10,6 @@ public enum PowerUpType
     TradingHub,
     NanobotComposition,
     DroneBuddy,
-    SolarSail,
     Harder,
     Fire,
     EfficientThrusters,
@@ -41,9 +40,6 @@ public class PowerUpEffect : MonoBehaviourSingleton<PowerUpEffect>
             case PowerUpType.DroneBuddy:
                 ApplyDroneBuddy();
                 break;
-            case PowerUpType.SolarSail:
-                ApplySolarSail();
-                break;
             case PowerUpType.Harder:
                 ApplyHarder();
                 break;
@@ -71,12 +67,13 @@ public class PowerUpEffect : MonoBehaviourSingleton<PowerUpEffect>
         }
     }
 
-    public void ApplyBelovedLeader() {  }
+    public void ApplyBelovedLeader() {
+        Settings.Instance.BelovedLeader = true;
+    }
     public void ApplyEnergizer() {  }
     public void ApplyTradingHub() {  }
     public void ApplyNanobotComposition() {  }
     public void ApplyDroneBuddy() {  }
-    public void ApplySolarSail() {  }
     public void ApplyHarder() {  }
     public void ApplyFire() { }
     public void ApplyEfficientThrusters() {  }
