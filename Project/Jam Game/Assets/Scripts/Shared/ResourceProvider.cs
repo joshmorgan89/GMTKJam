@@ -14,7 +14,7 @@ public class ResourceProvider : MonoBehaviour
     {
         //provide material
         if (resourceDrop == ResourceDrop.fuel) {
-            ResourceManager.Instance.UpdateFuel(5 * resourceMultiplier);
+            ResourceManager.Instance.UpdateRareMineral(5 * resourceMultiplier);
         }
     }
 }
