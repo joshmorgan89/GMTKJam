@@ -23,7 +23,7 @@ public class RoomStore : MonoBehaviourSingleton<RoomStore>
 
     private void SetButtonData(Button button, SO_RoomItem roomItem)
     {
-        button.GetComponentInChildren<TMP_Text>().text = "Cost: " + roomItem.cost; 
+        button.GetComponentInChildren<TMP_Text>().text = "Cost: " + roomItem.cost * Settings.Instance.TradingMultiplier; 
         button.GetComponent<Image>().sprite = roomItem.itemIcon;
         button.GetComponent<TooltipInfo>().description = roomItem.description;
 
@@ -33,9 +33,9 @@ public class RoomStore : MonoBehaviourSingleton<RoomStore>
 
     public void PurchaseRoom(Button button, SO_RoomItem roomItem)
     {
-        if (ResourceManager.Instance.rareMineral >= roomItem.cost)
+        if (ResourceManager.Instance.rareMineral >= roomItem.cost * Settings.Instance.TradingMultiplier)
         {
-            ResourceManager.Instance.UpdateRareMineral(-roomItem.cost);
+            ResourceManager.Instance.UpdateRareMineral(-roomItem.cost * Settings.Instance.TradingMultiplier);
             button.interactable = false;
             Debug.Log(roomItem.itemName + " purchased! Remaining money: " + ResourceManager.Instance.rareMineral);
 
