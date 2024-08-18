@@ -5,7 +5,6 @@ using UnityEngine;
 public class RandomEventsManager : MonoBehaviourSingleton<RandomEventsManager>
 {
     public void ShopOutpostEvent() {
-        Debug.Log(UIManager.Instance);
         UIManager.Instance.ShowShopOutpost();
         UpgradeStore.Instance.AssignRandomPerks();
         RoomStore.Instance.AssignRandomRooms();

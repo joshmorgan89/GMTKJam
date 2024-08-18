@@ -10,6 +10,7 @@ public class Embassy : MonoBehaviourSingleton<Embassy>
     public Button noButton;
     public void ShowTradeRefugees()
     {
+        ResetEmbassy();
         rareMineralsReceived = CalculateTradeAmount(ResourceManager.Instance.refugees); 
         UIManager.Instance.ChanegEmbassyTradeText("Traded " + ResourceManager.Instance.refugees + " refugees for " + rareMineralsReceived + " rare minerals.");
     }
@@ -30,5 +31,10 @@ public class Embassy : MonoBehaviourSingleton<Embassy>
     public void NoTrade() {
         yesButton.interactable = false;
         noButton.interactable = false;
+    }
+
+    public void ResetEmbassy() {
+        yesButton.interactable = true;
+        noButton.interactable = true;
     }
 }
