@@ -7,16 +7,19 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
     [Header("Game Settings")]
     public List<BaseRoom> InitialRoomsPrefabs;
     public List<BaseRoom> RoomPrefabs;
-    public Transform RoomsParent;
+    public Transform ShipTransform;
+    public int MaxPopulationCount = 10;
+    public int CrewQuartersMod = 5;
 
     [Header("Managers")]
     public GameObject Ship;
     private ShipGrid _shipGrid;
 
-    private int _currentElectionCycle = 1;
-
     [Header("Camera")]
     public CinemachineVirtualCamera virtualCamera;
+
+    private int _currentElectionCycle = 1;
+    private int _currentPopulationCount = 0;
 
     private void Start() {
         InitializeGame();
@@ -33,7 +36,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
         int section = -1;
 
         for (int i = 0; i < InitialRoomsPrefabs.Count; i++) {
-            BaseRoom newRoom = Instantiate(InitialRoomsPrefabs[i], RoomsParent);
+            BaseRoom newRoom = Instantiate(InitialRoomsPrefabs[i], ShipTransform);
             AddRoomAtPosition(new Vector3Int(section++, 0), newRoom);
         }
     }
@@ -75,5 +78,13 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
 
     public void SetZoomLevelTwo() {
         virtualCamera.m_Lens.OrthographicSize = 20;
+    }
+
+    public void CrewQuartersActivated() {
+        MaxPopulationCount += CrewQuartersMod;
+    }
+
+    public void CrewQuartersDeactivated() {
+        MaxPopulationCount -= CrewQuartersMod;
     }
 }
