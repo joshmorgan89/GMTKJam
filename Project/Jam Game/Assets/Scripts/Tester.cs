@@ -20,7 +20,10 @@ public class Tester : MonoBehaviourSingleton<Tester>
         }
 
         HUD.Instance.UpdateGoodwill(100, goodwillNum);
-        
+
+        if (Input.GetKeyDown("o")) {
+            UpgradeStore.Instance.AssignRandomPerks();
+        }
     }
 
 }

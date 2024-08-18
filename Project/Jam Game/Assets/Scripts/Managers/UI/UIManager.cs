@@ -31,6 +31,5 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
             ElectionPopUp.Instance.ShowElectionPopUp("This is an election");
             _nextElectionHappenValue += _electionHappenValue;
         }
-
     }
 }
