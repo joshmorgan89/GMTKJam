@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 public class ElectionPopUp : MonoBehaviourSingleton<ElectionPopUp>
 {
     [SerializeField]
@@ -9,10 +10,13 @@ public class ElectionPopUp : MonoBehaviourSingleton<ElectionPopUp>
     [SerializeField]
     private TMP_Text _popUpInfo;
 
+    public Sprite[] ordinances;
+    public Image PopUpBorder;
     public void ShowElectionPopUp(string text) {
         _popUpWindow.SetActive(true);
         _popUpInfo.text = text;
-        StartCoroutine(HidePopUpAfterDelay(4f));
+        PopUpBorder.sprite = ordinances[Random.Range(0,ordinances.Length-1)];
+        //StartCoroutine(HidePopUpAfterDelay(4f));
     }
 
     private IEnumerator HidePopUpAfterDelay(float delay)
