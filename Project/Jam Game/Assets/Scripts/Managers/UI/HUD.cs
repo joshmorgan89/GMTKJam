@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class HUD : MonoBehaviourSingleton<HUD>
@@ -12,6 +13,9 @@ public class HUD : MonoBehaviourSingleton<HUD>
     [SerializeField]
     private Image _fuelBar;
 
+    [SerializeField]
+    private TMP_Text _rareMineralCount;
+
     public void UpdatePopulation(float maxPopulation, float currentPopulation)
     {
         _populationBar.rectTransform.localScale = new Vector3(currentPopulation / maxPopulation, _populationBar.rectTransform.localScale.y, _populationBar.rectTransform.localScale.z);
@@ -23,5 +27,9 @@ public class HUD : MonoBehaviourSingleton<HUD>
     public void UpdateFuel(float maxFuel, float currentFuel)
     {
         _fuelBar.rectTransform.localScale = new Vector3(currentFuel / maxFuel, _fuelBar.rectTransform.localScale.y, _fuelBar.rectTransform.localScale.z);
+    }
+
+    public void UpdateRareMineral() {
+        _rareMineralCount.text = "Rare Mineral: " + ResourceManager.Instance.rareMineral;
     }
 }

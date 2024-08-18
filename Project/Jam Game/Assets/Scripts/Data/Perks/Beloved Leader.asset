@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6b8cffc98170ae4ba037625721d7f65, type: 3}
-  m_Name: Trading Hub
+  m_Name: Beloved Leader
   m_EditorClassIdentifier: 
-  itemName: Trading Hub
-  itemID: 3
-  itemIcon: {fileID: 21300000, guid: 27f42a6783f5efe439097f76afb74e7f, type: 3}
-  description: Trading Hub:<br>Items from outpost visitors become cheaper.
-  powerUpType: 2
+  itemName: Beloved Leader
+  itemID: 1001
+  itemIcon: {fileID: 21300000, guid: 142e8326e541c4b468aeed475f4fb828, type: 3}
+  description: 'Beloved Leader:<br>Provide a grace period for goodwill being decreased
+    when bad events happen '
+  powerUpType: 0
   cost: 0
