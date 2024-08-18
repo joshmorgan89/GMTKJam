@@ -423,6 +423,7 @@ GameObject:
   m_Component:
   - component: {fileID: 55785573}
   - component: {fileID: 55785574}
+  - component: {fileID: 55785575}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -457,11 +458,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a827d2d5ae13b8469103628e56b230a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialRoomCount: 3
+  InitialRoomsPrefabs: []
   RoomPrefabs: []
   RoomsParent: {fileID: 0}
   Ship: {fileID: 0}
   virtualCamera: {fileID: 780790146}
+--- !u!114 &55785575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55785572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68373ccad12714a449b06cc5476b9a88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BelovedLeader: 0
+  GracePeriod: 0
+  Energizer: 0
+  EnergizerRange: 1
+  TradingHub: 0
+  TradingMultiplier: 1
+  NanobotComposition: 0
+  GoodWillMultiplier: 1
+  DroneBuddy: 0
+  Harder: 0
+  DurabilityMultiplier: 1
+  Fire: 0
+  FireCooldownMultiplier: 1
+  EfficientThrusters: 0
+  PlayerSpeedMultiplier: 1
+  Asylum: 0
+  RefugeeDropModifier: 1
+  Engineer: 0
+  RepairCostModifier: 5
+  Scavenger: 0
+  RoomDropMultiplier: 1
+  FoundFamily: 0
 --- !u!1 &56238239
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,6 +623,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 504c55d785140514899bec08bea5216e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yesButton: {fileID: 249626735}
+  noButton: {fileID: 1631715517}
 --- !u!114 &59994574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1313,7 +1350,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &347017540
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1391,7 +1428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &396718878
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2843,6 +2880,7 @@ MonoBehaviour:
   _goodwillBar: {fileID: 1057398797}
   _fuelBar: {fileID: 56238241}
   _rareMineralCount: {fileID: 252420991}
+  _refugeeCount: {fileID: 1669624734}
 --- !u!1 &696712313
 GameObject:
   m_ObjectHideFlags: 0
@@ -4754,8 +4792,8 @@ RectTransform:
   - {fileID: 742025982}
   - {fileID: 491021920}
   - {fileID: 27681690}
-  - {fileID: 9611824}
   - {fileID: 59994572}
+  - {fileID: 9611824}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
