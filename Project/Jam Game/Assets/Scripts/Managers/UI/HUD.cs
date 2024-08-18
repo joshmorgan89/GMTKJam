@@ -31,10 +31,10 @@ public class HUD : MonoBehaviourSingleton<HUD>
     }
 
     public void UpdateRareMineral() {
-        _rareMineralCount.text = "Rare Mineral: " + ResourceManager.Instance.rareMineral;
+        //_rareMineralCount.text = "Rare Mineral: " + ResourceManager.Instance.rareMineral;
     }
     public void UpdateRefugee()
     {
-        _refugeeCount.text = "RefugeeCount: " + ResourceManager.Instance.refugees;
+        //_refugeeCount.text = "RefugeeCount: " + ResourceManager.Instance.refugees;
     }
 }

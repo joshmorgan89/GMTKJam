@@ -690,10 +690,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a827d2d5ae13b8469103628e56b230a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialRoomCount: 3
+  InitialRoomsPrefabs: []
   RoomPrefabs:
   - {fileID: -8462453080596069446, guid: 738498fea7031824d9b25cc6493ae514, type: 3}
   - {fileID: 1035496011471388962, guid: fc9f4c8b599191c458417078fe3fd0cf, type: 3}
+  - {fileID: -8462453080596069446, guid: 738498fea7031824d9b25cc6493ae514, type: 3}
   RoomsParent: {fileID: 1361644232}
   Ship: {fileID: 1361644229}
   virtualCamera: {fileID: 0}
@@ -1710,9 +1711,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Grid: {fileID: 1361644231}
   RoomTile: {fileID: 11400000, guid: e6c857b78f7cc5746beec5da46ffc058, type: 2}
-  GeneratorRoomTile: {fileID: 0}
+  GeneratorRoomTile: {fileID: 11400000, guid: 5991fd33f6af08c409a284dce86dac8a, type: 2}
   RoomTileMap: {fileID: 1983708732}
-  SpecialRoomTileMap: {fileID: 0}
+  SpecialRoomTileMap: {fileID: 1947821441}
 --- !u!156049354 &1361644231
 Grid:
   m_ObjectHideFlags: 0
@@ -3147,7 +3148,23 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   m_TileMatrixArray:
@@ -3155,28 +3172,28 @@ Tilemap:
     m_Data:
       e00: 0
       e01: 0
-      e02: -2.2040541e-38
-      e03: -2.2040541e-38
+      e02: -7.5000076
+      e03: -7.5000076
       e10: 0
       e11: 0
-      e12: 5.79e-43
-      e13: 5.79e-43
-      e20: 5.4871054e-28
-      e21: 5.2652734e-20
-      e22: 9.0179214e-29
-      e23: -8.680915e+9
+      e12: 6.92e-43
+      e13: 6.92e-43
+      e20: 65245890
+      e21: -2879352
+      e22: 9.4955135e-29
+      e23: -1.654022e+29
       e30: 4.5904e-41
-      e31: 5.83e-43
-      e32: 5.8e-43
-      e33: 5.82e-43
+      e31: 6.96e-43
+      e32: 6.94e-43
+      e33: 6.95e-43
   m_TileColorArray:
   - m_RefCount: 0
-    m_Data: {r: NaN, g: NaN, b: NaN, a: NaN}
+    m_Data: {r: 4.1389e-41, g: 4.1389e-41, b: 4.1389e-41, a: 4.1389e-41}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -7, y: 0, z: 0}
-  m_Size: {x: 7, y: 2, z: 1}
+  m_Origin: {x: 0, y: 0, z: 0}
+  m_Size: {x: 48, y: 22, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -3362,28 +3379,28 @@ Tilemap:
     m_Data:
       e00: 0
       e01: 0
-      e02: -2.2040541e-38
-      e03: -2.2040541e-38
+      e02: -7.5000076
+      e03: -7.5000076
       e10: 0
       e11: 0
-      e12: 5.79e-43
-      e13: 5.79e-43
-      e20: 5.4871054e-28
-      e21: -50261824
-      e22: 9.4106185e-29
-      e23: -8.658715e+9
+      e12: 6.92e-43
+      e13: 6.92e-43
+      e20: 65245890
+      e21: 1.254441e-11
+      e22: 9.7693615e-29
+      e23: -1.6142907e+29
       e30: 4.5904e-41
-      e31: 5.83e-43
-      e32: 5.8e-43
-      e33: 5.82e-43
+      e31: 6.96e-43
+      e32: 6.94e-43
+      e33: 6.95e-43
   m_TileColorArray:
   - m_RefCount: 0
-    m_Data: {r: NaN, g: NaN, b: NaN, a: NaN}
+    m_Data: {r: 4.1896e-41, g: 4.1896e-41, b: 4.1896e-41, a: 4.1896e-41}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -17, y: -11, z: 0}
-  m_Size: {x: 39, y: 22, z: 1}
+  m_Origin: {x: 0, y: 0, z: 0}
+  m_Size: {x: 49, y: 22, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:

@@ -5,7 +5,7 @@ using UnityEngine;
 using Cinemachine;
 public class GameManager : MonoBehaviourSingleton<GameManager> {
     [Header("Game Settings")]
-    public int InitialRoomCount = 3;
+    public List<BaseRoom> InitialRoomsPrefabs;
     public List<BaseRoom> RoomPrefabs;
     public Transform RoomsParent;
 
@@ -32,20 +32,17 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
     private void SetupInitialRooms() {
         int section = -1;
 
-        for (int i = 0; i < RoomPrefabs.Count/*InitialRoomCount*/; i++) {
-            BaseRoom newRoom = Instantiate(RoomPrefabs[i], RoomsParent);
-
+        for (int i = 0; i < InitialRoomsPrefabs.Count; i++) {
+            BaseRoom newRoom = Instantiate(InitialRoomsPrefabs[i], RoomsParent);
             AddRoomAtPosition(new Vector3Int(section++, 0), newRoom);
         }
     }
 
     public void AddRoomAtPosition(Vector3Int cellPosition, BaseRoom newRoom) {
-        if (_shipGrid.IsPositionValid(cellPosition)) {
-            if (_shipGrid.AddRoom(cellPosition, newRoom)) {
-                // Update UI with room count.
-            } else {
-                Destroy(newRoom);
-            }
+        if (_shipGrid.AddRoom(cellPosition, newRoom)) {
+            // Update UI with room count.
+        } else {
+            Destroy(newRoom);
         }
     }
 
