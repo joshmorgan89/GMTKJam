@@ -11,6 +11,7 @@ public class RoomStore : MonoBehaviourSingleton<RoomStore>
 
     public void AssignRandomRooms()
     {
+        ResetButtons();
         for (int i = 0; i < roomButtons.Length; i++)
         {
             SO_RoomItem randomRoomItem = roomItems[Random.Range(0, roomItems.Count)];
@@ -34,7 +35,7 @@ public class RoomStore : MonoBehaviourSingleton<RoomStore>
     {
         if (ResourceManager.Instance.rareMineral >= roomItem.cost)
         {
-            ResourceManager.Instance.rareMineral -= roomItem.cost;
+            ResourceManager.Instance.UpdateRareMineral(-roomItem.cost);
             button.interactable = false;
             Debug.Log(roomItem.itemName + " purchased! Remaining money: " + ResourceManager.Instance.rareMineral);
 
@@ -48,8 +49,12 @@ public class RoomStore : MonoBehaviourSingleton<RoomStore>
 
     private void AddRoomToPlayer(SO_RoomItem roomItem)
     {
-        // Implement the logic to add the room to the player's ship or inventory
-        // This might involve updating the player's ship layout, inventory, etc.
         Debug.Log(roomItem.itemName + " added to the player's ship.");
+    }
+
+    public void ResetButtons() {
+        foreach (Button button in roomButtons) {
+            button.interactable = true;
+        }
     }
 }

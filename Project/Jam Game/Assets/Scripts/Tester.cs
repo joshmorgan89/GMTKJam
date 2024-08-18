@@ -20,13 +20,14 @@ public class Tester : MonoBehaviourSingleton<Tester>
         }
 
         HUD.Instance.UpdateGoodwill(100, goodwillNum);
-
+        HUD.Instance.UpdateRareMineral();
+        HUD.Instance.UpdateRefugee();
         //refresh shop
         if (Input.GetKeyDown("o")) {
-            Debug.Log(123);
-            UpgradeStore.Instance.AssignRandomPerks();
-            RoomStore.Instance.AssignRandomRooms();
-            HUD.Instance.UpdateRareMineral();
+            RandomEventsManager.Instance.ShopOutpostEvent();
+        }
+        if (Input.GetKeyDown("p")) {
+            RandomEventsManager.Instance.EmbassyOutpostEvent();
         }
 
     }

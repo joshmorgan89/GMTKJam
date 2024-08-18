@@ -14,6 +14,8 @@ public class UpgradeStore : MonoBehaviourSingleton<UpgradeStore>
 
     public void AssignRandomPerks()
     {
+        ResetStore();
+
         // Filter out already obtained upgrades
         List<SO_PowerUp> availableForSelection = new List<SO_PowerUp>();
         foreach (SO_PowerUp powerUp in powerUpObjects)
@@ -100,5 +102,14 @@ public class UpgradeStore : MonoBehaviourSingleton<UpgradeStore>
                 button.interactable = false;
             }
         }
+    }
+
+    public void ResetStore()
+    {
+        foreach (Button button in upgradeButtons)
+        {
+            button.interactable = true;
+        }
+        upgradeSelected = false;
     }
 }

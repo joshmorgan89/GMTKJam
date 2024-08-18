@@ -15,7 +15,8 @@ public class HUD : MonoBehaviourSingleton<HUD>
 
     [SerializeField]
     private TMP_Text _rareMineralCount;
-
+    [SerializeField]
+    private TMP_Text _refugeeCount;
     public void UpdatePopulation(float maxPopulation, float currentPopulation)
     {
         _populationBar.rectTransform.localScale = new Vector3(currentPopulation / maxPopulation, _populationBar.rectTransform.localScale.y, _populationBar.rectTransform.localScale.z);
@@ -31,5 +32,9 @@ public class HUD : MonoBehaviourSingleton<HUD>
 
     public void UpdateRareMineral() {
         _rareMineralCount.text = "Rare Mineral: " + ResourceManager.Instance.rareMineral;
+    }
+    public void UpdateRefugee()
+    {
+        _refugeeCount.text = "RefugeeCount: " + ResourceManager.Instance.refugees;
     }
 }
