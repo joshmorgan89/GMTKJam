@@ -15,4 +15,5 @@ public class RandomEventsManager : MonoBehaviourSingleton<RandomEventsManager>
         UpgradeStore.Instance.AssignRandomPerks();
         Embassy.Instance.ShowTradeRefugees();
     }
+
 }

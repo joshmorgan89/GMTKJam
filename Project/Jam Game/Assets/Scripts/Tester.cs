@@ -29,6 +29,9 @@ public class Tester : MonoBehaviourSingleton<Tester>
         if (Input.GetKeyDown("p")) {
             RandomEventsManager.Instance.EmbassyOutpostEvent();
         }
+        if (Input.GetKeyDown("q")) {
+            RandomEventPopup.Instance.ShowEventPopUp("This is a random event");
+        }
 
     }
 
