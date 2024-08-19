@@ -3252,7 +3252,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &741636834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5673,7 +5673,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popUpCount: 2
-  totalGameSecond: 0
+  distanceFormShip: 0
+  asteroid: {fileID: 0}
+  numberOfAsteroid: 0
+  alien: {fileID: 0}
+  numberOfAlien: 0
 --- !u!114 &1327917696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7780,6 +7784,7 @@ MonoBehaviour:
   ShipTransform: {fileID: 322843617}
   MaxPopulationCount: 10
   CrewQuartersMod: 5
+  GeneratorChargeRange: 3
   PlayerPodInteraction: {fileID: 366073986}
   Ship: {fileID: 322843614}
   virtualCamera: {fileID: 46484204}

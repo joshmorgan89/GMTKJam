@@ -17,6 +17,7 @@ public class BaseRoom : MonoBehaviour
     private void Update() {
         if (_health.IsDestroyed) {
             Deactivate();
+            GameManager.Instance.RemoveRoom(GameManager.Instance.GetRoomPosition(this));
         }
     }
 

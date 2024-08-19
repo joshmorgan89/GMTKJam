@@ -43,8 +43,10 @@ public class ShipGrid : MonoBehaviour {
             }
 
             // Activate the room
-            if (IsInRangeOfGeneratorRoom(cellPosition)) {
+            if (IsInRangeOfGeneratorRoom(cellPosition) || room is GeneratorRoom) {
                 room.Activate();
+            } else {
+                room.Deactivate();
             }
             
             if (GetRoomAtPosition(cellPosition) == null) {
@@ -82,13 +84,13 @@ public class ShipGrid : MonoBehaviour {
 
         // Check if the position is already occupied by an active room
         if (GetRoomAtPosition(cellPosition) != null) {
-            Debug.Log("Position is already occupied by another room.");
+            //Debug.Log("Position is already occupied by another room.");
             return false;
         }
 
         // Check if the position is adjacent to an existing active room (if adjacency rules apply)
         if (RoomCount > 0 && !IsAdjacentToExistingRoom(cellPosition)) {
-            Debug.Log("Position is not adjacent to an existing room.");
+            //Debug.Log("Position is not adjacent to an existing room.");
             return false;
         }
 
@@ -113,16 +115,29 @@ public class ShipGrid : MonoBehaviour {
         return _addedRooms.FirstOrDefault(x => x.Key == cellPosition).Value;
     }
 
-    public bool IsInRangeOfGeneratorRoom(Vector3Int cellPosition) {
-        return !_addedRooms
-            .Where(x => Mathf.Abs(x.Key.x - cellPosition.x + x.Key.y - cellPosition.y) <= 3)       // First get cells within charge distance
-            .FirstOrDefault(x => x.Value is GeneratorRoom)                                  // Then see if any of those cells are generators
-            .Equals(default(KeyValuePair<Vector3Int, BaseRoom>));                                                       // Finally we check if the FirstOrDefault is default
+    public Vector3Int GetRoomPosition(BaseRoom room) {
+        return _addedRooms.FirstOrDefault(x => x.Value == room).Key;
+    }
+
+    public KeyValuePair<Vector3Int, BaseRoom> FindRoomInDictionary(BaseRoom roomToFind) {
+        return _addedRooms.FirstOrDefault(x => x.Value == roomToFind);
     }
 
     public List<BaseRoom> GetRoomsInRangeOfCellPosition(int range, Vector3Int cellPosition) {
-        Dictionary<Vector3Int, BaseRoom> roomsInRange = _addedRooms.Where(x => (x.Key.x - cellPosition.x) + (x.Key.y - cellPosition.y) <= range) as Dictionary<Vector3Int, BaseRoom>;
-        return roomsInRange.Values.ToList();
+        var roomsInRange = _addedRooms.Where(x => Mathf.Abs(x.Key.x - cellPosition.x) + Mathf.Abs(x.Key.y - cellPosition.y) <= range).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        return roomsInRange?.Values.ToList();
+    }
+
+    public bool IsInRangeOfGeneratorRoom(Vector3Int cellPosition) {
+        var rooms = GetRoomsInRangeOfCellPosition(GameManager.Instance.GeneratorChargeRange, cellPosition);
+        var generatorRooms = rooms?.Where(x => x.GetType() == typeof(GeneratorRoom)).ToList();
+        return generatorRooms?.Count > 0;
+    }
+
+    public bool IsInRangeOfGeneratorRoomExcluding(Vector3Int cellPosition, GeneratorRoom generatorRoom) {
+        var rooms = GetRoomsInRangeOfCellPosition(GameManager.Instance.GeneratorChargeRange, cellPosition);
+        var generatorRooms = rooms?.Where(x => x is GeneratorRoom && x != generatorRoom).ToList();
+        return generatorRooms?.Count > 0;
     }
 
     public bool IsAdjacentToExistingRoom(Vector3 cellPosition) {
@@ -245,19 +260,33 @@ public class ShipGrid : MonoBehaviour {
         return _addedRooms.ContainsKey(cellPosition) && _addedRooms[cellPosition] != null;
     }
 
-    public void OnActivatedGeneratorRoom(GeneratorRoom generatorRoom) {
-        Vector3Int cellPosition = _addedRooms.FirstOrDefault(x => x.Value == generatorRoom).Key;
+    public void ActivatedGeneratorRoom(GeneratorRoom generatorRoom) {
+        var found = FindRoomInDictionary(generatorRoom);
+        Vector3Int cellPosition = found.Key;
 
-        foreach (var room in GetRoomsInRangeOfCellPosition(3, cellPosition)) {
-            room.Activate();
+        var roomsInRange = GetRoomsInRangeOfCellPosition(GameManager.Instance.GeneratorChargeRange, cellPosition);
+
+        if (roomsInRange != null) {
+            foreach (var room in roomsInRange) {
+                if (!room.IsActive) { 
+                    room.Activate(); 
+                }
+            }
         }
     }
 
-    public void OnDeactivatedGeneratorRoom(GeneratorRoom generatorRoom) {
-        Vector3Int cellPosition = _addedRooms.FirstOrDefault(x => x.Value == generatorRoom).Key;
+    public void DeactivatedGeneratorRoom(GeneratorRoom generatorRoom) {
+        var found = FindRoomInDictionary(generatorRoom);
+        Vector3Int cellPosition = found.Key;
 
-        foreach (var room in GetRoomsInRangeOfCellPosition(3, cellPosition)) {
-            room.Deactivate();
+        var roomsInRange = GetRoomsInRangeOfCellPosition(GameManager.Instance.GeneratorChargeRange, cellPosition);
+
+        if (roomsInRange != null) {
+            foreach (var room in roomsInRange) {
+                if (room.IsActive && !(room is GeneratorRoom)) {
+                    room.Deactivate();
+                }
+            }
         }
     }
 }
