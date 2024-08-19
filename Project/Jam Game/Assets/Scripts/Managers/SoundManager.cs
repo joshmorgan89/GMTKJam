@@ -56,6 +56,9 @@ public class SoundManager : MonoBehaviourSingleton<SoundManager>
 
     private void Start()
     {
+        _sfxVolume = Settings.Instance.SFXVolumn;
+        _musicVolume = Settings.Instance.BGMVolumn;
+
         InitializeAudioSourcePool();
     }
 
@@ -67,7 +70,7 @@ public class SoundManager : MonoBehaviourSingleton<SoundManager>
         for (int i = 0; i < maxSimultaneousSounds; i++)
         {
             AudioSource audioSource = gameObject.AddComponent<AudioSource>();
-            audioSource.volume = _sfxVolume;  // Set initial volume
+            audioSource.volume = _sfxVolume; 
             audioSourcePool.Enqueue(audioSource);
         }
     }
@@ -109,12 +112,12 @@ public class SoundManager : MonoBehaviourSingleton<SoundManager>
             }
             else
             {
-                Debug.LogWarning("No available AudioSource to play the clip: " + soundName);
+                Debug.LogWarning("No available AudioSource to play: " + soundName);
             }
         }
         else
         {
-            Debug.LogWarning("AudioClip not found for sound: " + soundName);
+            Debug.LogWarning("AudioClip not found: " + soundName);
         }
     }
 
@@ -180,7 +183,7 @@ public class SoundManager : MonoBehaviourSingleton<SoundManager>
     public void SetSFXVolume(float volume)
     {
         _sfxVolume = Mathf.Clamp01(volume);
-
+        Settings.Instance.SFXVolumn = _sfxVolume;
         // Update the volume for all active and pooled audio sources
         foreach (var audioSource in activeAudioSources)
         {
@@ -196,6 +199,7 @@ public class SoundManager : MonoBehaviourSingleton<SoundManager>
     public void SetMusicVolume(float volume)
     {
         _musicVolume = Mathf.Clamp01(volume);
+        Settings.Instance.BGMVolumn = _musicVolume;
         musicSource.volume = _musicVolume;
     }
 
