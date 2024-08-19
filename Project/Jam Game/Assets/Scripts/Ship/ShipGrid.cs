@@ -12,6 +12,7 @@ public class ShipGrid : MonoBehaviour {
     public TileBase GeneratorRoomTile;
     public Tilemap RoomTileMap;
     public Tilemap SpecialRoomTileMap;
+    public GameObject TurretPrefab;
 
     private Dictionary<Vector3Int, BaseRoom> _addedRooms = new Dictionary<Vector3Int, BaseRoom>();
 
@@ -26,6 +27,8 @@ public class ShipGrid : MonoBehaviour {
             // Set the tile on the special tilemap if it's one of our special rooms
             if (room is GeneratorRoom generatorRoom) {
                 SpecialRoomTileMap.SetTile(cellPosition, GeneratorRoomTile);
+            } else if (room is TurretRoom turretRoom) {
+                turretRoom.Turret = Instantiate(TurretPrefab, Grid.GetCellCenterWorld(cellPosition), room.transform.rotation);
             }
 
             // Activate the room
@@ -83,6 +86,11 @@ public class ShipGrid : MonoBehaviour {
             .Equals(default(KeyValuePair<Vector3Int, BaseRoom>));                                                       // Finally we check if the FirstOrDefault is default
     }
 
+    public List<BaseRoom> GetRoomsInRangeOfCellPosition(int range, Vector3Int cellPosition) {
+        Dictionary<Vector3Int, BaseRoom> roomsInRange = _addedRooms.Where(x => (x.Key.x - cellPosition.x) + (x.Key.y - cellPosition.y) <= range) as Dictionary<Vector3Int, BaseRoom>;
+        return roomsInRange.Values.ToList();
+    }
+
     public bool IsAdjacentToExistingRoom(Vector3 cellPosition) {
         // Offsets to check all four adjacent positions (up, down, left, right)
         Vector3Int[] adjacentOffsets = new Vector3Int[] {
@@ -103,5 +111,21 @@ public class ShipGrid : MonoBehaviour {
 
         // No adjacent room found
         return false;
+    }
+
+    public void OnActivatedGeneratorRoom(GeneratorRoom generatorRoom) {
+        Vector3Int cellPosition = _addedRooms.FirstOrDefault(x => x.Value == generatorRoom).Key;
+
+        foreach (var room in GetRoomsInRangeOfCellPosition(3, cellPosition)) {
+            room.Activate();
+        }
+    }
+
+    public void OnDeactivatedGeneratorRoom(GeneratorRoom generatorRoom) {
+        Vector3Int cellPosition = _addedRooms.FirstOrDefault(x => x.Value == generatorRoom).Key;
+
+        foreach (var room in GetRoomsInRangeOfCellPosition(3, cellPosition)) {
+            room.Deactivate();
+        }
     }
 }
