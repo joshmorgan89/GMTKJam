@@ -47,9 +47,11 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
         if (Time.timeScale == 1)
         {
             Time.timeScale = 0;
+            //show pause
         }
         else {
             Time.timeScale = 1;
+            //stop pause
         }
     }
     public void StopGameTimeScale()
