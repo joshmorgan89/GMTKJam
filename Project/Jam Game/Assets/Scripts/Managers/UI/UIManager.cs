@@ -38,7 +38,6 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
         {
             ElectionPopUp.Instance.ShowElectionPopUp("This is an election");
             _nextElectionHappenValue += electionHappenValue;
-            RandomEventsManager.Instance.Reset(); // reset after each election
         }
     }
 

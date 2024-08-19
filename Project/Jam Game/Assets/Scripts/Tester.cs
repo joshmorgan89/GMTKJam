@@ -14,10 +14,6 @@ public class Tester : MonoBehaviourSingleton<Tester>
         goodwillNum += Time.deltaTime;
         timer += Time.deltaTime;
 
-        if (timer >= 2) { 
-            Instantiate(asteroid, gameObject.transform.position, Quaternion.Euler(new Vector3(0,0, Random.Range(0f, 360f))));
-            timer -= 2;
-        }
 
         HUD.Instance.UpdateGoodwill(100, goodwillNum);
         HUD.Instance.UpdateRareMineral();
