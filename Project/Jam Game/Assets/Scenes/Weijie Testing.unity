@@ -511,7 +511,7 @@ GameObject:
   - component: {fileID: 56238242}
   - component: {fileID: 56238241}
   m_Layer: 5
-  m_Name: Fuel Bar
+  m_Name: Health Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1271,7 +1271,7 @@ GameObject:
   - component: {fileID: 331044505}
   - component: {fileID: 331044504}
   m_Layer: 5
-  m_Name: Fuel Bar Background
+  m_Name: Health Bar Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2821,7 +2821,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _populationBar: {fileID: 784704569}
   _goodwillBar: {fileID: 1057398797}
-  _fuelBar: {fileID: 56238241}
+  _healthBar: {fileID: 56238241}
   _rareMineralCount: {fileID: 252420991}
   _refugeeCount: {fileID: 1669624734}
 --- !u!114 &684665005
@@ -2884,7 +2884,7 @@ GameObject:
   - component: {fileID: 739746590}
   - component: {fileID: 739746589}
   m_Layer: 5
-  m_Name: Fuel Text
+  m_Name: Health Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2929,7 +2929,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Fuel:'
+  m_text: 'Health:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3246,6 +3246,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 784704567}
   m_CullTransparentMesh: 1
+--- !u!1001 &808862030
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3462056021183556078, guid: c13b1b5ea96d25040a69cfe46d326074, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 81.509315
+      objectReference: {fileID: 0}
+    - target: {fileID: 3462056021183556078, guid: c13b1b5ea96d25040a69cfe46d326074, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.0916622
+      objectReference: {fileID: 0}
+    - target: {fileID: 3462056021183556078, guid: c13b1b5ea96d25040a69cfe46d326074, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -46.85865
+      objectReference: {fileID: 0}
+    - target: {fileID: 3462056021183556078, guid: c13b1b5ea96d25040a69cfe46d326074, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.33074766
+      objectReference: {fileID: 0}
+    - target: {fileID: 3462056021183556078, guid: c13b1b5ea96d25040a69cfe46d326074, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3462056021183556078, guid: c13b1b5ea96d25040a69cfe46d326074, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.94371927
+      objectReference: {fileID: 0}
+    - target: {fileID: 3462056021183556078, guid: c13b1b5ea96d25040a69cfe46d326074, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3462056021183556078, guid: c13b1b5ea96d25040a69cfe46d326074, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3462056021183556078, guid: c13b1b5ea96d25040a69cfe46d326074, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3462056021183556078, guid: c13b1b5ea96d25040a69cfe46d326074, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692937315736575717, guid: c13b1b5ea96d25040a69cfe46d326074, type: 3}
+      propertyPath: m_Name
+      value: Alien Pirate
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c13b1b5ea96d25040a69cfe46d326074, type: 3}
 --- !u!1 &828096437
 GameObject:
   m_ObjectHideFlags: 0
@@ -4893,7 +4950,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1338165985}
   m_Layer: 5
-  m_Name: Fuel
+  m_Name: Player Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5059,9 +5116,9 @@ MonoBehaviour:
   popUpCount: 2
   distanceFormShip: 100
   asteroid: {fileID: 5874138225474922833, guid: 3725afc24332ccc479b058c78061208a, type: 3}
-  numberOfAsteroid: 10
+  numberOfAsteroid: 5
   alien: {fileID: 8692937315736575717, guid: c13b1b5ea96d25040a69cfe46d326074, type: 3}
-  numberOfAlien: 10
+  numberOfAlien: 5
 --- !u!1 &1357976208
 GameObject:
   m_ObjectHideFlags: 0
@@ -7471,3 +7528,4 @@ SceneRoots:
   - {fileID: 1614480135}
   - {fileID: 1247415916}
   - {fileID: 1960350180}
+  - {fileID: 808862030}

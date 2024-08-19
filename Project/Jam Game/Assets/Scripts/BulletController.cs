@@ -27,7 +27,7 @@ public class BulletController : MonoBehaviour
         }
 
         if (collision.gameObject.tag == "Player") {
-            collision.gameObject.GetComponent<PlayerHealth>().PlayerCurrentHealthUpdate(-bulletDamage);
+            collision.gameObject.GetComponent<PlayerHealth>().PlayerCurrentHealthUpdate(-20);
             Destroy(gameObject);
         }
     }

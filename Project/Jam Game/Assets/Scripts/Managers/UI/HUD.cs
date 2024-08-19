@@ -11,7 +11,7 @@ public class HUD : MonoBehaviourSingleton<HUD>
     [SerializeField]
     private Image _goodwillBar;
     [SerializeField]
-    private Image _fuelBar;
+    private Image _healthBar;
 
     [SerializeField]
     private TMP_Text _rareMineralCount;
@@ -25,9 +25,9 @@ public class HUD : MonoBehaviourSingleton<HUD>
     {
         _goodwillBar.rectTransform.localScale = new Vector3(currentGoodwil / maxGoodwil, _goodwillBar.rectTransform.localScale.y, _goodwillBar.rectTransform.localScale.z);
     }
-    public void UpdateFuel(float maxFuel, float currentFuel)
+    public void UpdateHealth(float maxHealth, float currentHealth)
     {
-        _fuelBar.rectTransform.localScale = new Vector3(currentFuel / maxFuel, _fuelBar.rectTransform.localScale.y, _fuelBar.rectTransform.localScale.z);
+        _healthBar.rectTransform.localScale = new Vector3(currentHealth / maxHealth, _healthBar.rectTransform.localScale.y, _healthBar.rectTransform.localScale.z);
     }
 
     public void UpdateRareMineral() {

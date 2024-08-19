@@ -62,6 +62,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""d69d73d2-91ad-4b07-8331-7c08a1ead743"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""Zoom2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""52086326-e3ab-4c09-ab3a-695d1903ab0c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -225,6 +245,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_Break = m_Player.FindAction("Break", throwIfNotFound: true);
         m_Player_Zoom1 = m_Player.FindAction("Zoom1", throwIfNotFound: true);
         m_Player_Zoom2 = m_Player.FindAction("Zoom2", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -290,6 +311,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Break;
     private readonly InputAction m_Player_Zoom1;
     private readonly InputAction m_Player_Zoom2;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -298,6 +320,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Break => m_Wrapper.m_Player_Break;
         public InputAction @Zoom1 => m_Wrapper.m_Player_Zoom1;
         public InputAction @Zoom2 => m_Wrapper.m_Player_Zoom2;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -319,6 +342,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Zoom2.started += instance.OnZoom2;
             @Zoom2.performed += instance.OnZoom2;
             @Zoom2.canceled += instance.OnZoom2;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -335,6 +361,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Zoom2.started -= instance.OnZoom2;
             @Zoom2.performed -= instance.OnZoom2;
             @Zoom2.canceled -= instance.OnZoom2;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -403,5 +432,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnBreak(InputAction.CallbackContext context);
         void OnZoom1(InputAction.CallbackContext context);
         void OnZoom2(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

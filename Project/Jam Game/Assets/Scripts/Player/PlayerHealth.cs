@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     public void Awake()
     {
         currentHealth = maxHealth;
+        PlayerCurrentHealthUpdate(0);
     }
 
     /// <summary>
@@ -27,10 +28,14 @@ public class PlayerHealth : MonoBehaviour
     /// <param name="amount">the amount of changes to player Pod's current health</param>
     public void PlayerCurrentHealthUpdate(float amount) {
         currentHealth += amount;
+        HUD.Instance.UpdateHealth(maxHealth, currentHealth);
 
         if (currentHealth <= 0) {
+            currentHealth= 0;
+            HUD.Instance.UpdateHealth(maxHealth, currentHealth);
             PlayerDestroyed();
         }
+
     }
 
     /// <summary>
