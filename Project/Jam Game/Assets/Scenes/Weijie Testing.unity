@@ -462,6 +462,7 @@ MonoBehaviour:
   ShipTransform: {fileID: 0}
   MaxPopulationCount: 10
   CrewQuartersMod: 5
+  PlayerPodInteraction: {fileID: 0}
   Ship: {fileID: 1960350179}
   virtualCamera: {fileID: 780790146}
 --- !u!114 &55785575
@@ -2798,7 +2799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   electionEventNum: 3
   electionHappenValue: 0
-  gameProgressSpeed: 0.01
+  gameProgressSpeed: 0.03
   electionPrefab: {fileID: 6419646482934240406, guid: 893b31efd87183248b9df3a64ea76878, type: 3}
   electionGroup: {fileID: 852993822}
   gameProgress: {fileID: 742025983}
@@ -3876,6 +3877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d072d489d2d6e784990188ec89149f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HoldPosition: {fileID: 0}
 --- !u!114 &1010218352
 MonoBehaviour:
   m_ObjectHideFlags: 0
