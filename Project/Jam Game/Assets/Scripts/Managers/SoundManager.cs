@@ -30,6 +30,8 @@ public class SoundManager : MonoBehaviourSingleton<SoundManager>
     public AudioClip shopBGM;
     public AudioClip normalBGM;
 
+    private float _sfxVolume = 1f;
+    private float _musicVolume = 1f;
     public void PlaySound(string soundName)
     {
         switch (soundName)
@@ -87,13 +89,14 @@ public class SoundManager : MonoBehaviourSingleton<SoundManager>
 
     private void PlaySFX(AudioClip clip)
     {
-        sfxSource.PlayOneShot(clip);
+        sfxSource.PlayOneShot(clip, _sfxVolume);
     }
 
     public void PlayMusic(AudioClip clip, bool loop = true)
     {
         musicSource.clip = clip;
         musicSource.loop = loop;
+        musicSource.volume = _musicVolume;
         musicSource.Play();
     }
 
@@ -115,5 +118,27 @@ public class SoundManager : MonoBehaviourSingleton<SoundManager>
     public void PlayNormalBGM()
     {
         PlayMusic(normalBGM);
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        _sfxVolume = Mathf.Clamp01(volume);
+        sfxSource.volume = _musicVolume;
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        _musicVolume = Mathf.Clamp01(volume);
+        musicSource.volume = _musicVolume;
+    }
+
+    public float GetSFXVolume()
+    {
+        return _sfxVolume;
+    }
+
+    public float GetMusicVolume()
+    {
+        return _musicVolume;
     }
 }
