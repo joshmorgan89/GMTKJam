@@ -26,6 +26,8 @@ public class InputManager : MonoBehaviour
         _playerInputAction.Player.Break.canceled += OnBreakCanceled;
         _playerInputAction.Player.Zoom1.performed += OnZoom1Performed;
         _playerInputAction.Player.Zoom2.performed += OnZoom2Performed;
+        _playerInputAction.Player.Pause.performed += OnPausePerformed;
+        _playerInputAction.Player.Pause.Enable();
         _playerInputAction.Player.Break.Enable();
         _playerInputAction.Player.Zoom1.Enable();
         _playerInputAction.Player.Zoom2.Enable();
@@ -39,6 +41,8 @@ public class InputManager : MonoBehaviour
         _playerInputAction.Player.Break.canceled -= OnBreakCanceled;
         _playerInputAction.Player.Zoom1.performed -= OnZoom1Performed;
         _playerInputAction.Player.Zoom2.performed -= OnZoom2Performed;
+        _playerInputAction.Player.Pause.performed -= OnPausePerformed;
+        _playerInputAction.Player.Pause.Disable();
         _playerInputAction.Player.Break.Disable();
         _playerInputAction.Player.Zoom1.Disable();
         _playerInputAction.Player.Zoom2.Disable();
@@ -60,6 +64,10 @@ public class InputManager : MonoBehaviour
 
         GameManager.Instance.SetZoomLevelOne();
     }
+    private void OnPausePerformed(InputAction.CallbackContext context) { 
+        GameManager.Instance.ToggleGamePause();
+    }
+
     private void OnBreakPerformed(InputAction.CallbackContext context)
     {
         playerMovement.BreakStart();

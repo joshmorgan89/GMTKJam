@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class EnemyMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float stopRange = 5f;
-    public float tooCloseRange = 3f;
+    public float tooCloseRange = 2f;
+    public float avoidOtherEnemiesRange = 1f;
 
     private Transform target;
 
@@ -24,7 +26,20 @@ public class EnemyMovement : MonoBehaviour
             }
             else if (distanceToTarget < tooCloseRange)
             {
-                MoveAwayFromTarget();
+                MoveAwayFromTarget(target);
+            }
+        }
+        AvoidOtherEnemies();
+    }
+    void AvoidOtherEnemies()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, avoidOtherEnemiesRange);
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.gameObject != gameObject && collider.CompareTag("Enemy"))
+            {
+                Vector2 direction = (transform.position - collider.transform.position).normalized;
+                transform.position = Vector2.MoveTowards(transform.position, transform.position + (Vector3)direction, moveSpeed * Time.deltaTime);
             }
         }
     }
@@ -78,9 +93,9 @@ public class EnemyMovement : MonoBehaviour
     /// <summary>
     /// move away from target too close
     /// </summary>
-    void MoveAwayFromTarget()
+    void MoveAwayFromTarget(Transform awayTarget)
     {
-        Vector2 direction = (transform.position - target.position).normalized;
+        Vector2 direction = (transform.position - awayTarget.position).normalized;
         transform.position = Vector2.MoveTowards(transform.position, transform.position + (Vector3)direction, moveSpeed * Time.deltaTime);
     }
 

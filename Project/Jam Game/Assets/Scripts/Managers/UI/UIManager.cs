@@ -57,6 +57,7 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     }
 
     public void CloseOutpost() {
+        GameManager.Instance.StartGameTimeScale();
         outpostPanel.SetActive(false);
         embassy.SetActive(false);
         shop.SetActive(false);

@@ -28,6 +28,13 @@ public class Tester : MonoBehaviourSingleton<Tester>
         if (Input.GetKeyDown("q")) {
             RandomEventPopup.Instance.ShowEventPopUp("This is a random event");
         }
+        if (Input.GetKeyDown("m")) {
+            Time.timeScale = 0;
+        }
+        if (Input.GetKeyDown("n"))
+        {
+            Time.timeScale = 1;
+        }
 
     }
 
