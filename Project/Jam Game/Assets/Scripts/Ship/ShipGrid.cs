@@ -17,6 +17,13 @@ public class ShipGrid : MonoBehaviour {
     public GameObject TurretPrefab;
 
     private Dictionary<Vector3Int, BaseRoom> _addedRooms = new Dictionary<Vector3Int, BaseRoom>();
+    // Adjacent offsets (up, down, right, left)
+    private Vector3Int[] _adjacentOffsets = new Vector3Int[] {
+        new Vector3Int(0, 1, 0),  // Up
+        new Vector3Int(0, -1, 0), // Down
+        new Vector3Int(1, 0, 0),  // Right
+        new Vector3Int(-1, 0, 0)  // Left
+    };
 
     public int RoomCount => _addedRooms.Count;
 
@@ -89,13 +96,26 @@ public class ShipGrid : MonoBehaviour {
         return true;
     }
 
+    public bool IsCloseEnough(Vector3Int cellPosition) {
+        if (IsPositionValid(cellPosition)) { return true; }
+
+        Vector3Int closestTile = FindClosestAvailablePosition(cellPosition);
+        if (closestTile != null) {
+            if (Mathf.Abs(closestTile.x - cellPosition.x + closestTile.y - cellPosition.y) <= 2) { 
+                return true; 
+            }
+        }
+
+        return false;
+    }
+
     public BaseRoom GetRoomAtPosition(Vector3Int cellPosition) {
         return _addedRooms.FirstOrDefault(x => x.Key == cellPosition).Value;
     }
 
     public bool IsInRangeOfGeneratorRoom(Vector3Int cellPosition) {
         return !_addedRooms
-            .Where(x => (x.Key.x - cellPosition.x) + (x.Key.y - cellPosition.y) <= 3)       // First get cells within charge distance
+            .Where(x => Mathf.Abs(x.Key.x - cellPosition.x + x.Key.y - cellPosition.y) <= 3)       // First get cells within charge distance
             .FirstOrDefault(x => x.Value is GeneratorRoom)                                  // Then see if any of those cells are generators
             .Equals(default(KeyValuePair<Vector3Int, BaseRoom>));                                                       // Finally we check if the FirstOrDefault is default
     }
@@ -106,16 +126,8 @@ public class ShipGrid : MonoBehaviour {
     }
 
     public bool IsAdjacentToExistingRoom(Vector3 cellPosition) {
-        // Offsets to check all four adjacent positions (up, down, left, right)
-        Vector3Int[] adjacentOffsets = new Vector3Int[] {
-            new Vector3Int(0, 1, 0),  // Up
-            new Vector3Int(0, -1, 0), // Down
-            new Vector3Int(1, 0, 0),  // Right
-            new Vector3Int(-1, 0, 0)  // Left
-        };
-
         // Check each adjacent position
-        foreach (var offset in adjacentOffsets) {
+        foreach (var offset in _adjacentOffsets) {
             Vector3 adjacentPosition = cellPosition + offset;
 
             if (_addedRooms.FirstOrDefault(x => x.Key == adjacentPosition).Value != null) {
@@ -136,21 +148,14 @@ public class ShipGrid : MonoBehaviour {
         visited.Add(cellPosition);
 
         // Adjacent offsets (up, down, right, left)
-        Vector3Int[] adjacentOffsets = new Vector3Int[] {
-            new Vector3Int(0, 1, 0),  // Up
-            new Vector3Int(0, -1, 0), // Down
-            new Vector3Int(1, 0, 0),  // Right
-            new Vector3Int(-1, 0, 0)  // Left
-        };
+        int numberOfDirectionsToCheck = 4;        // Hard-coded here, but would be our way of placing straight lines if it were set to 1 for example
 
         // Process the queue until all rooms are spawned or no more positions available
         while (queue.Count > 0 && roomsToSpawn.Count > 0) {
             Vector3Int currentCell = queue.Dequeue();
 
-            bool roomPlaced = false;
-
-            foreach (var offset in adjacentOffsets) {
-                Vector3Int closestAvailablePosition = FindClosestAvailablePosition(currentCell, adjacentOffsets);
+            for(int i = 0; i < numberOfDirectionsToCheck; i++) {
+                Vector3Int closestAvailablePosition = FindClosestAvailablePosition(currentCell);
                 if (closestAvailablePosition != null) {
                     if (AddRoom(closestAvailablePosition, roomsToSpawn[0])) {
                         roomsToSpawn.RemoveAt(0);  // Remove the room from the list once placed
@@ -174,7 +179,7 @@ public class ShipGrid : MonoBehaviour {
         }
     }
 
-    private Vector3Int FindClosestAvailablePosition(Vector3Int startPosition, Vector3Int[] offsets) {
+    private Vector3Int FindClosestAvailablePosition(Vector3Int startPosition) {
         Queue<Vector3Int> searchQueue = new Queue<Vector3Int>();
         HashSet<Vector3Int> searched = new HashSet<Vector3Int>();
 
@@ -184,16 +189,8 @@ public class ShipGrid : MonoBehaviour {
         while (searchQueue.Count > 0) {
             Vector3Int current = searchQueue.Dequeue();
 
-            foreach (var offset in offsets) {
+            foreach (var offset in _adjacentOffsets) {
                 Vector3Int neighbor = current + offset;
-
-                //// We want to build out and not fill spaces
-                //Vector3 directionTowardShip = startPosition - neighbor;
-                //float dot = Vector3.Dot(directionTowardShip.normalized, offset);
-
-                //if (dot > 0) {
-                //    continue;
-                //}
 
                 if (!searched.Contains(neighbor) && IsPositionValid(neighbor)) {
                     return neighbor;

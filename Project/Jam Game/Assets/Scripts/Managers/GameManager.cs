@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
     public bool GenerateRoomClusterAtPosition(Vector3 worldPosition, int numberOfRooms) {
         Vector3Int cellPosition = _shipGrid.Grid.WorldToCell(worldPosition);
 
-        if (_shipGrid.IsPositionValid(cellPosition)) {
+        if (_shipGrid.IsCloseEnough(cellPosition)) {
             List<BaseRoom> roomsToAdd = new List<BaseRoom>();
 
             for (int i = 0; i < numberOfRooms; i++) {

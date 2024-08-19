@@ -5,8 +5,8 @@ using UnityEngine;
 public class BoxSpawner : MonoBehaviour {
     public BoxWithRooms BoxPrefab;
     public Transform PlayerTransform;
-    public float SpawnDistance = 10.0f;
-    public float SpawnHeight = 5.0f;
+    public float SpawnDistance = 30.0f;
+    public float SpawnHeight = 10.0f;
     public float BoxSpeed = 5.0f;
     public float SpawnInterval = 2.0f;
     public float GrowthRate = 0.5f;
