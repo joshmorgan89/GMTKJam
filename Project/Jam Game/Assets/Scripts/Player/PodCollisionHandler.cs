@@ -11,4 +11,12 @@ public class PodCollisionHandler : MonoBehaviour
             //enemy collision event
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        BoxWithRooms box = collision.gameObject.GetComponent<BoxWithRooms>();
+        InteractionHandler pod = GetComponent<InteractionHandler>();
+        if (box != null && pod.CarriedBox == null) {
+            pod.CarriedBox = box;
+        }
+    }
 }

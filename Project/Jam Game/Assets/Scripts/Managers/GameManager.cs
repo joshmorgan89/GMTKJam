@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Cinemachine;
+
 public class GameManager : MonoBehaviourSingleton<GameManager> {
     [Header("Game Settings")]
     public List<BaseRoom> InitialRoomsPrefabs;
@@ -11,7 +12,11 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
     public int MaxPopulationCount = 10;
     public int CrewQuartersMod = 5;
 
+    private float _sessionTimer = 0.0f;
+    public float SessionTimer => _sessionTimer;
+
     [Header("Managers")]
+    public InteractionHandler PlayerPodInteraction;
     public GameObject Ship;
     private ShipGrid _shipGrid;
 
@@ -22,11 +27,16 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
     private int _currentPopulationCount = 0;
 
     private void Start() {
+        _shipGrid = Ship.GetComponent<ShipGrid>();
         InitializeGame();
     }
 
+    private void Update() {
+        _sessionTimer += Time.deltaTime;
+    }
+
     private void InitializeGame() {
-        _shipGrid = Ship.GetComponent<ShipGrid>();
+        _sessionTimer = 0;
         SetupInitialRooms();
 
         // Initialize UI.
@@ -49,6 +59,24 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
         }
     }
 
+    public bool GenerateRoomClusterAtPosition(Vector3 worldPosition, int numberOfRooms) {
+        Vector3Int cellPosition = _shipGrid.Grid.WorldToCell(worldPosition);
+
+        if (_shipGrid.IsPositionValid(cellPosition)) {
+            List<BaseRoom> roomsToAdd = new List<BaseRoom>();
+
+            for (int i = 0; i < numberOfRooms; i++) {
+                roomsToAdd.Add(Instantiate(RoomPrefabs[Random.Range(0,RoomPrefabs.Count - 1)], ShipTransform));
+            }
+
+            _shipGrid.SpawnRoomsAroundCellPosition(cellPosition, roomsToAdd);
+
+            return true;
+        }
+
+        return false;
+    }
+
     public void HandleRoomDestroyed(Vector3Int cellPosition) {
         _shipGrid.RemoveRoom(cellPosition);
         
@@ -56,6 +84,18 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
 
         // Trigger any other logic for when a room is destroyed, such as spawning enemies or triggering events.
         CheckGameOverCondition();
+    }
+
+    public bool IsPodOutsideCircle(Vector3 circleCenter, float radius) {
+        return PlayerPodInteraction.IsPodOutsideCircle(circleCenter, radius);
+    }
+
+    public void MovePodOutsideShipBounds(Vector3 circleCenter, float radius) {
+        PlayerPodInteraction.MovePodOutsideShipBounds(circleCenter, radius);
+    }
+
+    public Transform GetPodTransform() {
+        return PlayerPodInteraction.PodTransform;
     }
 
     public void CheckGameOverCondition() {

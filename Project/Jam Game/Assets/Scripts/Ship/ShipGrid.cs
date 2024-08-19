@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 [RequireComponent(typeof(Grid))]
 public class ShipGrid : MonoBehaviour {
@@ -111,6 +112,134 @@ public class ShipGrid : MonoBehaviour {
 
         // No adjacent room found
         return false;
+    }
+
+    public void SpawnRoomsAroundCellPosition(Vector3Int cellPosition, List<BaseRoom> roomsToSpawn) {
+        Queue<Vector3Int> queue = new Queue<Vector3Int>();
+        HashSet<Vector3Int> visited = new HashSet<Vector3Int>();
+
+        // Add the initial position to the queue and mark it as visited
+        queue.Enqueue(cellPosition);
+        visited.Add(cellPosition);
+
+        // Adjacent offsets (up, down, right, left)
+        Vector3Int[] adjacentOffsets = new Vector3Int[] {
+            new Vector3Int(0, 1, 0),  // Up
+            new Vector3Int(0, -1, 0), // Down
+            new Vector3Int(1, 0, 0),  // Right
+            new Vector3Int(-1, 0, 0)  // Left
+        };
+
+        // Process the queue until all rooms are spawned or no more positions available
+        while (queue.Count > 0 && roomsToSpawn.Count > 0) {
+            Vector3Int currentCell = queue.Dequeue();
+
+            bool roomPlaced = false;
+
+            foreach (var offset in adjacentOffsets) {
+                Vector3Int newCellPosition = currentCell + offset;
+
+                // Try to add the room at this position
+                if (AddRoom(newCellPosition, roomsToSpawn[0])) {
+                    roomsToSpawn.RemoveAt(0);  // Remove the room from the list once placed
+                    roomPlaced = true;
+
+                    // Mark the position as visited and add it to the queue for further exploration
+                    visited.Add(newCellPosition);
+                    queue.Enqueue(newCellPosition);
+
+                    // If all rooms have been placed, break out of the loop
+                    if (roomsToSpawn.Count == 0) {
+                        break;
+                    }
+                }
+            }
+
+            // If the room was not placed, find the closest available tile
+            if (!roomPlaced) {
+                Vector3Int closestAvailablePosition = FindClosestAvailablePosition(currentCell, adjacentOffsets);
+                if (closestAvailablePosition != null) {
+                    if (AddRoom(closestAvailablePosition, roomsToSpawn[0])) {
+                        roomsToSpawn.RemoveAt(0);  // Remove the room from the list once placed
+                        visited.Add(closestAvailablePosition);
+                    }
+                }
+            }
+        }
+
+        // Push the player outside the new ship bounds
+        EnsurePodIsOutsideShipBoundingCircle();
+
+        // If roomsToSpawn is not empty, it means not all rooms could be placed, handle accordingly
+        if (roomsToSpawn.Count > 0) {
+            Debug.LogWarning("Not all rooms could be placed.");
+        }
+    }
+
+    private Vector3Int FindClosestAvailablePosition(Vector3Int startPosition, Vector3Int[] offsets) {
+        Queue<Vector3Int> searchQueue = new Queue<Vector3Int>();
+        HashSet<Vector3Int> searched = new HashSet<Vector3Int>();
+
+        searchQueue.Enqueue(startPosition);
+        searched.Add(startPosition);
+
+        while (searchQueue.Count > 0) {
+            Vector3Int current = searchQueue.Dequeue();
+
+            foreach (var offset in offsets) {
+                Vector3Int neighbor = current + offset;
+
+                if (!searched.Contains(neighbor) && IsPositionValid(neighbor)) {
+                    return neighbor;
+                }
+
+                if (!searched.Contains(neighbor)) {
+                    searched.Add(neighbor);
+                    searchQueue.Enqueue(neighbor);
+                }
+            }
+        }
+
+        return Vector3Int.zero;
+    }
+
+    private (Vector3 center, float radius) CalculateBoundingCircle(List<Vector3Int> roomPositions) {
+        if (roomPositions.Count == 0)
+            return (Vector3.zero, 0f);
+
+        Vector3 sum = Vector3.zero;
+        foreach (var pos in roomPositions) {
+            sum += Grid.CellToWorld(pos);
+        }
+        Vector3 center = sum / roomPositions.Count;
+
+        float radius = 0f;
+        foreach (var pos in roomPositions) {
+            float distance = Vector3.Distance(center, Grid.CellToWorld(pos));
+            if (distance > radius) {
+                radius = distance;
+            }
+        }
+
+        return (center, radius);
+    }
+
+    public void EnsurePodIsOutsideShipBoundingCircle() {
+        // Calculate bounding circle of the newly spawned rooms
+        var (center, radius) = CalculateBoundingCircle(_addedRooms.Keys.ToList());
+
+        // Check if the pod is outside the circle
+        Vector3 podPosition = GameManager.Instance.GetPodTransform().position;
+
+        if (!GameManager.Instance.IsPodOutsideCircle(center, radius)) {
+            // Adjust pod position if it's inside the circle
+            GameManager.Instance.MovePodOutsideShipBounds(center, radius);
+        }
+    }
+
+    public bool IsPositionInsideOfARoom(Vector3 worldPosition) {
+        Vector3Int cellPosition = Grid.WorldToCell(worldPosition);
+        return _addedRooms.ContainsKey(cellPosition) && _addedRooms[cellPosition] != null;
     }
 
     public void OnActivatedGeneratorRoom(GeneratorRoom generatorRoom) {
