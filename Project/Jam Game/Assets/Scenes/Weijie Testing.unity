@@ -2878,8 +2878,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d3e7f683be07314d94130a740fac7ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  electionEventNum: 10
-  gameProgressSpeed: 0.01
+  electionEventNum: 3
+  electionHappenValue: 0
+  gameProgressSpeed: 0.0008333334
   electionPrefab: {fileID: 6419646482934240406, guid: 893b31efd87183248b9df3a64ea76878, type: 3}
   electionGroup: {fileID: 852993822}
   gameProgress: {fileID: 742025983}
@@ -2919,7 +2920,6 @@ MonoBehaviour:
   _popUpWindow: {fileID: 1946557615}
   _popUpTextBackground: {fileID: 529326712}
   _popUpInfo: {fileID: 1543929059}
-  popUpCount: 2
 --- !u!1 &696712313
 GameObject:
   m_ObjectHideFlags: 0
@@ -5167,6 +5167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c164f198d1cbd24c9acaf989821179f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popUpCount: 2
+  totalGameSecond: 1200
 --- !u!1 &1357976208
 GameObject:
   m_ObjectHideFlags: 0

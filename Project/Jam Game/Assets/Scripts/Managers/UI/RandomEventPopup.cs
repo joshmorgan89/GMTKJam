@@ -12,14 +12,6 @@ public class RandomEventPopup : MonoBehaviourSingleton<RandomEventPopup>
     [SerializeField]
     private TMP_Text _popUpInfo;
 
-    public int popUpCount;
-    private int _popUpRemain;
-
-    private void Start()
-    {
-        _popUpRemain = popUpCount;
-    }
-
     public void ShowEventPopUp(string text)
     {
         StartCoroutine(FlashAndShowPopup(text));
@@ -53,8 +45,4 @@ public class RandomEventPopup : MonoBehaviourSingleton<RandomEventPopup>
         _popUpTextBackground.SetActive(false);
     }
 
-    public void Reset()
-    {
-        _popUpRemain = popUpCount;
-    }
 }
