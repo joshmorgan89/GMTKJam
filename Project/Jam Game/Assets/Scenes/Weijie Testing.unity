@@ -5464,6 +5464,7 @@ GameObject:
   - component: {fileID: 1355165899}
   - component: {fileID: 1355165898}
   - component: {fileID: 1355165900}
+  - component: {fileID: 1355165901}
   m_Layer: 0
   m_Name: Tester
   m_TagString: Untagged
@@ -5520,6 +5521,38 @@ MonoBehaviour:
   numberOfAsteroid: 5
   alien: {fileID: 8692937315736575717, guid: c13b1b5ea96d25040a69cfe46d326074, type: 3}
   numberOfAlien: 5
+--- !u!114 &1355165901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355165897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 623c40466bf147541a67111f81087d27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxSource: {fileID: 0}
+  musicSource: {fileID: 0}
+  asteroidBreaks: {fileID: 8300000, guid: eacc7792fecc40c4fbfb15b6f3b3d64f, type: 3}
+  death1: {fileID: 8300000, guid: a3fbdceab39320d47aa4eb1dec189ed4, type: 3}
+  death2: {fileID: 8300000, guid: 986f1be3a62634a4aaa0cc2933b88b11, type: 3}
+  death3: {fileID: 8300000, guid: a9a4a3a4f1131a14f9a0a5c9f8690b9b, type: 3}
+  death4: {fileID: 8300000, guid: 5850e4660cc0cef4d80cb08bcfc14ad5, type: 3}
+  electionHasHappened: {fileID: 8300000, guid: e33d9e23da3952a4097c521399db0a08, type: 3}
+  notice: {fileID: 8300000, guid: 450c88f1c7771c9409f91484ab5258f2, type: 3}
+  pickUpRoom: {fileID: 8300000, guid: 25486279a3512ea4680952874f24e981, type: 3}
+  pirateShipShoots: {fileID: 8300000, guid: ecc22f690ebb840499fe9babb17fcf20, type: 3}
+  pirateShipShootsAlternate: {fileID: 8300000, guid: 817d1755183b3e841aa14292523e9fe3, type: 3}
+  placeRoom: {fileID: 8300000, guid: a76d94c578994a24a8b375fc099cb001, type: 3}
+  playerShipThrusters: {fileID: 8300000, guid: 033f0cda455c76e4d90d4915d5f52abd, type: 3}
+  turretShots: {fileID: 8300000, guid: a5cc836cd527e5c49a65dc21883bed7f, type: 3}
+  uiMouseOver: {fileID: 8300000, guid: aa227ac0fe0cf7a4eafe659f4f24e342, type: 3}
+  warning: {fileID: 8300000, guid: f9239969ac8bc5843ae1e399d2ce94cb, type: 3}
+  battleBGM: {fileID: 8300000, guid: 4fdf3ff2a78e0894fad049c595e2adea, type: 3}
+  shopBGM: {fileID: 8300000, guid: e33f42efc70f64f40bf503a82f4caefc, type: 3}
+  normalBGM: {fileID: 8300000, guid: 5d8d2b7414930554eb14d7f779847e6f, type: 3}
 --- !u!1 &1357976208
 GameObject:
   m_ObjectHideFlags: 0
