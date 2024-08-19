@@ -10,6 +10,7 @@ public class GeneratorRoom : BaseRoom {
     public override void Activate() {
         base.Activate();
         // Additional generator activation logic
+        GameManager.Instance.ActivatedGeneratorRoom(this);
         Debug.Log($"{gameObject.name} is now generating power.");
     }
 
@@ -17,6 +18,7 @@ public class GeneratorRoom : BaseRoom {
     public override void Deactivate() {
         base.Deactivate();
         // Additional generator deactivation logic
+        GameManager.Instance.DeactivatedGeneratorRoom(this);
         Debug.Log($"{gameObject.name} stopped generating power.");
     }
 }

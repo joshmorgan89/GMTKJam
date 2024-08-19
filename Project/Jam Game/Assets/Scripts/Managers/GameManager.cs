@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
     public Transform ShipTransform;
     public int MaxPopulationCount = 10;
     public int CrewQuartersMod = 5;
+    public int GeneratorChargeRange = 3;
 
     private float _sessionTimer = 0.0f;
     public float SessionTimer => _sessionTimer;
@@ -98,6 +99,14 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
         return PlayerPodInteraction.PodTransform;
     }
 
+    public Vector3Int GetRoomPosition(BaseRoom room) {
+        return _shipGrid.GetRoomPosition(room);
+    }
+
+    public void RemoveRoom(Vector3Int cellPosition) {
+        _shipGrid.RemoveRoom(cellPosition);   
+    }
+
     public void CheckGameOverCondition() {
         if (_shipGrid.RoomCount == 0) {
             // Show Game Over screen.
@@ -126,5 +135,13 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
 
     public void CrewQuartersDeactivated() {
         MaxPopulationCount -= CrewQuartersMod;
+    }
+
+    public void ActivatedGeneratorRoom(GeneratorRoom generatorRoom) {
+        _shipGrid.ActivatedGeneratorRoom(generatorRoom);
+    }
+
+    public void DeactivatedGeneratorRoom(GeneratorRoom generatorRoom) {
+        _shipGrid.DeactivatedGeneratorRoom(generatorRoom);
     }
 }
