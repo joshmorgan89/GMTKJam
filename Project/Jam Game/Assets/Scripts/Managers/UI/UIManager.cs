@@ -12,7 +12,8 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     public float gameProgressSpeed = 1/1200f;
     public GameObject electionPrefab;
     public GameObject electionGroup;
-
+    public GameObject pausePanel;
+    public GameObject settingPanel;
     public Slider gameProgress;
 
     [Header("Outpost")]
@@ -58,6 +59,13 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
 
     public void CloseOutpost() {
         GameManager.Instance.StartGameTimeScale();
+        if (GameObject.FindWithTag("Enemy") != null)
+        {
+            SoundManager.Instance.PlayBattleBGM();
+        }
+        else {
+            SoundManager.Instance.PlayNormalBGM();
+        }
         outpostPanel.SetActive(false);
         embassy.SetActive(false);
         shop.SetActive(false);
