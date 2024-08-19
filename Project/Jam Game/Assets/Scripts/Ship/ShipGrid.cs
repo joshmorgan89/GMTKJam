@@ -11,6 +11,7 @@ public class ShipGrid : MonoBehaviour {
     public Grid Grid;
     public TileBase RoomTile;
     public TileBase GeneratorRoomTile;
+    public TileBase CrewQuartersTile;
     public Tilemap RoomTileMap;
     public Tilemap SpecialRoomTileMap;
     public GameObject TurretPrefab;
@@ -26,10 +27,12 @@ public class ShipGrid : MonoBehaviour {
             RoomTileMap.SetTile(cellPosition, RoomTile);
 
             // Set the tile on the special tilemap if it's one of our special rooms
-            if (room is GeneratorRoom generatorRoom) {
+            if (room is GeneratorRoom) {
                 SpecialRoomTileMap.SetTile(cellPosition, GeneratorRoomTile);
             } else if (room is TurretRoom turretRoom) {
                 turretRoom.Turret = Instantiate(TurretPrefab, Grid.GetCellCenterWorld(cellPosition), room.transform.rotation);
+            } else if (room is CrewQuarters) {
+                SpecialRoomTileMap.SetTile(cellPosition, CrewQuartersTile);
             }
 
             // Activate the room
@@ -52,6 +55,16 @@ public class ShipGrid : MonoBehaviour {
         if (room != null) {
             room.Deactivate();
             _addedRooms.Remove(cellPosition);
+
+            // Tell the cell to stop rendering the tile(s)
+            RoomTileMap.SetTile(cellPosition, null);
+
+            // Set the tile on the special tilemap if it's one of our special rooms
+            if (room is GeneratorRoom || room is CrewQuarters) {
+                SpecialRoomTileMap.SetTile(cellPosition, null);
+            } else if (room is TurretRoom turretRoom) {
+                Destroy(turretRoom.Turret);
+            }
         }
     }
 
@@ -137,32 +150,17 @@ public class ShipGrid : MonoBehaviour {
             bool roomPlaced = false;
 
             foreach (var offset in adjacentOffsets) {
-                Vector3Int newCellPosition = currentCell + offset;
-
-                // Try to add the room at this position
-                if (AddRoom(newCellPosition, roomsToSpawn[0])) {
-                    roomsToSpawn.RemoveAt(0);  // Remove the room from the list once placed
-                    roomPlaced = true;
-
-                    // Mark the position as visited and add it to the queue for further exploration
-                    visited.Add(newCellPosition);
-                    queue.Enqueue(newCellPosition);
-
-                    // If all rooms have been placed, break out of the loop
-                    if (roomsToSpawn.Count == 0) {
-                        break;
-                    }
-                }
-            }
-
-            // If the room was not placed, find the closest available tile
-            if (!roomPlaced) {
                 Vector3Int closestAvailablePosition = FindClosestAvailablePosition(currentCell, adjacentOffsets);
                 if (closestAvailablePosition != null) {
                     if (AddRoom(closestAvailablePosition, roomsToSpawn[0])) {
                         roomsToSpawn.RemoveAt(0);  // Remove the room from the list once placed
                         visited.Add(closestAvailablePosition);
+                        queue.Enqueue(closestAvailablePosition);
                     }
+                }
+
+                if (roomsToSpawn.Count == 0) {
+                    break;
                 }
             }
         }
@@ -188,6 +186,14 @@ public class ShipGrid : MonoBehaviour {
 
             foreach (var offset in offsets) {
                 Vector3Int neighbor = current + offset;
+
+                //// We want to build out and not fill spaces
+                //Vector3 directionTowardShip = startPosition - neighbor;
+                //float dot = Vector3.Dot(directionTowardShip.normalized, offset);
+
+                //if (dot > 0) {
+                //    continue;
+                //}
 
                 if (!searched.Contains(neighbor) && IsPositionValid(neighbor)) {
                     return neighbor;
