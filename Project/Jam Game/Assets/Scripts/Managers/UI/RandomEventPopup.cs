@@ -14,6 +14,7 @@ public class RandomEventPopup : MonoBehaviourSingleton<RandomEventPopup>
 
     public void ShowEventPopUp(string text)
     {
+        SoundManager.Instance.PlaySound(SoundName.Warning);
         StartCoroutine(FlashAndShowPopup(text));
     }
 

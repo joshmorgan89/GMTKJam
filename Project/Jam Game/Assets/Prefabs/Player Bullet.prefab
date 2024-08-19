@@ -133,7 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   rigidbody: {fileID: 4868463793571088457}
-  bulletDamage: 5
+  bulletDamage: 20
 --- !u!50 &4868463793571088457
 Rigidbody2D:
   serializedVersion: 4

@@ -16,6 +16,7 @@ public class ElectionPopUp : MonoBehaviourSingleton<ElectionPopUp>
         _popUpWindow.SetActive(true);
         _popUpInfo.text = text;
         PopUpBorder.sprite = ordinances[Random.Range(0,ordinances.Length-1)];
+        SoundManager.Instance.PlaySound(SoundName.ElectionHasHappened);
         //StartCoroutine(HidePopUpAfterDelay(4f));
     }
 

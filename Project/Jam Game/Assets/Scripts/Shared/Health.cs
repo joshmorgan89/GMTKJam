@@ -21,5 +21,9 @@ namespace Scripts.Shared {
         public void CurrentHealthUpdate(float amount) {
             _currentHealth += amount;
         }
+
+        public float GetHealth() {
+            return _currentHealth;
+        }
     }
 }

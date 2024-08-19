@@ -74,5 +74,6 @@ public class Turret : MonoBehaviour
     {
         float angle = turret.transform.rotation.eulerAngles.z;
         Instantiate(bulletPrefab, ShootingPoint.position, Quaternion.Euler(new Vector3(0, 0, angle + 90)));
+        SoundManager.Instance.PlaySound(SoundName.TurretShots);
     }
 }
