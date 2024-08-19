@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
     private float _sessionTimer = 0.0f;
     public float SessionTimer => _sessionTimer;
 
+    public bool inBattle = false;
+
     [Header("Managers")]
     public InteractionHandler PlayerPodInteraction;
     public GameObject Ship;
@@ -34,6 +36,22 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
 
     private void Update() {
         _sessionTimer += Time.deltaTime;
+
+        if (GameObject.FindWithTag("Enemy") != null)
+        {
+            if (inBattle == false) {
+                SoundManager.Instance.PlayBattleBGM();
+            }
+            inBattle = true;
+        }
+        else {
+            if (inBattle == true)
+            {
+                SoundManager.Instance.PlayNormalBGM();
+            }
+            inBattle = false;
+        }
+
     }
 
     private void InitializeGame() {
@@ -47,9 +65,12 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
         if (Time.timeScale == 1)
         {
             Time.timeScale = 0;
+            UIManager.Instance.pausePanel.SetActive(true);
         }
         else {
             Time.timeScale = 1;
+            UIManager.Instance.pausePanel.SetActive(false);
+            UIManager.Instance.settingPanel.SetActive(false);
         }
     }
     public void StopGameTimeScale()

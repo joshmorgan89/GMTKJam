@@ -69,6 +69,7 @@ public class RandomEventsManager : MonoBehaviourSingleton<RandomEventsManager>
     }
     public void ShopOutpostEvent()
     {
+        SoundManager.Instance.PlayShopBGM();
         GameManager.Instance.StopGameTimeScale();
         UIManager.Instance.ShowShopOutpost();
         UpgradeStore.Instance.AssignRandomPerks();
@@ -76,6 +77,7 @@ public class RandomEventsManager : MonoBehaviourSingleton<RandomEventsManager>
     }
 
     public void EmbassyOutpostEvent() {
+        SoundManager.Instance.PlayShopBGM();
         GameManager.Instance.StopGameTimeScale();
         UIManager.Instance.ShowEmbassyOutpost();
         UpgradeStore.Instance.AssignRandomPerks();
