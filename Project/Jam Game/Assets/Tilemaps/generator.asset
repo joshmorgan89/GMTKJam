@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
   m_Name: Generator
   m_EditorClassIdentifier: 
-  m_AnimatedSprites: []
+  m_AnimatedSprites:
+  - {fileID: -9853559, guid: ae74ff2f23a3ad54084f76ac3b83e87d, type: 3}
+  - {fileID: 1660763662, guid: ae74ff2f23a3ad54084f76ac3b83e87d, type: 3}
+  - {fileID: 1011175560, guid: ae74ff2f23a3ad54084f76ac3b83e87d, type: 3}
   m_MinSpeed: 1
   m_MaxSpeed: 1
   m_AnimationStartTime: 0
