@@ -1602,6 +1602,7 @@ MonoBehaviour:
   Grid: {fileID: 322843616}
   RoomTile: {fileID: 11400000, guid: e6c857b78f7cc5746beec5da46ffc058, type: 2}
   GeneratorRoomTile: {fileID: 11400000, guid: 5991fd33f6af08c409a284dce86dac8a, type: 2}
+  CrewQuartersTile: {fileID: 11400000, guid: 1371ecd13dbd96149bc0b49aa9f450ca, type: 2}
   RoomTileMap: {fileID: 1139668955}
   SpecialRoomTileMap: {fileID: 1937631174}
   TurretPrefab: {fileID: 1185135003257921094, guid: 8e5d1788f1d0aa14c892bb78ac6535de, type: 3}
@@ -2216,6 +2217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d072d489d2d6e784990188ec89149f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HoldPosition: {fileID: 1413957797}
 --- !u!114 &366073987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2244,6 +2246,7 @@ Transform:
   m_Children:
   - {fileID: 755834935}
   - {fileID: 1207089387}
+  - {fileID: 1413957797}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &380364913
@@ -5669,6 +5672,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c164f198d1cbd24c9acaf989821179f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popUpCount: 2
+  totalGameSecond: 0
 --- !u!114 &1327917696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5971,6 +5976,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1381256066}
   m_CullTransparentMesh: 1
+--- !u!1 &1413957796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1413957797}
+  m_Layer: 6
+  m_Name: Hold Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1413957797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413957796}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.81, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 366073988}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1419516180
 GameObject:
   m_ObjectHideFlags: 0
@@ -6906,6 +6942,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 741636839}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1790571509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1790571511}
+  - component: {fileID: 1790571510}
+  m_Layer: 0
+  m_Name: Box Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1790571510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790571509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd20e5e65cca2c49b00a042463baf6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoxPrefab: {fileID: 2175838253218980129, guid: 14182cfa8bbaad54b9088c3bd464b814, type: 3}
+  PlayerTransform: {fileID: 366073988}
+  SpawnDistance: 10
+  SpawnHeight: 5
+  BoxSpeed: 5
+  SpawnInterval: 10
+  GrowthRate: 0.01
+--- !u!4 &1790571511
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790571509}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5121447, y: -1.9813309, z: 0.0137571}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1816735223
 GameObject:
   m_ObjectHideFlags: 0
@@ -7672,13 +7759,28 @@ MonoBehaviour:
   - {fileID: 5713922782258865448, guid: 33d879c86e644ed46b190cb5da4a43e1, type: 3}
   - {fileID: 6898930385572985372, guid: 4d8b4af41ada3d54e99a927383fc6774, type: 3}
   RoomPrefabs:
-  - {fileID: -8462453080596069446, guid: 738498fea7031824d9b25cc6493ae514, type: 3}
   - {fileID: 1035496011471388962, guid: fc9f4c8b599191c458417078fe3fd0cf, type: 3}
   - {fileID: 6898930385572985372, guid: 4d8b4af41ada3d54e99a927383fc6774, type: 3}
   - {fileID: 5713922782258865448, guid: 33d879c86e644ed46b190cb5da4a43e1, type: 3}
-  ShipTransform: {fileID: 0}
+  - {fileID: -8462453080596069446, guid: 738498fea7031824d9b25cc6493ae514, type: 3}
+  - {fileID: -8462453080596069446, guid: 738498fea7031824d9b25cc6493ae514, type: 3}
+  - {fileID: -8462453080596069446, guid: 738498fea7031824d9b25cc6493ae514, type: 3}
+  - {fileID: -8462453080596069446, guid: 738498fea7031824d9b25cc6493ae514, type: 3}
+  - {fileID: -8462453080596069446, guid: 738498fea7031824d9b25cc6493ae514, type: 3}
+  - {fileID: -8462453080596069446, guid: 738498fea7031824d9b25cc6493ae514, type: 3}
+  - {fileID: -8462453080596069446, guid: 738498fea7031824d9b25cc6493ae514, type: 3}
+  - {fileID: -8462453080596069446, guid: 738498fea7031824d9b25cc6493ae514, type: 3}
+  - {fileID: -8462453080596069446, guid: 738498fea7031824d9b25cc6493ae514, type: 3}
+  - {fileID: -8462453080596069446, guid: 738498fea7031824d9b25cc6493ae514, type: 3}
+  - {fileID: -8462453080596069446, guid: 738498fea7031824d9b25cc6493ae514, type: 3}
+  - {fileID: -8462453080596069446, guid: 738498fea7031824d9b25cc6493ae514, type: 3}
+  - {fileID: -8462453080596069446, guid: 738498fea7031824d9b25cc6493ae514, type: 3}
+  - {fileID: -8462453080596069446, guid: 738498fea7031824d9b25cc6493ae514, type: 3}
+  - {fileID: -8462453080596069446, guid: 738498fea7031824d9b25cc6493ae514, type: 3}
+  ShipTransform: {fileID: 322843617}
   MaxPopulationCount: 10
   CrewQuartersMod: 5
+  PlayerPodInteraction: {fileID: 366073986}
   Ship: {fileID: 322843614}
   virtualCamera: {fileID: 46484204}
 --- !u!4 &2099431406
@@ -7728,6 +7830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   electionEventNum: 3
+  electionHappenValue: 0
   gameProgressSpeed: 0.01
   electionPrefab: {fileID: 6419646482934240406, guid: 893b31efd87183248b9df3a64ea76878, type: 3}
   electionGroup: {fileID: 352361002}
@@ -7871,3 +7974,4 @@ SceneRoots:
   - {fileID: 322843617}
   - {fileID: 321039922}
   - {fileID: 496068987}
+  - {fileID: 1790571511}
