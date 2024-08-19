@@ -29,22 +29,20 @@ public class RandomEventsManager : MonoBehaviourSingleton<RandomEventsManager>
         //list of random event
         eventMethods = new List<EventMethod>
         {
-            ShopOutpostEvent,
-            EmbassyOutpostEvent,
             AlienEvent,
-            AsteroidEvent
+            AsteroidEvent,
+            ShopOutpostEvent,
+            EmbassyOutpostEvent
         };
     }
     public void InitRandomEvent() {
         totalGameSecond = 1 / UIManager.Instance.gameProgressSpeed;
         _popUpRemain = popUpCount;
-        Debug.Log("event trigger time:"+ totalGameSecond / (UIManager.Instance.electionEventNum + 1) / (popUpCount+1));
         StartCoroutine(CheckForRandomEvent());
     }
 
     private IEnumerator CheckForRandomEvent()
     {
-        
         _popUpRemain -= 1;
         yield return new WaitForSeconds(totalGameSecond / (UIManager.Instance.electionEventNum + 1) / (popUpCount + 1));
 
@@ -82,33 +80,78 @@ public class RandomEventsManager : MonoBehaviourSingleton<RandomEventsManager>
     }
 
     public void AsteroidEvent() {
-        SpawnPrefabs(asteroid, numberOfAsteroid);
+        float angleOffset = GetRandomDirectionAngle();
+
+        StartCoroutine(SpawnEnemiesInArc(asteroid, numberOfAsteroid, 10f, 90f, angleOffset,2));
         RandomEventPopup.Instance.ShowEventPopUp("Asteroid detected! Enemies are emerging!");
     }
 
     public void AlienEvent() {
-        SpawnPrefabs(alien, numberOfAlien);
+        float angleOffset = GetRandomDirectionAngle();
+
+        StartCoroutine(SpawnEnemiesInArc(alien, numberOfAlien, 10f, 90f, angleOffset, 2));
         RandomEventPopup.Instance.ShowEventPopUp("Alien Ship detected! Enemies are emerging!");
     }
-
-    public void SpawnPrefabs(GameObject enemy, int enemyCount)
+    private IEnumerator SpawnEnemiesInArc(GameObject enemyPrefab, int totalEnemyCount, float initialRadius, float arcAngle, float angleOffset, float radiusIncrement)
     {
-        for (int i = 0; i < enemyCount; i++)
-        {
-            Vector3 spawnPosition = CalculatePosition(i, enemyCount);
+        int enemiesPerLayer = 9;
+        int layers = Mathf.CeilToInt((float)totalEnemyCount / enemiesPerLayer);
 
-            Instantiate(enemy, spawnPosition, Quaternion.identity);
+        for (int layer = 0; layer < layers; layer++)
+        {
+            float currentRadius = initialRadius + layer * radiusIncrement;
+            int enemiesInThisLayer = Mathf.Min(enemiesPerLayer, totalEnemyCount - layer * enemiesPerLayer);
+
+            for (int i = 0; i < enemiesInThisLayer; i++)
+            {
+                //find the angle
+                float angleStep = arcAngle / (enemiesInThisLayer - 1);
+                float currentAngle = angleOffset + (angleStep * i);
+
+                //find the spawn position around the ship
+                var spawnPos = CalculateSpawnPosition(currentAngle, currentRadius);
+
+                //spawn the enemy at the calculated position
+                Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+
+                yield return new WaitForSeconds(0.1f);
+            }
         }
     }
 
-    private Vector3 CalculatePosition(int index, int enemyCount)
+    private Vector3 CalculateSpawnPosition(float angle, float radius)
     {
-        float angle = index * Mathf.PI * 2 / enemyCount;
+        Vector3 shipPosition = GameManager.Instance.Ship.transform.position;
+        angle *= Mathf.Deg2Rad;
 
-        float x = GameManager.Instance.Ship.transform.position.x + Mathf.Cos(angle) * distanceFormShip;
-        float z = GameManager.Instance.Ship.transform.position.z + Mathf.Sin(angle) * distanceFormShip;
+        //find the position in 2D space
+        float x = shipPosition.x + Mathf.Cos(angle) * radius;
+        float y = shipPosition.y + Mathf.Sin(angle) * radius;
 
-        return new Vector3(x, GameManager.Instance.Ship.transform.position.y, z);
+        //return the calculated position
+        return new Vector3(x, y, 0);
+    }
+
+    private float GetRandomDirectionAngle()
+    {
+        int direction = Random.Range(0, 4);
+        float angleOffset = 0f;
+        switch (direction)
+        {
+            case 0: // North
+                angleOffset = 45f;
+                break;
+            case 1: // East
+                angleOffset = 135f; 
+                break;
+            case 2: // South
+                angleOffset = 225f; 
+                break;
+            case 3: // West
+                angleOffset = 315f;
+                break;
+        }
+        return angleOffset;
     }
 
     public void Reset()
