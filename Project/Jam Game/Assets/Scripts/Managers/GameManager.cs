@@ -42,6 +42,24 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
         // Initialize UI.
     }
 
+    public void ToggleGamePause() {
+        if (Time.timeScale == 1)
+        {
+            Time.timeScale = 0;
+        }
+        else {
+            Time.timeScale = 1;
+        }
+    }
+    public void StopGameTimeScale()
+    {
+        Time.timeScale = 0;
+    }
+    public void StartGameTimeScale()
+    {
+        Time.timeScale = 1;
+    }
+
     private void SetupInitialRooms() {
         int section = -1;
 

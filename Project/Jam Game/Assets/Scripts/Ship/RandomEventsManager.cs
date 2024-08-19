@@ -67,13 +67,16 @@ public class RandomEventsManager : MonoBehaviourSingleton<RandomEventsManager>
         int randomIndex = Random.Range(0, eventMethods.Count);
         eventMethods[randomIndex]?.Invoke();
     }
-    public void ShopOutpostEvent() {
+    public void ShopOutpostEvent()
+    {
+        GameManager.Instance.StopGameTimeScale();
         UIManager.Instance.ShowShopOutpost();
         UpgradeStore.Instance.AssignRandomPerks();
         RoomStore.Instance.AssignRandomRooms();
     }
 
     public void EmbassyOutpostEvent() {
+        GameManager.Instance.StopGameTimeScale();
         UIManager.Instance.ShowEmbassyOutpost();
         UpgradeStore.Instance.AssignRandomPerks();
         Embassy.Instance.ShowTradeRefugees();
@@ -101,11 +104,10 @@ public class RandomEventsManager : MonoBehaviourSingleton<RandomEventsManager>
         {
             float currentRadius = initialRadius + layer * radiusIncrement;
             int enemiesInThisLayer = Mathf.Min(enemiesPerLayer, totalEnemyCount - layer * enemiesPerLayer);
-
             for (int i = 0; i < enemiesInThisLayer; i++)
             {
                 //find the angle
-                float angleStep = arcAngle / (enemiesInThisLayer - 1);
+                float angleStep = arcAngle / (enemiesInThisLayer);
                 float currentAngle = angleOffset + (angleStep * i);
 
                 //find the spawn position around the ship
