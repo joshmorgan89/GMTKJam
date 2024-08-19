@@ -47,7 +47,7 @@ public class RoomStore : MonoBehaviourSingleton<RoomStore>
         }
     }
 
-    private void AddRoomToPlayer(SO_RoomItem roomItem)
+    public void AddRoomToPlayer(SO_RoomItem roomItem)
     {
         Debug.Log(roomItem.itemName + " added to the player's ship.");
     }
