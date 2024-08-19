@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class parallax_controller : MonoBehaviour
+public class Background : MonoBehaviour
 {
     public float layerSpeed;
     public float resetDistance;

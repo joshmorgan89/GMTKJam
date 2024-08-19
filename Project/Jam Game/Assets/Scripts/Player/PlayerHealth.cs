@@ -30,10 +30,14 @@ public class PlayerHealth : MonoBehaviour
         currentHealth += amount;
         HUD.Instance.UpdateHealth(maxHealth, currentHealth);
 
-        if (currentHealth <= 0) {
-            currentHealth= 0;
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
             HUD.Instance.UpdateHealth(maxHealth, currentHealth);
             PlayerDestroyed();
+        }
+        else if(currentHealth >= maxHealth) {
+            currentHealth = maxHealth;
         }
 
     }

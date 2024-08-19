@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
     private float _sessionTimer = 0.0f;
     public float SessionTimer => _sessionTimer;
 
-    public bool inBattle = false;
+    public bool inBattle = true;
 
     [Header("Managers")]
     public InteractionHandler PlayerPodInteraction;
