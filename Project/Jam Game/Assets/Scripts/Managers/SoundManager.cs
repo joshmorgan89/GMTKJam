@@ -168,16 +168,19 @@ public class SoundManager : MonoBehaviourSingleton<SoundManager>
     public void PlayBattleBGM()
     {
         PlayMusic(battleBGM);
+        Debug.Log("BattleBGM");
     }
 
     public void PlayShopBGM()
     {
         PlayMusic(shopBGM);
+        Debug.Log("ShopBGM");
     }
 
     public void PlayNormalBGM()
     {
         PlayMusic(normalBGM);
+        Debug.Log("NormalBGM");
     }
 
     public void SetSFXVolume(float volume)

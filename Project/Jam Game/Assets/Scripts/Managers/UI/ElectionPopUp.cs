@@ -17,6 +17,7 @@ public class ElectionPopUp : MonoBehaviourSingleton<ElectionPopUp>
         _popUpInfo.text = text;
         PopUpBorder.sprite = ordinances[Random.Range(0,ordinances.Length-1)];
         SoundManager.Instance.PlaySound(SoundName.ElectionHasHappened);
+        GameObject.FindAnyObjectByType<PlayerHealth>().GetComponent<PlayerHealth>().PlayerCurrentHealthUpdate(10000);
         //StartCoroutine(HidePopUpAfterDelay(4f));
     }
 
