@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 public class Tester : MonoBehaviourSingleton<Tester>
 {
     public TMP_Text fuelText;
