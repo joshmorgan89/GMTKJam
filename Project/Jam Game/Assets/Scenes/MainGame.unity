@@ -1387,6 +1387,7 @@ MonoBehaviour:
   RoomTileMap: {fileID: 1919860807}
   SpecialRoomTileMap: {fileID: 1664174838}
   TurretPrefab: {fileID: 1185135003257921094, guid: 8e5d1788f1d0aa14c892bb78ac6535de, type: 3}
+  ShipSprite: {fileID: 0}
 --- !u!156049354 &300793329
 Grid:
   m_ObjectHideFlags: 0
@@ -3261,7 +3262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   electionEventNum: 3
   electionHappenValue: 0
-  gameProgressSpeed: 0.01
+  gameProgressSpeed: 0.00083333335
   electionPrefab: {fileID: 6419646482934240406, guid: 893b31efd87183248b9df3a64ea76878, type: 3}
   electionGroup: {fileID: 852993822}
   pausePanel: {fileID: 206997907}
