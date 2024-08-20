@@ -50,11 +50,16 @@ public class InteractionHandler : MonoBehaviour
             if (pickup != null) {
                 // Play sounds
                 SoundManager.Instance.PlaySound(SoundName.PickUpRoom);
-                CarriedBox = Instantiate(BoxWithRoomsPrefab, HoldPosition.position, Quaternion.identity);
-                CarriedBox.RoomType = pickup;
-                CarriedBox.UpdateNumberOfRooms(1);
+
+                PutBoxInPodHands(BoxWithRoomsPrefab, pickup);
             }
         }
+    }
+
+    public void PutBoxInPodHands(BoxWithRooms box, BaseRoom roomType) {
+        CarriedBox = Instantiate(box, HoldPosition.position, Quaternion.identity);
+        CarriedBox.RoomType = roomType;
+        CarriedBox.UpdateNumberOfRooms(1);
     }
 
     public bool IsPodOutsideCircle(Vector3 circleCenter, float radius) {

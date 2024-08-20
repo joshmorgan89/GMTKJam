@@ -9,7 +9,7 @@ public class RoomStore : MonoBehaviourSingleton<RoomStore>
     public List<SO_RoomItem> roomItems; 
     public Button[] roomButtons; 
     public InteractionHandler PlayerInteraction;
-    public BoxWithRooms box;
+    public BoxWithRooms Box;
 
     public void AssignRandomRooms()
     {
@@ -52,11 +52,7 @@ public class RoomStore : MonoBehaviourSingleton<RoomStore>
     public void AddRoomToPlayer(SO_RoomItem roomItem)
     {
         Debug.Log(roomItem.itemName + " added to the player's ship.");
-
-        PlayerInteraction.CarriedBox = Instantiate(box, PlayerInteraction.HoldPosition.position, PlayerInteraction.HoldPosition.rotation);
-        Debug.Log("Room type:"+roomItem.room);
-        PlayerInteraction.CarriedBox.RoomType = roomItem.room;
-        PlayerInteraction.CarriedBox.UpdateNumberOfRooms(1);
+        PlayerInteraction.PutBoxInPodHands(Box, roomItem.room);
     }
 
     public void ResetButtons() {
