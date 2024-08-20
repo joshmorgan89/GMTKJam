@@ -17,7 +17,9 @@ public class AsteroidMovement : BaseMovement
     }
 
     public override void Movement() {
-        _rb.velocity = transform.right * MovementSpeed;
+
+        GameObject ship = GameObject.FindGameObjectWithTag("Ship");
+        _rb.velocity = ship.transform.position - transform.position;
     }
 
     public override void Rotation() {
