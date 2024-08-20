@@ -15,7 +15,7 @@ public class Turret : MonoBehaviour
 
     private GameObject _closestEnemy;
 
-    public bool IsActive { get; set; }
+    public bool IsActive { get; set; } = true;
 
     private void FixedUpdate()
     {
