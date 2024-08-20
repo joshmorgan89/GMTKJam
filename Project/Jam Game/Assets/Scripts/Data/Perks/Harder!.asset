@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: Harder!
   itemID: 1006
   itemIcon: {fileID: 21300000, guid: f67cb860f29365b46957c5920d3f4188, type: 3}
-  description: 'Increases the durability of rooms by one tier '
+  description: 'Increases the durability of player by one tier '
   powerUpType: 5
   cost: 0
