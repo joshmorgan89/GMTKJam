@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.SceneManagement;
+using Scripts.Shared;
 
 public class GameManager : MonoBehaviourSingleton<GameManager> {
     [Header("Game Settings")]
@@ -113,6 +114,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
     }
 
     public bool GenerateRoomClusterOfTypeAtPosition(Vector3 worldPosition, int numberOfRooms, BaseRoom roomToAdd) {
+        Debug.Log(roomToAdd.gameObject.GetComponent<Health>());
         Vector3Int cellPosition = _shipGrid.Grid.WorldToCell(worldPosition);
 
         if (_shipGrid.IsCloseEnough(cellPosition)) {

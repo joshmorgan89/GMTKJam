@@ -3098,7 +3098,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   electionEventNum: 3
   electionHappenValue: 0
-  gameProgressSpeed: 0.005
+  gameProgressSpeed: 0.00083333335
   electionPrefab: {fileID: 6419646482934240406, guid: 893b31efd87183248b9df3a64ea76878, type: 3}
   electionGroup: {fileID: 852993822}
   pausePanel: {fileID: 206997907}
@@ -4895,7 +4895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b705c96a3acac4ca5a15b9090733d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rareMineral: 0
+  rareMineral: 21312
   refugees: 0
 --- !u!1 &1140516760
 GameObject:
@@ -9060,6 +9060,10 @@ PrefabInstance:
     - target: {fileID: 8730620359825966646, guid: b4f4a237ebe9d9a44b636e8578281d20, type: 3}
       propertyPath: m_Name
       value: Ship Manager (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730620359825966646, guid: b4f4a237ebe9d9a44b636e8578281d20, type: 3}
+      propertyPath: m_TagString
+      value: Ship
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
