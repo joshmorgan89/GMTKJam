@@ -3098,7 +3098,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   electionEventNum: 3
   electionHappenValue: 0
-  gameProgressSpeed: 0.00083333335
+  gameProgressSpeed: 0.005
   electionPrefab: {fileID: 6419646482934240406, guid: 893b31efd87183248b9df3a64ea76878, type: 3}
   electionGroup: {fileID: 852993822}
   pausePanel: {fileID: 206997907}
@@ -4366,8 +4366,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HoldPosition: {fileID: 961142860}
-  GrabReticle: {fileID: 0}
-  BoxWithRoomsPrefab: {fileID: 0}
+  GrabReticle: {fileID: 961142860}
+  BoxWithRoomsPrefab: {fileID: 2175838253218980129, guid: 14182cfa8bbaad54b9088c3bd464b814, type: 3}
 --- !u!114 &1010218352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8130,6 +8130,91 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1885663393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1885663395}
+  - component: {fileID: 1885663394}
+  - component: {fileID: 1885663396}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1885663394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885663393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 413b243bba2a3b34c8c48d8a749d5d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fuelText: {fileID: 0}
+  timer: 0
+  goodwillNum: 0
+  asteroid: {fileID: 0}
+--- !u!4 &1885663395
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885663393}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.869365, y: -8.331694, z: 0.26924396}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1885663396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885663393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68373ccad12714a449b06cc5476b9a88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BelovedLeader: 0
+  GracePeriod: 0
+  Energizer: 0
+  EnergizerRange: 1
+  TradingHub: 0
+  TradingMultiplier: 1
+  NanobotComposition: 0
+  GoodWillMultiplier: 1
+  DroneBuddy: 0
+  Harder: 0
+  DurabilityMultiplier: 1
+  Fire: 0
+  FireCooldownMultiplier: 1
+  EfficientThrusters: 0
+  PlayerSpeedMultiplier: 1
+  Asylum: 0
+  RefugeeDropModifier: 1
+  Engineer: 0
+  RepairCostModifier: 5
+  Scavenger: 0
+  RoomDropMultiplier: 1
+  FoundFamily: 0
+  SFXVolumn: 1
+  BGMVolumn: 1
 --- !u!1 &1906516185
 GameObject:
   m_ObjectHideFlags: 0
@@ -9943,3 +10028,4 @@ SceneRoots:
   - {fileID: 1851176674}
   - {fileID: 567972601}
   - {fileID: 2012133272}
+  - {fileID: 1885663395}
