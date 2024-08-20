@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13d3f22863b92524893e3b6d3ad6135f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceDrop: 0
+  resourceDrop: 1
   resourceMultiplier: 1
 --- !u!114 &4791410039469148140
 MonoBehaviour:
@@ -161,6 +161,7 @@ MonoBehaviour:
   moveSpeed: 5
   stopRange: 5
   tooCloseRange: 3
+  avoidOtherEnemiesRange: 1
 --- !u!1 &8772764321345586413
 GameObject:
   m_ObjectHideFlags: 0
