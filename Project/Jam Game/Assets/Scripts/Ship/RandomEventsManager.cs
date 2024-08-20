@@ -87,14 +87,14 @@ public class RandomEventsManager : MonoBehaviourSingleton<RandomEventsManager>
     public void AsteroidEvent() {
         float angleOffset = GetRandomDirectionAngle();
 
-        StartCoroutine(SpawnEnemiesInArc(asteroid, numberOfAsteroid, 10f, 90f, angleOffset,2));
+        StartCoroutine(SpawnEnemiesInArc(asteroid, numberOfAsteroid * GameManager.Instance.currentElectionCycle, 10f, 90f, angleOffset,2));
         RandomEventPopup.Instance.ShowEventPopUp("Asteroid detected! Enemies are emerging!");
     }
 
     public void AlienEvent() {
         float angleOffset = GetRandomDirectionAngle();
 
-        StartCoroutine(SpawnEnemiesInArc(alien, numberOfAlien, 10f, 90f, angleOffset, 2));
+        StartCoroutine(SpawnEnemiesInArc(alien, numberOfAlien*GameManager.Instance.currentElectionCycle, 10f, 90f, angleOffset, 2));
         RandomEventPopup.Instance.ShowEventPopUp("Alien Ship detected! Enemies are emerging!");
     }
     private IEnumerator SpawnEnemiesInArc(GameObject enemyPrefab, int totalEnemyCount, float initialRadius, float arcAngle, float angleOffset, float radiusIncrement)
