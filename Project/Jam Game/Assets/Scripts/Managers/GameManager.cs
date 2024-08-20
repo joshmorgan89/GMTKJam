@@ -27,31 +27,23 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
     [Header("Camera")]
     public CinemachineVirtualCamera virtualCamera;
 
-    private int _currentElectionCycle = 1;
+    [Header("Enemy Settings")]
+    public GameObject AlienShipPrefab;
+    public GameObject AsteroidPrefab;
+    public float AttackInterval = 30f; 
+    public float SpawnDistance = 50f;
+
+    public int currentElectionCycle = 1;
     private int _currentPopulationCount = 0;
 
     private void Start() {
         _shipGrid = Ship.GetComponent<ShipGrid>();
         InitializeGame();
+        StartCoroutine(SpawnRoutine());
     }
 
     private void Update() {
         _sessionTimer += Time.deltaTime;
-
-        if (GameObject.FindWithTag("Enemy") != null)
-        {
-            if (inBattle == false) {
-                SoundManager.Instance.PlayBattleBGM();
-            }
-            inBattle = true;
-        }
-        else {
-            if (inBattle == true)
-            {
-                SoundManager.Instance.PlayNormalBGM();
-            }
-            inBattle = false;
-        }
 
         if (UIManager.Instance.gameProgress.value == 1) {
             SceneManager.LoadScene("GoodEnd");
@@ -61,7 +53,6 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
     private void InitializeGame() {
         _sessionTimer = 0;
         SetupInitialRooms();
-
         // Initialize UI.
     }
 
@@ -174,14 +165,6 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
         }
     }
 
-    public void ProceedToNextElectionCycle() {
-        _currentElectionCycle++;
-        
-        // Update UI
-
-        // Add more rooms, spawn new challenges, etc.
-    }
-
     public void SetZoomLevelOne() {
         virtualCamera.m_Lens.OrthographicSize = 7.5f;
     }
@@ -204,5 +187,45 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
 
     public void DeactivatedGeneratorRoom(GeneratorRoom generatorRoom) {
         _shipGrid.DeactivatedGeneratorRoom(generatorRoom);
+    }
+
+    private IEnumerator SpawnRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(AttackInterval);
+
+            // Randomly decide whether to spawn aliens or asteroids
+            bool spawnAlien = Random.value > 0.5f; // 50% chance to spawn either
+
+            if (spawnAlien)
+            {
+                int numberOfAliens = Random.Range(2, 4);
+                for (int i = 0; i < numberOfAliens; i++)
+                {
+                    SpawnAlienShip();
+                }
+            }
+            else
+            {
+                int numberOfAsteroids = Random.Range(2, 4);
+                for (int i = 0; i < numberOfAsteroids; i++)
+                {
+                    SpawnAsteroid();
+                }
+            }
+        }
+    }
+
+    private void SpawnAlienShip()
+    {
+        Vector3 spawnPosition = ShipTransform.position + (Vector3)(Random.insideUnitCircle.normalized * SpawnDistance);
+        Instantiate(AlienShipPrefab, spawnPosition, Quaternion.identity);
+    }
+
+    private void SpawnAsteroid()
+    {
+        Vector3 spawnPosition = ShipTransform.position + (Vector3)(Random.insideUnitCircle.normalized * SpawnDistance);
+        Instantiate(AsteroidPrefab, spawnPosition, Quaternion.identity);
     }
 }

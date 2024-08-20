@@ -32,6 +32,8 @@ public class ElectionManager : MonoBehaviourSingleton<ElectionManager>
 
     public void TriggerElection()
     {
+        GameManager.Instance.currentElectionCycle += 1;
+
         // Determine the election modifiers
         ApplyElectionModifiers();
 

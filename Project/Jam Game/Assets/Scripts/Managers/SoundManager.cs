@@ -62,6 +62,27 @@ public class SoundManager : MonoBehaviourSingleton<SoundManager>
         InitializeAudioSourcePool();
     }
 
+    private void Update()
+    {
+        if (GameObject.FindWithTag("Enemy") != null)
+        {
+            if (GameManager.Instance.inBattle == false)
+            {
+                PlayBattleBGM();
+            }
+            GameManager.Instance.inBattle = true;
+        }
+        else
+        {
+            Debug.Log(2);
+            if (GameManager.Instance.inBattle == true)
+            {
+                PlayNormalBGM();
+            }
+            GameManager.Instance.inBattle = false;
+        }
+    }
+
     private void InitializeAudioSourcePool()
     {
         audioSourcePool = new Queue<AudioSource>();
