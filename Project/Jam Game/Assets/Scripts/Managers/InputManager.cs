@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
     public PodMovement playerMovement;
+    public InteractionHandler PlayerInteractionHandler;
 
     private PlayerInputAction _playerInputAction;
     
@@ -27,10 +28,12 @@ public class InputManager : MonoBehaviour
         _playerInputAction.Player.Zoom1.performed += OnZoom1Performed;
         _playerInputAction.Player.Zoom2.performed += OnZoom2Performed;
         _playerInputAction.Player.Pause.performed += OnPausePerformed;
+        _playerInputAction.Player.Place.performed += OnPlacePerformed;
         _playerInputAction.Player.Pause.Enable();
         _playerInputAction.Player.Break.Enable();
         _playerInputAction.Player.Zoom1.Enable();
         _playerInputAction.Player.Zoom2.Enable();
+        _playerInputAction.Player.Place.Enable();
 
     }
 
@@ -42,10 +45,12 @@ public class InputManager : MonoBehaviour
         _playerInputAction.Player.Zoom1.performed -= OnZoom1Performed;
         _playerInputAction.Player.Zoom2.performed -= OnZoom2Performed;
         _playerInputAction.Player.Pause.performed -= OnPausePerformed;
+        _playerInputAction.Player.Place.performed -= OnPlacePerformed;
         _playerInputAction.Player.Pause.Disable();
         _playerInputAction.Player.Break.Disable();
         _playerInputAction.Player.Zoom1.Disable();
         _playerInputAction.Player.Zoom2.Disable();
+        _playerInputAction.Player.Place.Disable();
     }
 
     private void FixedUpdate()
@@ -75,5 +80,9 @@ public class InputManager : MonoBehaviour
     private void OnBreakCanceled(InputAction.CallbackContext context)
     {
         playerMovement.BreakEnd();
+    }
+
+    private void OnPlacePerformed(InputAction.CallbackContext context) {
+        PlayerInteractionHandler.PlaceBox();
     }
 }

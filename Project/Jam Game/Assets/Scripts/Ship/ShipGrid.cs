@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,10 @@ public class ShipGrid : MonoBehaviour {
     public TileBase RoomTile;
     public TileBase GeneratorRoomTile;
     public TileBase CrewQuartersTile;
+    public TileBase BreachTile;
     public Tilemap RoomTileMap;
     public Tilemap SpecialRoomTileMap;
-    public GameObject TurretPrefab;
+    public Turret TurretPrefab;
     public GameObject ShipSprite;
 
     private Dictionary<Vector3Int, BaseRoom> _addedRooms = new Dictionary<Vector3Int, BaseRoom>();
@@ -190,7 +192,7 @@ public class ShipGrid : MonoBehaviour {
         EnsurePodIsOutsideShipBoundingCircle();
 
         // Grow the ship
-        UpdateShipSpriteScaleSmoothly();
+        UpdateShipSpriteScale();
 
         // If roomsToSpawn is not empty, it means not all rooms could be placed, handle accordingly
         if (roomsToSpawn.Count > 0) {
@@ -254,9 +256,6 @@ public class ShipGrid : MonoBehaviour {
         // Calculate bounding circle of the newly spawned rooms
         var (center, radius) = GetBoundingCircleOfRooms();
 
-        // Check if the pod is outside the circle
-        Vector3 podPosition = GameManager.Instance.GetPodTransform().position;
-
         if (!GameManager.Instance.IsPodOutsideCircle(center, radius)) {
             // Adjust pod position if it's inside the circle
             GameManager.Instance.MovePodOutsideShipBounds(center, radius);
@@ -298,7 +297,7 @@ public class ShipGrid : MonoBehaviour {
         }
     }
 
-    public void UpdateShipSpriteScaleSmoothly() {
+    public void UpdateShipSpriteScale() {
         var (center, radius) = GetBoundingCircleOfRooms();
         Transform shipSpriteTransform = ShipSprite.transform;
         float targetScale = radius * 2.0f;
@@ -329,5 +328,12 @@ public class ShipGrid : MonoBehaviour {
         );
 
         return center;
+    }
+
+    public void RoomDestroyed(Vector3Int cellPosition) {
+        var room = _addedRooms[cellPosition];
+        if (room != null) {
+            SpecialRoomTileMap.SetTile(cellPosition, BreachTile);
+        }
     }
 }

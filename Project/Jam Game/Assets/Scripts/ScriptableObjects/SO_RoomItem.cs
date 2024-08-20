@@ -10,4 +10,5 @@ public class SO_RoomItem : ScriptableObject
     public Sprite itemIcon;
     public string description;
     public int cost;
+    public BaseRoom room;
 }

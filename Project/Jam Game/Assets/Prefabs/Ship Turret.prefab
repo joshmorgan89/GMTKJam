@@ -16,10 +16,26 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: f9acf78a818f2c54c922a9b2fc3d13af, type: 3}
+    - target: {fileID: 2475920264761271234, guid: d1770b5a3e9780044a5eac8f5f704577, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2475920264761271234, guid: d1770b5a3e9780044a5eac8f5f704577, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1946351195
+      objectReference: {fileID: 0}
     - target: {fileID: 3718243142237777955, guid: d1770b5a3e9780044a5eac8f5f704577, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 2e4538adf15787c49a0cbc6e2de412f5, type: 3}
+    - target: {fileID: 3718243142237777955, guid: d1770b5a3e9780044a5eac8f5f704577, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718243142237777955, guid: d1770b5a3e9780044a5eac8f5f704577, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1946351195
+      objectReference: {fileID: 0}
     - target: {fileID: 6543973792644850668, guid: d1770b5a3e9780044a5eac8f5f704577, type: 3}
       propertyPath: m_Name
       value: Ship Turret

@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
     }
 
     public void HandleRoomDestroyed(Vector3Int cellPosition) {
-        _shipGrid.RemoveRoom(cellPosition);
+        _shipGrid.RoomDestroyed(cellPosition);
         
         // Update UI with room count.
 

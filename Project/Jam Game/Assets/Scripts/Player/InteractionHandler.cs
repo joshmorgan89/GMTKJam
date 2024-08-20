@@ -13,15 +13,10 @@ public class InteractionHandler : MonoBehaviour
         if (CarriedBox != null) {
             // Make the box follow the drone
             CarriedBox.transform.position = HoldPosition.position;
-
-            // Place the box when left-click is pressed
-            if (Input.GetMouseButtonDown(0)) {
-                PlaceBox();
-            }
         }
     }
 
-    private void PlaceBox() {
+    public void PlaceBox() {
         if (CarriedBox != null) {
             // Generate rooms at the box's position
             if (GameManager.Instance.GenerateRoomClusterAtPosition(CarriedBox.transform.position, CarriedBox.NumberOfRooms) == true) {

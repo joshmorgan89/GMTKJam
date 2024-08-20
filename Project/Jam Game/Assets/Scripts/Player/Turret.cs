@@ -15,8 +15,12 @@ public class Turret : MonoBehaviour
 
     private GameObject _closestEnemy;
 
+    public bool IsActive { get; set; }
+
     private void FixedUpdate()
     {
+        if (!IsActive) { return; }
+
         // Update the cooldown timer
         if (_timer < attackingCooldown * Settings.Instance.FireCooldownMultiplier)
             _timer += Time.fixedDeltaTime;

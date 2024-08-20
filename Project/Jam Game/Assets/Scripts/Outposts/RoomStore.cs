@@ -8,6 +8,8 @@ public class RoomStore : MonoBehaviourSingleton<RoomStore>
 {
     public List<SO_RoomItem> roomItems; 
     public Button[] roomButtons; 
+    public InteractionHandler PlayerInteraction;
+    public BoxWithRooms box;
 
     public void AssignRandomRooms()
     {
@@ -50,6 +52,10 @@ public class RoomStore : MonoBehaviourSingleton<RoomStore>
     public void AddRoomToPlayer(SO_RoomItem roomItem)
     {
         Debug.Log(roomItem.itemName + " added to the player's ship.");
+
+        PlayerInteraction.CarriedBox = Instantiate(box, PlayerInteraction.HoldPosition.position, PlayerInteraction.HoldPosition.rotation);
+        PlayerInteraction.CarriedBox.RoomType = roomItem.room;
+        PlayerInteraction.CarriedBox.UpdateNumberOfRooms(1);
     }
 
     public void ResetButtons() {

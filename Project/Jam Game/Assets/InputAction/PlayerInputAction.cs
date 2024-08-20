@@ -71,6 +71,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Place"",
+                    ""type"": ""Button"",
+                    ""id"": ""7747261f-c417-4d96-b558-b49287260b4c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +181,17 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b7379605-daf0-4ac2-a70e-1c955dcf0b43"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Place"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -246,6 +266,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_Zoom1 = m_Player.FindAction("Zoom1", throwIfNotFound: true);
         m_Player_Zoom2 = m_Player.FindAction("Zoom2", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_Place = m_Player.FindAction("Place", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -312,6 +333,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Zoom1;
     private readonly InputAction m_Player_Zoom2;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_Place;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -321,6 +343,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Zoom1 => m_Wrapper.m_Player_Zoom1;
         public InputAction @Zoom2 => m_Wrapper.m_Player_Zoom2;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @Place => m_Wrapper.m_Player_Place;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -345,6 +368,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @Place.started += instance.OnPlace;
+            @Place.performed += instance.OnPlace;
+            @Place.canceled += instance.OnPlace;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -364,6 +390,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @Place.started -= instance.OnPlace;
+            @Place.performed -= instance.OnPlace;
+            @Place.canceled -= instance.OnPlace;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -433,5 +462,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnZoom1(InputAction.CallbackContext context);
         void OnZoom2(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnPlace(InputAction.CallbackContext context);
     }
 }
