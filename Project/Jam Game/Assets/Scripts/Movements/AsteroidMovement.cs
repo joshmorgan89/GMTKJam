@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using Scripts.Shared;
 public class AsteroidMovement : BaseMovement
 {
     private void Awake()

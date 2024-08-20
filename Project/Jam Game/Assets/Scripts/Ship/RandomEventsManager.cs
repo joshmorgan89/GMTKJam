@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using UnityEngine;
-using static Unity.VisualScripting.FlowStateWidget;
 
 public class RandomEventsManager : MonoBehaviourSingleton<RandomEventsManager>
 {
