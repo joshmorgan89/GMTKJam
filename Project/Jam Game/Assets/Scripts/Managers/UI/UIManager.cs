@@ -15,7 +15,8 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     public GameObject pausePanel;
     public GameObject settingPanel;
     public Slider gameProgress;
-
+    public Slider SFXSlider;
+    public Slider BGMSlider;
     [Header("Outpost")]
     public GameObject outpostPanel;
     public GameObject shop;
@@ -29,6 +30,8 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
         electionHappenValue = 1.0f / (electionEventNum+1);
         _nextElectionHappenValue = electionHappenValue;
         RandomEventsManager.Instance.InitRandomEvent();
+        SFXSlider.value = Settings.Instance.SFXVolumn;
+        BGMSlider.value = Settings.Instance.BGMVolumn;
     }
 
     private void Update()

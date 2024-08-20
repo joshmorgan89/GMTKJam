@@ -41,4 +41,8 @@ public class Settings: MonoBehaviourSingleton<Settings>
     public float SFXVolumn = 1;
     public float BGMVolumn = 1;
 
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Turret
   itemID: 1104
-  itemIcon: {fileID: 21300000, guid: 142e8326e541c4b468aeed475f4fb828, type: 3}
+  itemIcon: {fileID: 21300000, guid: f8b9356d6c7d73c41a9eca1983d2b3e1, type: 3}
   description: 'Turret:<br>Requires access to 1 crew quarters and 1 generator room
     to become active. Can fire from anywhere, to anywhere, but is more accurate on
     the outsides/closer to where the pirates arrive. '

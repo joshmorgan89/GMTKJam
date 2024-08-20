@@ -7,7 +7,6 @@ using static UnityEngine.Rendering.DebugUI;
 public class MenuManager : MonoBehaviour
 {
     public GameObject settingPanel;
-
     public void OnSettingClicked()
     {
         settingPanel.SetActive(true);
@@ -18,9 +17,13 @@ public class MenuManager : MonoBehaviour
         GameManager.Instance.ToggleGamePause();
     }
 
+    public void ResumeInMain() {
+        settingPanel.SetActive(false);
+    }
+
     public void OnExitClicked() 
-    { 
-        
+    {
+        Application.Quit();
     }
 
     public void OnStartClicked() { 

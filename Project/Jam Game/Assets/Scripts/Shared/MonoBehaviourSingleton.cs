@@ -9,7 +9,7 @@ public class MonoBehaviourSingleton<T> : MonoBehaviour
     private void Awake() {
         if (Instance == null) {
             Instance = this as T;
-            DontDestroyOnLoad(gameObject); // Keep the instance across scenes
+            //DontDestroyOnLoad(gameObject); // Keep the instance across scenes
         } else {
             Destroy(gameObject);
         }

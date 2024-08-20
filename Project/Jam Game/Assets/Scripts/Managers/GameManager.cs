@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourSingleton<GameManager> {
     [Header("Game Settings")]
@@ -52,6 +53,9 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
             inBattle = false;
         }
 
+        if (UIManager.Instance.gameProgress.value == 1) {
+            SceneManager.LoadScene("GoodEnd");
+        }
     }
 
     private void InitializeGame() {

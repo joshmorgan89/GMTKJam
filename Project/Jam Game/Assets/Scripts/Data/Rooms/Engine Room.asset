@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Engine Room
   itemID: 1101
-  itemIcon: {fileID: 21300000, guid: 27f42a6783f5efe439097f76afb74e7f, type: 3}
+  itemIcon: {fileID: 21300000, guid: 7a751d23bcf5cba459e4fc913bd41e4a, type: 3}
   description: 'Engine Room:<br>Provide energy for other rooms and weapons '
   cost: 10
