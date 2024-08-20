@@ -19,3 +19,4 @@ MonoBehaviour:
     to become active. Can fire from anywhere, to anywhere, but is more accurate on
     the outsides/closer to where the pirates arrive. '
   cost: 20
+  room: {fileID: 6898930385572985372, guid: 4d8b4af41ada3d54e99a927383fc6774, type: 3}
