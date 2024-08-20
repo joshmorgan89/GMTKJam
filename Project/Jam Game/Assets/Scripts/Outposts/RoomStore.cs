@@ -54,7 +54,7 @@ public class RoomStore : MonoBehaviourSingleton<RoomStore>
         Debug.Log(roomItem.itemName + " added to the player's ship.");
 
         PlayerInteraction.CarriedBox = Instantiate(box, PlayerInteraction.HoldPosition.position, PlayerInteraction.HoldPosition.rotation);
-        Debug.Log(roomItem.room);
+        Debug.Log("Room type:"+roomItem.room);
         PlayerInteraction.CarriedBox.RoomType = roomItem.room;
         PlayerInteraction.CarriedBox.UpdateNumberOfRooms(1);
     }

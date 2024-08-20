@@ -23,7 +23,7 @@ public class BaseRoom : MonoBehaviour
 
     // Called when the room is added to the grid and activated
     public virtual void Activate() {
-        if (_health.IsDestroyed) { return; }
+        //if (_health.IsDestroyed) { return; }
 
         IsActive = true;
         // Additional activation logic (e.g., turn on lights, enable room functionality)

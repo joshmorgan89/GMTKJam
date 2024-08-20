@@ -4895,7 +4895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b705c96a3acac4ca5a15b9090733d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rareMineral: 0
+  rareMineral: 21312
   refugees: 0
 --- !u!1 &1140516760
 GameObject:
