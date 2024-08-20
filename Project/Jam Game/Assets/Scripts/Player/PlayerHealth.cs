@@ -44,6 +44,7 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public void PlayerDestroyed() {
+        Settings.Instance.GoodwillOverall = GoodWillManager.Instance.Goodwill;
         SceneManager.LoadScene("BadEnd");
     }
 }
