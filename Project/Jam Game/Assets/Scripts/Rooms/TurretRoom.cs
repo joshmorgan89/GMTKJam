@@ -6,6 +6,12 @@ public class TurretRoom : BaseRoom
 {
     public Turret Turret { get; set; }
 
+    protected override void Awake() {
+        base.Awake();
+
+        RoomType = RoomTypes.Turret;
+    }
+
     public override void Activate() {
         base.Activate();
         Turret.IsActive = true;

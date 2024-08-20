@@ -232,4 +232,35 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
         Instantiate(AsteroidPrefab, spawnPosition, Quaternion.identity);
     }
 
+    public List<BaseRoom> GetListOfRoomsTooCloseToRoomsOfSameType(RoomTypes roomType, int range) {
+        List<BaseRoom> roomList = new List<BaseRoom>();
+        foreach (var cellPosition in _shipGrid.GetCellPositionsForRoomsOfType(roomType)) {
+            List<BaseRoom> nearbyRooms = _shipGrid.GetRoomsInRangeOfCellPosition(range, cellPosition);
+            if (nearbyRooms.Where(x => x.RoomType == roomType).ToList().Count > 0) {
+                roomList.Add(_shipGrid.GetRoomAtPosition(cellPosition));
+            }
+
+        }
+
+        return roomList;
+    }
+
+    public List<BaseRoom> GetListOfRoomsOfTypeInRangeOfRoomsOfType(RoomTypes roomType1, RoomTypes roomType2, int range) {
+        List<BaseRoom> roomList = new List<BaseRoom>();
+        foreach (var cellPosition in _shipGrid.GetCellPositionsForRoomsOfType(roomType1)) {
+            List<BaseRoom> nearbyRooms = _shipGrid.GetRoomsInRangeOfCellPosition(range, cellPosition);
+            if (nearbyRooms.Where(x => x.RoomType == roomType2).ToList().Count > 0) {
+                roomList.Add(_shipGrid.GetRoomAtPosition(cellPosition));
+            }
+
+        }
+
+        return roomList;
+    }
+
+    public int GetRoomCountOfRoomType(RoomTypes roomType) {
+        return _shipGrid.GetRoomCountOfRoomType(roomType);
+    }
+
+    public bool ShipHasMajorityBufferRooms() { return _shipGrid.IsMajorityBufferRooms; }
 }

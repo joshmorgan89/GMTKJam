@@ -3,15 +3,24 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+public enum RoomTypes {
+    Buffer,
+    Generator,
+    Crew,
+    Turret,
+}
+
 public class BaseRoom : MonoBehaviour
 {
     protected ShipGrid _shipGrid;
     private Scripts.Shared.Health _health;
 
     public bool IsActive { get; private set; }
+    public RoomTypes RoomType { get; protected set; }
 
-    private void Awake() {
+    protected virtual void Awake() {
         _health = GetComponent<Scripts.Shared.Health>();
+        RoomType = RoomTypes.Buffer;
     }
 
     private void Update() {

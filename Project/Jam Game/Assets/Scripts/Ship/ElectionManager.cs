@@ -179,61 +179,61 @@ public class ElectionManager : MonoBehaviourSingleton<ElectionManager>
     private bool CheckTooManyCooks()
     {
         //check if crew quarters are too close together
-        return false; 
+        return GameManager.Instance.GetListOfRoomsTooCloseToRoomsOfSameType(RoomTypes.Crew, 1).Count > 0; 
     }
 
     private bool CheckLonelinessEpidemic()
     {
         // check if crew quarters are far apart
-        return false;
+        return GameManager.Instance.GetListOfRoomsTooCloseToRoomsOfSameType(RoomTypes.Crew, 1).Count == 0;
     }
 
     private bool CheckPacifism()
     {
         // check if there are too many active turrets
-        return false;
+        return GameManager.Instance.GetRoomCountOfRoomType(RoomTypes.Turret) > 6;
     }
 
     private bool CheckTerrorist()
     {
         // check if there are too less active turrets
-        return false;
+        return GameManager.Instance.GetRoomCountOfRoomType(RoomTypes.Turret) < 6;
     }
 
     private bool CheckOpenArms()
     {
         // check if there are many refugees
-        return false;
+        return ResourceManager.Instance.refugees <= 6.0f;
     }
 
     private bool CheckXenophobia()
     {
         //check if there are too many refugees
-        return false;
+        return ResourceManager.Instance.refugees >= 6.0f;
     }
 
     private bool CheckExcessCharge()
     {
         //check if there are many generators
-        return false;
+        return GameManager.Instance.GetRoomCountOfRoomType(RoomTypes.Generator) >= 8;
     }
 
     private bool CheckPowerHungry()
     {
         //check if there are not enough generators
-        return false;
+        return GameManager.Instance.GetRoomCountOfRoomType(RoomTypes.Generator) < 8;
     }
 
     private bool CheckNoiseComplaint()
     {
         //check if generators are too close to crew quarters
-        return false;
+        return GameManager.Instance.GetListOfRoomsOfTypeInRangeOfRoomsOfType(RoomTypes.Generator, RoomTypes.Crew, 1).Count > 0;
     }
 
     private bool CheckWhiteNoiseToSleep()
     {
         //check if generators are close to crew quarters
-        return false;
+        return GameManager.Instance.GetListOfRoomsOfTypeInRangeOfRoomsOfType(RoomTypes.Crew, RoomTypes.Generator, 1).Count == GameManager.Instance.GetRoomCountOfRoomType(RoomTypes.Crew);
     }
 
     private bool CheckMeltingPot()
@@ -245,7 +245,7 @@ public class ElectionManager : MonoBehaviourSingleton<ElectionManager>
     private bool CheckClaustrophobia()
     {
         // Implement logic to check if there are more buffer rooms than non-buffer rooms
-        return false;
+        return GameManager.Instance.ShipHasMajorityBufferRooms();
     }
 
     // Method to modify goodwill

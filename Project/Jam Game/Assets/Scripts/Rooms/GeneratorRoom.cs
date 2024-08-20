@@ -6,6 +6,12 @@ public class GeneratorRoom : BaseRoom {
 
     public int CurrentPowerOutput { get; private set; }
 
+    protected override void Awake() {
+        base.Awake();
+
+        RoomType = RoomTypes.Generator;
+    }
+
     // Override Activate to include generator-specific logic
     public override void Activate() {
         base.Activate();

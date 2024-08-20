@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,6 +34,8 @@ public class ShipGrid : MonoBehaviour {
     };
 
     public int RoomCount => _addedRooms.Count;
+
+    public bool IsMajorityBufferRooms => GetRoomCountOfRoomType(RoomTypes.Buffer) > _addedRooms.Count / 2;
 
     // Add a room to the grid
     public bool AddRoom(Vector3Int cellPosition, BaseRoom room) {
@@ -348,4 +351,13 @@ public class ShipGrid : MonoBehaviour {
         //    SpecialRoomTileMap.SetTile(cellPosition, BreachTile);
         //}
     }
+
+    public int GetRoomCountOfRoomType(RoomTypes roomType) {
+        return _addedRooms.Values.Where(x => x.RoomType == roomType).ToList().Count;
+    }
+
+    public List<Vector3Int> GetCellPositionsForRoomsOfType(RoomTypes roomType) {
+       return _addedRooms.Where(x => x.Value.RoomType == roomType).ToDictionary(kvp => kvp.Key, kvp => kvp.Value).Keys.ToList();
+    }
+
 }

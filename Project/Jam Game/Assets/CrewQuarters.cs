@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CrewQuarters : BaseRoom {
+    protected override void Awake() {
+        base.Awake();
+
+        RoomType = RoomTypes.Crew;
+    }
+
     public override void Activate() {
         base.Activate();
         // Additional generator activation logic
