@@ -185,6 +185,7 @@ public class ElectionManager : MonoBehaviourSingleton<ElectionManager>
     private bool CheckLonelinessEpidemic()
     {
         // check if crew quarters are far apart
+        Debug.Log(GameManager.Instance.GetListOfRoomsTooCloseToRoomsOfSameType(RoomTypes.Crew, 1).Count);
         return GameManager.Instance.GetListOfRoomsTooCloseToRoomsOfSameType(RoomTypes.Crew, 1).Count == 0;
     }
 
