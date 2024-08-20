@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     public Slider gameProgress;
     public Slider SFXSlider;
     public Slider BGMSlider;
+    public TMP_Text goodwillValue;
     [Header("Outpost")]
     public GameObject outpostPanel;
     public GameObject shop;
@@ -40,7 +41,7 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
 
         if (gameProgress.value >= _nextElectionHappenValue)
         {
-            ElectionPopUp.Instance.ShowElectionPopUp("This is an election");
+            ElectionManager.Instance.TriggerElection();
             _nextElectionHappenValue += electionHappenValue;
         }
     }

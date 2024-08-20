@@ -1362,6 +1362,7 @@ GameObject:
   m_Component:
   - component: {fileID: 315810844}
   - component: {fileID: 315810843}
+  - component: {fileID: 315810845}
   m_Layer: 0
   m_Name: tester
   m_TagString: Untagged
@@ -1400,6 +1401,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &315810845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315810842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68373ccad12714a449b06cc5476b9a88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BelovedLeader: 0
+  GracePeriod: 0
+  Energizer: 0
+  EnergizerRange: 1
+  TradingHub: 0
+  TradingMultiplier: 1
+  NanobotComposition: 0
+  GoodWillMultiplier: 1
+  DroneBuddy: 0
+  Harder: 0
+  DurabilityMultiplier: 1
+  Fire: 0
+  FireCooldownMultiplier: 1
+  EfficientThrusters: 0
+  PlayerSpeedMultiplier: 1
+  Asylum: 0
+  RefugeeDropModifier: 1
+  Engineer: 0
+  RepairCostModifier: 5
+  Scavenger: 0
+  RoomDropMultiplier: 1
+  FoundFamily: 0
+  SFXVolumn: 1
+  BGMVolumn: 1
 --- !u!1001 &322377294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3197,7 +3234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   electionEventNum: 3
   electionHappenValue: 0
-  gameProgressSpeed: 0.00083333335
+  gameProgressSpeed: 0.01
   electionPrefab: {fileID: 6419646482934240406, guid: 893b31efd87183248b9df3a64ea76878, type: 3}
   electionGroup: {fileID: 852993822}
   pausePanel: {fileID: 206997907}
@@ -4330,6 +4367,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HoldPosition: {fileID: 961142860}
+  GrabReticle: {fileID: 0}
+  BoxWithRoomsPrefab: {fileID: 0}
 --- !u!114 &1010218352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8712,6 +8751,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3066236277098007537, guid: b4f4a237ebe9d9a44b636e8578281d20, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3066236277098007537, guid: b4f4a237ebe9d9a44b636e8578281d20, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3066236277098007537, guid: b4f4a237ebe9d9a44b636e8578281d20, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4951943814734677223, guid: b4f4a237ebe9d9a44b636e8578281d20, type: 3}
       propertyPath: BreachTile
       value: 
@@ -9043,7 +9094,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8730620359825966646, guid: b4f4a237ebe9d9a44b636e8578281d20, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2012133275}
   m_SourcePrefab: {fileID: 100100000, guid: b4f4a237ebe9d9a44b636e8578281d20, type: 3}
 --- !u!1 &2012133273 stripped
 GameObject:
@@ -9055,6 +9109,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3864651372573540003, guid: b4f4a237ebe9d9a44b636e8578281d20, type: 3}
   m_PrefabInstance: {fileID: 2012133272}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2012133275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012133273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6772ef29f3aaa6447978014cd88e2162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  electionModifiers: []
 --- !u!1 &2020049173
 GameObject:
   m_ObjectHideFlags: 0

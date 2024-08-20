@@ -717,6 +717,9 @@ MonoBehaviour:
   RoomTile: {fileID: 11400000, guid: e6c857b78f7cc5746beec5da46ffc058, type: 2}
   GeneratorRoomTile: {fileID: 11400000, guid: 5991fd33f6af08c409a284dce86dac8a, type: 2}
   CrewQuartersTile: {fileID: 11400000, guid: 159b3a2fdf3338245b1873bdbd498705, type: 2}
+  BreachTile: {fileID: 0}
   RoomTileMap: {fileID: 6517920973106249176}
   SpecialRoomTileMap: {fileID: 2934975688428505548}
-  TurretPrefab: {fileID: 1185135003257921094, guid: 8e5d1788f1d0aa14c892bb78ac6535de, type: 3}
+  TurretPrefab: {fileID: 6353468174882179101, guid: 8e5d1788f1d0aa14c892bb78ac6535de, type: 3}
+  ShipSprite: {fileID: 0}
+  RoomDeathTimer: 0
