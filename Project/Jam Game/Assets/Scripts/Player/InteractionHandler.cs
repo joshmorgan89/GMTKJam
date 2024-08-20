@@ -20,6 +20,9 @@ public class InteractionHandler : MonoBehaviour
         if (CarriedBox != null) {
             // Generate rooms at the box's position
             if (GameManager.Instance.GenerateRoomClusterAtPosition(CarriedBox.transform.position, CarriedBox.NumberOfRooms) == true) {
+                // Play sounds
+                SoundManager.Instance.PlaySound(SoundName.PlaceRoom);
+
                 // Destroy the box after placing it
                 Destroy(CarriedBox.gameObject);
 
