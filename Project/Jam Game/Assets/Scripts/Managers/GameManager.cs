@@ -1,10 +1,10 @@
+using Cinemachine;
+using Scripts.Shared;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Cinemachine;
 using UnityEngine.SceneManagement;
-using Scripts.Shared;
 
 public class GameManager : MonoBehaviourSingleton<GameManager> {
     [Header("Game Settings")]
