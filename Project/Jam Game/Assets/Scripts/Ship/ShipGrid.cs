@@ -15,6 +15,7 @@ public class ShipGrid : MonoBehaviour {
     public Tilemap RoomTileMap;
     public Tilemap SpecialRoomTileMap;
     public GameObject TurretPrefab;
+    public GameObject ShipSprite;
 
     private Dictionary<Vector3Int, BaseRoom> _addedRooms = new Dictionary<Vector3Int, BaseRoom>();
     // Adjacent offsets (up, down, right, left)
@@ -188,6 +189,9 @@ public class ShipGrid : MonoBehaviour {
         // Push the player outside the new ship bounds
         EnsurePodIsOutsideShipBoundingCircle();
 
+        // Grow the ship
+        UpdateShipSpriteScaleSmoothly();
+
         // If roomsToSpawn is not empty, it means not all rooms could be placed, handle accordingly
         if (roomsToSpawn.Count > 0) {
             Debug.LogWarning("Not all rooms could be placed.");
@@ -242,9 +246,13 @@ public class ShipGrid : MonoBehaviour {
         return (center, radius);
     }
 
+    public (Vector3 center, float radius) GetBoundingCircleOfRooms() {
+        return CalculateBoundingCircle(_addedRooms.Keys.ToList());
+    }
+
     public void EnsurePodIsOutsideShipBoundingCircle() {
         // Calculate bounding circle of the newly spawned rooms
-        var (center, radius) = CalculateBoundingCircle(_addedRooms.Keys.ToList());
+        var (center, radius) = GetBoundingCircleOfRooms();
 
         // Check if the pod is outside the circle
         Vector3 podPosition = GameManager.Instance.GetPodTransform().position;
@@ -288,5 +296,38 @@ public class ShipGrid : MonoBehaviour {
                 }
             }
         }
+    }
+
+    public void UpdateShipSpriteScaleSmoothly() {
+        var (center, radius) = GetBoundingCircleOfRooms();
+        Transform shipSpriteTransform = ShipSprite.transform;
+        float targetScale = radius * 2.0f;
+
+        // Apply the scale smoothly
+        shipSpriteTransform.localScale = new Vector3(targetScale, targetScale, 1.0f);
+        shipSpriteTransform.position = Grid.CellToWorld(CalculateCenterOfAddedRooms());
+    }
+
+    public Vector3Int CalculateCenterOfAddedRooms() {
+        if (_addedRooms.Count == 0) {
+            Debug.LogWarning("No rooms available to calculate the center.");
+            return Vector3Int.zero; // Return (0, 0, 0) if there are no rooms
+        }
+
+        Vector3Int sum = Vector3Int.zero;
+
+        // Sum all the cell positions
+        foreach (var roomPosition in _addedRooms.Keys) {
+            sum += roomPosition;
+        }
+
+        // Calculate the average (centroid)
+        Vector3Int center = new Vector3Int(
+            Mathf.RoundToInt(sum.x / (float)_addedRooms.Count),
+            Mathf.RoundToInt(sum.y / (float)_addedRooms.Count),
+            0  // Assuming a 2D grid; if 3D, handle z-axis similarly
+        );
+
+        return center;
     }
 }
