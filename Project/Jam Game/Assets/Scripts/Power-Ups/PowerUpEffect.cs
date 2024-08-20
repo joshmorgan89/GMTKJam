@@ -89,6 +89,7 @@ public class PowerUpEffect : MonoBehaviourSingleton<PowerUpEffect>
     public void ApplyHarder() {
         Settings.Instance.Harder = true;
         Settings.Instance.DurabilityMultiplier *= 2f;
+        GameObject.FindAnyObjectByType<PlayerHealth>().GetComponent<PlayerHealth>().PlayerMaxHealthUpdate(100);
     }
     public void ApplyFire() {
         Settings.Instance.Fire = true;

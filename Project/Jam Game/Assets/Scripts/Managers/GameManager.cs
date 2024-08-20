@@ -231,5 +231,4 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
         Instantiate(AsteroidPrefab, spawnPosition, Quaternion.identity);
     }
 
-    public bool RoomOfTypeTooClose()
 }
