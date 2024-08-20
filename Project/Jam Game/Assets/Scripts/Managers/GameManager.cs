@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
 
     private void Start() {
         _shipGrid = Ship.GetComponent<ShipGrid>();
-        InitializeGame();
+        StartCoroutine(InitializeGame());
         StartCoroutine(SpawnRoutine());
     }
 
@@ -52,13 +52,16 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
         }
     }
 
-    private void InitializeGame() {
+    private IEnumerator InitializeGame() {
+        yield return new WaitForSeconds(0.1f);
         ElectionManager.Instance.TriggerElection();
         Time.timeScale = 0;
         _sessionTimer = 0;
         SetupInitialRooms();
         // Initialize UI.
     }
+
+
 
     public void ToggleGamePause() {
         if (Time.timeScale == 1)

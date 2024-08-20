@@ -14,8 +14,7 @@ public enum ElectionModifier
     ExcessCharge,             
     PowerHungry,              
     NoiseComplaint,           
-    WhiteNoiseToSleep,        
-    MeltingPot,               
+    WhiteNoiseToSleep,               
     Claustrophobia            
 }
 
@@ -106,8 +105,6 @@ public class ElectionManager : MonoBehaviourSingleton<ElectionManager>
                 return "-Noise Complaint > Dislikes when generators are too close to crew quarters";
             case ElectionModifier.WhiteNoiseToSleep:
                 return "+I Need White Noise to Sleep > Likes generators close to crew quarters";
-            case ElectionModifier.MeltingPot:
-                return "-Melting Pot > Dislikes storage rooms with refugees being close to crew quarters";
             case ElectionModifier.Claustrophobia:
                 return "+Claustrophobia > Likes when there are more buffer rooms than non-buffer rooms";
             default:
@@ -162,10 +159,6 @@ public class ElectionManager : MonoBehaviourSingleton<ElectionManager>
                 case ElectionModifier.WhiteNoiseToSleep:
                     if (CheckWhiteNoiseToSleep())
                         ModifyGoodwill(1);
-                    break;
-                case ElectionModifier.MeltingPot:
-                    if (CheckMeltingPot())
-                        ModifyGoodwill(-1);
                     break;
                 case ElectionModifier.Claustrophobia:
                     if (CheckClaustrophobia())
