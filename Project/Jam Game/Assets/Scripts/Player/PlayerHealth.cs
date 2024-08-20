@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -28,7 +29,6 @@ public class PlayerHealth : MonoBehaviour
     /// <param name="amount">the amount of changes to player Pod's current health</param>
     public void PlayerCurrentHealthUpdate(float amount) {
         currentHealth += amount;
-        HUD.Instance.UpdateHealth(maxHealth, currentHealth);
 
         if (currentHealth <= 0)
         {
@@ -39,13 +39,11 @@ public class PlayerHealth : MonoBehaviour
         else if(currentHealth >= maxHealth) {
             currentHealth = maxHealth;
         }
+        HUD.Instance.UpdateHealth(maxHealth, currentHealth);
 
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public void PlayerDestroyed() { 
-        
+    public void PlayerDestroyed() {
+        SceneManager.LoadScene("BadEnd");
     }
 }
