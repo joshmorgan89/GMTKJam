@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum ResourceDrop { 
-    fuel
+    rareMineral,
+    Refugees
 }
 
 public class ResourceProvider : MonoBehaviour
@@ -13,8 +14,12 @@ public class ResourceProvider : MonoBehaviour
     private void OnDestroy()
     {
         //provide material
-        if (resourceDrop == ResourceDrop.fuel) {
+        if (resourceDrop == ResourceDrop.rareMineral) {
             ResourceManager.Instance.UpdateRareMineral(5 * resourceMultiplier);
+        }
+
+        if (resourceDrop == ResourceDrop.Refugees) {
+            ResourceManager.Instance.UpdateRefugee(Settings.Instance.RefugeeDropModifier);
         }
     }
 }
