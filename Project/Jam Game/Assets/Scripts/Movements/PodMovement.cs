@@ -12,10 +12,18 @@ public class PodMovement : MonoBehaviour
     {
         Vector2 direction = playerRB.velocity;
 
-        if (direction.magnitude > 0.1f)
-        {
-            SnapRotationToNearest90Degrees(direction);
-        }
+        //SnapRotationToNearest90Degrees(direction);
+        RotateToMouse();
+    }
+
+    private void RotateToMouse() {
+        Vector3 mouse_pos = Input.mousePosition;
+        mouse_pos.z = 5.23f;
+        Vector3 object_pos = Camera.main.WorldToScreenPoint(transform.position);
+        mouse_pos.x = mouse_pos.x - object_pos.x;
+        mouse_pos.y = mouse_pos.y - object_pos.y;
+        float angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle-90));
     }
 
     private void RotateTowards(Vector2 direction)
