@@ -41,6 +41,7 @@ public class Settings: MonoBehaviourSingleton<Settings>
     public float SFXVolumn = 1;
     public float BGMVolumn = 1;
 
+    public float GoodwillOverall;
     private void Start()
     {
         DontDestroyOnLoad(gameObject);

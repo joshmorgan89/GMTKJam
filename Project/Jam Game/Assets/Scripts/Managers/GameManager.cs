@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
         _sessionTimer += Time.deltaTime;
 
         if (UIManager.Instance.gameProgress.value == 1) {
+            Settings.Instance.GoodwillOverall = GoodWillManager.Instance.Goodwill;
             SceneManager.LoadScene("GoodEnd");
         }
     }
