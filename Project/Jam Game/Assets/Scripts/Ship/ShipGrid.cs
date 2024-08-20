@@ -18,8 +18,12 @@ public class ShipGrid : MonoBehaviour {
     public Tilemap SpecialRoomTileMap;
     public Turret TurretPrefab;
     public GameObject ShipSprite;
+    public float RoomDeathTimer;
 
     private Dictionary<Vector3Int, BaseRoom> _addedRooms = new Dictionary<Vector3Int, BaseRoom>();
+    private Dictionary<BaseRoom, float> _dyingRooms = new Dictionary<BaseRoom, float>();
+    
+
     // Adjacent offsets (up, down, right, left)
     private Vector3Int[] _adjacentOffsets = new Vector3Int[] {
         new Vector3Int(0, 1, 0),  // Up
@@ -62,7 +66,7 @@ public class ShipGrid : MonoBehaviour {
     }
 
     // Remove a room from the grid
-    public void RemoveRoom(Vector3Int cellPosition) {
+    public BaseRoom RemoveRoom(Vector3Int cellPosition) {
         BaseRoom room = GetRoomAtPosition(cellPosition);
         if (room != null) {
             room.Deactivate();
@@ -75,9 +79,15 @@ public class ShipGrid : MonoBehaviour {
             if (room is GeneratorRoom || room is CrewQuarters) {
                 SpecialRoomTileMap.SetTile(cellPosition, null);
             } else if (room is TurretRoom turretRoom) {
-                Destroy(turretRoom.Turret);
+                turretRoom.Turret.DestroyTurret();
             }
         }
+
+        return room;
+    }
+
+    public BaseRoom PickUpTile(Vector3 worldPosition) {
+        return RemoveRoom(Grid.WorldToCell(worldPosition));
     }
 
     // Check if a position is within the grid bounds
@@ -331,9 +341,11 @@ public class ShipGrid : MonoBehaviour {
     }
 
     public void RoomDestroyed(Vector3Int cellPosition) {
-        var room = _addedRooms[cellPosition];
-        if (room != null) {
-            SpecialRoomTileMap.SetTile(cellPosition, BreachTile);
-        }
+        RemoveRoom(cellPosition);
+
+        //var room = _addedRooms[cellPosition];
+        //if (room != null) {
+        //    SpecialRoomTileMap.SetTile(cellPosition, BreachTile);
+        //}
     }
 }

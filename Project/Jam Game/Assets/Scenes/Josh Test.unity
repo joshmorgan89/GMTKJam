@@ -2077,6 +2077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 366073985}
+  PlayerInteractionHandler: {fileID: 366073986}
 --- !u!4 &380364916
 Transform:
   m_ObjectHideFlags: 0
@@ -5494,6 +5495,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1520583762}
   m_CullTransparentMesh: 1
+--- !u!1 &1524705703
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1524705704}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1524705704
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524705703}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.4685074, y: -0.047696482, z: 0.08872665}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1542746860
 GameObject:
   m_ObjectHideFlags: 0
@@ -6742,6 +6774,8 @@ MonoBehaviour:
   pausePanel: {fileID: 0}
   settingPanel: {fileID: 0}
   gameProgress: {fileID: 568357820}
+  SFXSlider: {fileID: 0}
+  BGMSlider: {fileID: 0}
   outpostPanel: {fileID: 676462340}
   shop: {fileID: 208751861}
   embassy: {fileID: 644561191}
@@ -6874,6 +6908,10 @@ PrefabInstance:
       propertyPath: ShipSprite
       value: 
       objectReference: {fileID: 1288626117}
+    - target: {fileID: 4951943814734677223, guid: b4f4a237ebe9d9a44b636e8578281d20, type: 3}
+      propertyPath: TurretPrefab
+      value: 
+      objectReference: {fileID: 6353468174882179101, guid: 8e5d1788f1d0aa14c892bb78ac6535de, type: 3}
     - target: {fileID: 6517920973106249176, guid: b4f4a237ebe9d9a44b636e8578281d20, type: 3}
       propertyPath: m_Tiles.Array.size
       value: 0
@@ -7243,6 +7281,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3392567736269190263, guid: 00e3d93cbb3b7804fa980e6cb024326c, type: 3}
+      propertyPath: GrabReticle
+      value: 
+      objectReference: {fileID: 2768563857579153523}
     - target: {fileID: 3813623398289292166, guid: 00e3d93cbb3b7804fa980e6cb024326c, type: 3}
       propertyPath: m_Name
       value: Player
@@ -7252,6 +7294,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00e3d93cbb3b7804fa980e6cb024326c, type: 3}
+--- !u!4 &2768563857579153523 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1555710994272128316, guid: 00e3d93cbb3b7804fa980e6cb024326c, type: 3}
+  m_PrefabInstance: {fileID: 2768563857579153522}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8254913811178933799
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7337,3 +7384,4 @@ SceneRoots:
   - {fileID: 321039922}
   - {fileID: 496068987}
   - {fileID: 8254913811178933799}
+  - {fileID: 1524705704}

@@ -5,6 +5,8 @@ using UnityEngine;
 public class InteractionHandler : MonoBehaviour
 {
     public Transform HoldPosition;
+    public Transform GrabReticle;
+    public BoxWithRooms BoxWithRoomsPrefab;
 
     public BoxWithRooms CarriedBox {  get; set; }
     public Transform PodTransform => transform;
@@ -19,7 +21,17 @@ public class InteractionHandler : MonoBehaviour
     public void PlaceBox() {
         if (CarriedBox != null) {
             // Generate rooms at the box's position
-            if (GameManager.Instance.GenerateRoomClusterAtPosition(CarriedBox.transform.position, CarriedBox.NumberOfRooms) == true) {
+            if (CarriedBox.RoomType != null) {
+                if (GameManager.Instance.GenerateRoomClusterOfTypeAtPosition(CarriedBox.transform.position, CarriedBox.NumberOfRooms, CarriedBox.RoomType)) {
+                    SoundManager.Instance.PlaySound(SoundName.PlaceRoom);
+
+                    // Destroy the box after placing it
+                    Destroy(CarriedBox.gameObject);
+
+                    // Clear the carried box reference
+                    CarriedBox = null;
+                }
+            } else if (GameManager.Instance.GenerateRoomClusterAtPosition(CarriedBox.transform.position, CarriedBox.NumberOfRooms) == true) {
                 // Play sounds
                 SoundManager.Instance.PlaySound(SoundName.PlaceRoom);
 
@@ -28,6 +40,19 @@ public class InteractionHandler : MonoBehaviour
 
                 // Clear the carried box reference
                 CarriedBox = null;  
+            }
+        }
+    }
+
+    public void PickUpTile() {
+        if (CarriedBox == null) {
+            BaseRoom pickup = GameManager.Instance.PickUpTile(GrabReticle.position);
+            if (pickup != null) {
+                // Play sounds
+                SoundManager.Instance.PlaySound(SoundName.PickUpRoom);
+                CarriedBox = Instantiate(BoxWithRoomsPrefab, HoldPosition.position, Quaternion.identity);
+                CarriedBox.RoomType = pickup;
+                CarriedBox.UpdateNumberOfRooms(1);
             }
         }
     }

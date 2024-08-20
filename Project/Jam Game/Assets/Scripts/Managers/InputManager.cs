@@ -83,6 +83,10 @@ public class InputManager : MonoBehaviour
     }
 
     private void OnPlacePerformed(InputAction.CallbackContext context) {
-        PlayerInteractionHandler.PlaceBox();
+        if (PlayerInteractionHandler.CarriedBox != null) {
+            PlayerInteractionHandler.PlaceBox();
+        } else {
+            PlayerInteractionHandler.PickUpTile();
+        }
     }
 }

@@ -80,4 +80,8 @@ public class Turret : MonoBehaviour
         Instantiate(bulletPrefab, ShootingPoint.position, Quaternion.Euler(new Vector3(0, 0, angle + 90)));
         SoundManager.Instance.PlaySound(SoundName.TurretShots);
     }
+
+    public void DestroyTurret() {
+        Destroy(gameObject);
+    }
 }

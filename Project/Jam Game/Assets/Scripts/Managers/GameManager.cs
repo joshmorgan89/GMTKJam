@@ -121,6 +121,24 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
         return false;
     }
 
+    public bool GenerateRoomClusterOfTypeAtPosition(Vector3 worldPosition, int numberOfRooms, BaseRoom roomToAdd) {
+        Vector3Int cellPosition = _shipGrid.Grid.WorldToCell(worldPosition);
+
+        if (_shipGrid.IsCloseEnough(cellPosition)) {
+            for (int i = 0; i < numberOfRooms; i++) {
+                _shipGrid.SpawnRoomsAroundCellPosition(cellPosition, new List<BaseRoom>() { roomToAdd });
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public BaseRoom PickUpTile(Vector3 worldPosition) {
+        return _shipGrid.PickUpTile(worldPosition);
+    }
+
     public void HandleRoomDestroyed(Vector3Int cellPosition) {
         _shipGrid.RoomDestroyed(cellPosition);
         

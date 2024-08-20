@@ -189,6 +189,7 @@ Transform:
   - {fileID: 7807303985259367060}
   - {fileID: 6559634060403294635}
   - {fileID: 1793326165743098299}
+  - {fileID: 1555710994272128316}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5389904949053858218
@@ -356,6 +357,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.90951765}
   m_EdgeRadius: 0
+--- !u!1 &4685371684419745677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1555710994272128316}
+  m_Layer: 6
+  m_Name: GrabReticle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1555710994272128316
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4685371684419745677}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 244641612515447382}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6276078889288135656
 GameObject:
   m_ObjectHideFlags: 0
