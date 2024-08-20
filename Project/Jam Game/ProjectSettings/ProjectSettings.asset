@@ -744,7 +744,13 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -764,11 +770,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 4b23c794-e3af-4012-9f88-797bd73a1de3
+  cloudProjectId: 495c3690-7069-4f6c-a84f-0f27a14977d3
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Jam Game 2024-08-16_15-09-39
-  organizationId: madman24k
+  projectName: Jam Game
+  organizationId: weijieye167
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

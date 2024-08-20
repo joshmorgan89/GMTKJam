@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
     public float AttackInterval = 30f; 
     public float SpawnDistance = 50f;
 
-    public int currentElectionCycle = 1;
+    public int currentElectionCycle = 0;
     private int _currentPopulationCount = 0;
 
     private void Start() {
@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
     }
 
     private void InitializeGame() {
+        ElectionManager.Instance.TriggerElection();
         Time.timeScale = 0;
         _sessionTimer = 0;
         SetupInitialRooms();
