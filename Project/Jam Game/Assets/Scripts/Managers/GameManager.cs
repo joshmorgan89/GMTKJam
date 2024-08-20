@@ -228,4 +228,6 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
         Vector3 spawnPosition = ShipTransform.position + (Vector3)(Random.insideUnitCircle.normalized * SpawnDistance);
         Instantiate(AsteroidPrefab, spawnPosition, Quaternion.identity);
     }
+
+    public bool RoomOfTypeTooClose()
 }

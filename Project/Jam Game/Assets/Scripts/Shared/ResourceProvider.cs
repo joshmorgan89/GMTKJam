@@ -27,7 +27,7 @@ public class ResourceProvider : MonoBehaviour
             {
                 int random = Random.Range(0, RoomStore.Instance.roomItems.Count);
 
-                RoomStore.Instance.PlayerInteraction.CarriedBox = Instantiate(RoomStore.Instance.box, RoomStore.Instance.PlayerInteraction.HoldPosition.position, RoomStore.Instance.PlayerInteraction.HoldPosition.rotation);
+                RoomStore.Instance.PlayerInteraction.CarriedBox = Instantiate(RoomStore.Instance.Box, RoomStore.Instance.PlayerInteraction.HoldPosition.position, RoomStore.Instance.PlayerInteraction.HoldPosition.rotation);
                 RoomStore.Instance.PlayerInteraction.CarriedBox.RoomType = RoomStore.Instance.roomItems[random].room;
                 RoomStore.Instance.PlayerInteraction.CarriedBox.UpdateNumberOfRooms(1);
             }
