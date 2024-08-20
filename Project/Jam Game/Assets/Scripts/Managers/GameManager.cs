@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager> {
     }
 
     private void InitializeGame() {
+        Time.timeScale = 0;
         _sessionTimer = 0;
         SetupInitialRooms();
         // Initialize UI.
